@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -39,4 +41,30 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
+  public Joystick xboxDriver = new Joystick(RobotMap.XBOX_CONTROLLER_DRIVER);
+  public Joystick xboxOperator = new Joystick(RobotMap.XBOX_CONTROLLER_OPERATOR);
+
+  public OI(){
+  }
+
+  public double xboxAxis(Joystick xboxController, int xboxAxis){
+    return xboxController.getRawAxis(xboxAxis);
+  }
+
+  public boolean xboxButton(Joystick xboxController, int xboxButton){
+    return xboxController.getRawButton(xboxButton);
+  }
+
+  public int xboxAxisAsButton(Joystick xboxController, int xboxAxis){
+    if(xboxController.getRawAxis(xboxAxis) > RobotMap.AXIS_THRESHOLD){
+      return 1;
+    }
+    else if(xboxController.getRawAxis(xboxAxis) < (-1 * RobotMap.AXIS_THRESHOLD)){
+      return -1;
+    }
+    else{
+      return 0;
+    }
+  }
 }
