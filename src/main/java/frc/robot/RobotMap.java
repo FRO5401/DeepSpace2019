@@ -40,7 +40,7 @@ public class RobotMap {
   public static final double SPIN_SENSITIVITY = 0.5;
 
 
-  /*** OI ***/
+  /*** Operator Interfaces ***/
     //Controllers 
   public static final int XBOX_CONTROLLER_DRIVER = 0;
   public static final int XBOX_CONTROLLER_OPERATOR = 1;
@@ -84,13 +84,14 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_RIGHT_2 = 0;
   public static final int DRIVE_MOTOR_LEFT_2  = 0;
 
-  /*** DoubleSolenoids ***/
+  /*** Solenoids (Single and Double) ***/
+    //DoubleSolenoids have an IN and a OUT
+    //Solenoids have just one. 
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
 
     //DriveBase
-  public static final int GEAR_SHIFTER_IN = 0;
-  public static final int GEAR_SHIFTER_OUT = 0;
+  public static final int GEAR_SHIFTER = 0;
 
   /*** Sensors ***/
     //Encoders

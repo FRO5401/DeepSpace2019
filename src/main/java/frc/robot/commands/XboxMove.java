@@ -57,21 +57,21 @@ public class XboxMove extends Command {
     gearShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_BACK_DRIVER);
 
     /*** Gear Shifting ***/
-      //Shift to HIGH
+      //Press for High Gear
     if(gearShiftHigh){
       Robot.drivebase.shiftLowToHigh();
     }
-      //Shift to LOW
-    else{
+      //Press for Low Gear
+    else if(gearShiftLow){
       Robot.drivebase.shiftHighToLow();
     }
 
     /*** Precision ***/
-      //Precision Speed
+      //Hold for Precision Speed
     if(precision){
       sensitivity = RobotMap.DRIVE_SENSITIVITY_PRECISION;
     }
-      //Regular Speed
+      //Release for Regular Speed
     else{
       sensitivity = RobotMap.DRIVE_SENSITIVITY_DEFAULT;
     }

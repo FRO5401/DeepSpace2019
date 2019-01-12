@@ -13,7 +13,7 @@ import frc.robot.RobotMap;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -30,7 +30,7 @@ public class DriveBase extends Subsystem {
   private VictorSP rightDrive2;
 
     //Solenoids
-  private DoubleSolenoid gearShifter;
+  private Solenoid gearShifter;
 
     //Sensors
   private Encoder leftEncoder;
@@ -43,7 +43,7 @@ public class DriveBase extends Subsystem {
     leftDrive2 = new VictorSP(RobotMap.DRIVE_MOTOR_LEFT_2);
     rightDrive2 = new VictorSP(RobotMap.DRIVE_MOTOR_RIGHT_2);
 
-    gearShifter = new DoubleSolenoid(RobotMap.GEAR_SHIFTER_IN, RobotMap.GEAR_SHIFTER_OUT);
+    gearShifter = new Solenoid(RobotMap.GEAR_SHIFTER);
 
     navxGyro = new AHRS(I2C.Port.kMXP);
     leftEncoder = new Encoder(RobotMap.DRIVE_ENC_LEFT_A, RobotMap.DRIVE_ENC_LEFT_B, true, EncodingType.k4X);
@@ -83,17 +83,17 @@ public class DriveBase extends Subsystem {
   }
 
   public void shiftHighToLow(){
-    gearShifter.set(DoubleSolenoid.Value.kForward);
+    gearShifter.set(true);
     setDPPHighGear();
   }
 
   public void shiftLowToHigh(){
-    gearShifter.set(DoubleSolenoid.Value.kReverse);
+    gearShifter.set(false);
     setDPPLowGear();
   }
 
-  public String getCurrentGear(){
-    return gearShifter.get().toString();
+  public boolean getCurrentGear(){
+    return gearShifter.get();
   }
 
   public void setDPPLowGear(){
