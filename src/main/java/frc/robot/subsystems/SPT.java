@@ -28,11 +28,11 @@ public class SPT extends Subsystem {
 
   public void infeedMotorsIn(double leftDesired, double rightDesired) {
     leftMotor.set(leftDesired);
-    rightMotor.set(-1 * rightDesired);
+    rightMotor.set(rightDesired);
   }
 }
   //following method might not be needed
   public void infeedMotorsOut(double leftDesired, double rightDesired) {
     leftMotor.set(leftDesired);
-    rightMotor.set(-1 * rightDesired);
+    rightMotor.set(rightDesired);
   }
