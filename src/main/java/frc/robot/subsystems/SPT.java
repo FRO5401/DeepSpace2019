@@ -1,9 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
 
@@ -34,11 +28,11 @@ public class SPT extends Subsystem {
 
   public void infeedMotorsIn(double leftDesired, double rightDesired) {
     leftMotor.set(leftDesired);
-    rightMotor.set(-1 * rightDesired);
+    rightMotor.set(rightDesired);
   }
 }
   //following method might not be needed
   public void infeedMotorsOut(double leftDesired, double rightDesired) {
     leftMotor.set(leftDesired);
-    rightMotor.set(-1 * rightDesired);
+    rightMotor.set(rightDesired);
   }
