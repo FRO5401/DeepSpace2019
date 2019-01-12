@@ -24,10 +24,23 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  /*** OI ***/
-    //Constants
-  public static final double AXIS_THRESHOLD = 0.5;
+  /*** Constants ***/
+    //OI
+  public static final double AXIS_THRESHOLD = 0.3;
 
+    //DriveBase
+  public static final double LOW_GEAR_LEFT_DPP = 0;
+  public static final double LOW_GEAR_RIGHT_DPP = 0;
+  public static final double HIGH_GEAR_LEFT_DPP = 0;
+  public static final double HIGH_GEAR_RIGHT_DPP = 0;
+
+    //XboxMove
+  public static final double DRIVE_SENSITIVITY_PRECISION = 0.5;
+  public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
+  public static final double SPIN_SENSITIVITY = 0.5;
+
+
+  /*** OI ***/
     //Controllers 
   public static final int XBOX_CONTROLLER_DRIVER = 0;
   public static final int XBOX_CONTROLLER_OPERATOR = 1;
@@ -56,6 +69,14 @@ public class RobotMap {
   public static final int XBOX_BUTTON_L3_OPERATOR		  	    = 9;
   public static final int XBOX_BUTTON_R3_OPERATOR		  	    = 10;
   
+    //Axes
+  public static final int XBOX_AXIS_LEFT_X = 0;
+  public static final int XBOX_AXIS_LEFT_Y = 1;
+  public static final int XBOX_AXIS_LEFT_TRIGGER  = 2;
+  public static final int XBOX_AXIS_RIGHT_TRIGGER = 3;
+  public static final int XBOX_AXIS_RIGHT_X = 4;
+  public static final int XBOX_AXIS_RIGHT_Y = 5;
+    
   /*** Motors ***/
     //DriveBase
   public static final int DRIVE_MOTOR_RIGHT_1 = 0;
@@ -64,6 +85,9 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_LEFT_2  = 0;
 
   /*** DoubleSolenoids ***/
+    //PCM (Pneumatic Control Module)
+  public static final int PCM_ID = 0;
+
     //DriveBase
   public static final int GEAR_SHIFTER_IN = 0;
   public static final int GEAR_SHIFTER_OUT = 0;

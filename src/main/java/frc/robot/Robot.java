@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   public static DriveBase drivebase;
   
   //OI is always last.
-  public static OI m_oi;
+  public static OI oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     drivebase = new DriveBase();
     
     //OI is always last.
-    m_oi = new OI();
+    oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
