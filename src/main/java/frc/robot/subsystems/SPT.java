@@ -36,3 +36,8 @@ public class SPT extends Subsystem {
     leftMotor.set(leftDesired);
     rightMotor.set(rightDesired);
   }
+
+  public void stop() {
+    leftMotor.set(0);
+    rightMotor.set(0);
+  }
