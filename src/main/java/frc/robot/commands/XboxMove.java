@@ -44,12 +44,13 @@ public class XboxMove extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      //Read Axes
+    /*** Repeated Readings ***/
+      //Axes
     turn = Robot.oi.xboxAxis(Robot.oi.xboxDriver, RobotMap.XBOX_AXIS_LEFT_X);
     throttle = Robot.oi.xboxAxis(Robot.oi.xboxDriver, RobotMap.XBOX_AXIS_RIGHT_TRIGGER);
     reverse = Robot.oi.xboxAxis(Robot.oi.xboxDriver, RobotMap.XBOX_AXIS_LEFT_TRIGGER);
     
-      //Read Buttons
+      //Buttons
     rotate = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_L3_DRIVER);
     brake = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_LEFT_BUMPER_DRIVER);
     precision = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_DRIVER);
