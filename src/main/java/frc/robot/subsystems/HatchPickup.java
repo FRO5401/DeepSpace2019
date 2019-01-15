@@ -6,18 +6,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 /**
- * Hatch Arm Subsystem is used to move the hatch arm.
+ * Hatch Pickup Subsystem is used to move the hatch arm.
  */
 public class HatchPickup extends Subsystem {
 
   private DoubleSolenoid hatchArm;
   private Solenoid brake; 
-  private TalonSRX armTalon;
+  private TalonSRX hatchArmTalon;
 
   public HatchPickup() {
-    armTalon = new TalonSRX();
-    brake = new Solenoid();
-    hatchArm = new DoubleSolenoid();
+    hatchArmTalon = new TalonSRX(0); // Change for data inputs
+    brake = new Solenoid(0); //Change for data inputs
+    hatchArm = new DoubleSolenoid(0, 0); //Change for data inputs
   }
   @Override
   public void initDefaultCommand() {

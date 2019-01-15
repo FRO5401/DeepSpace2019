@@ -23,7 +23,7 @@ import frc.robot.subsystems.HatchPickup;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static HatchPickup m_subsystem = new HatchPickup();
+  public static HatchPickup m_hatchpickup = new HatchPickup();
   public static OI m_oi;
 
   Command m_autonomousCommand;
