@@ -10,7 +10,7 @@ public class CargoRollers extends Command {
 
   @Override
   protected void initialize() {
-    //set arm to 0 degrees
+    //set arm to starting position
   }
 
   @Override //called repeatedly

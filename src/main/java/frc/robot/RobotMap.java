@@ -15,6 +15,16 @@ package frc.robot;
  */
 public class RobotMap {
 
+  //Controllers
+  public static int XboxControllerDriver = 1;
+  public static int XboxControllerOperator = 2;
+
+  //SPT
+  public static int leftMotor = 1;
+  public static int rightMotor = 2;
+  public static int sptTalon = 3;
+
+
   
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.

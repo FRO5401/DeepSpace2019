@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class SPT extends Subsystem {
@@ -14,9 +16,9 @@ public class SPT extends Subsystem {
   private TalonSRX sptTalon;
 
   public SPT() {
-    leftMotor = new VictorSP();
-    rightMotor = new VictorSP();
-    sptTalon = new TalonSRX();
+    leftMotor = new VictorSP(RobotMap.leftMotor);
+    rightMotor = new VictorSP(RobotMap.rightMotor);
+    sptTalon = new TalonSRX(RobotMap.sptTalon);
   }
 
   @Override
@@ -30,7 +32,6 @@ public class SPT extends Subsystem {
     leftMotor.set(leftDesired);
     rightMotor.set(rightDesired);
   }
-}
   //following method might not be needed
   public void infeedMotorsOut(double leftDesired, double rightDesired) {
     leftMotor.set(leftDesired);
@@ -41,3 +42,8 @@ public class SPT extends Subsystem {
     leftMotor.set(0);
     rightMotor.set(0);
   }
+
+  public void arm() {
+    
+  }
+}  
