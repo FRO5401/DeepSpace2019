@@ -85,8 +85,8 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_LEFT_2  = 0;
 
   /*** Solenoids (Single and Double) ***/
-    //DoubleSolenoids have an IN and a OUT
-    //Solenoids have just one. 
+    //DoubleSolenoids have an IN and an OUT constant. 
+    //Solenoids have just one constant. 
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
 

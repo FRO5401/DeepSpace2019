@@ -82,7 +82,7 @@ public class XboxMove extends Command {
     if(brake){
       Robot.drivebase.stopMotors();
     }
-      //No Braking
+      //Not Braking
     else{
         //Pirouetting (Turn in place). 
       if(rotate){
@@ -93,7 +93,7 @@ public class XboxMove extends Command {
           right = RobotMap.SPIN_SENSITIVITY * (turn * -1);
         }
       }
-        //Not rotating
+        //Not pirouetting (Not turning in place).
       else{
           //Turning right
         if(turn > RobotMap.AXIS_THRESHOLD){
@@ -103,7 +103,7 @@ public class XboxMove extends Command {
         }
           //Turning left
         else if(turn < (-1 * RobotMap.AXIS_THRESHOLD)){
-            //Makes right speed by a factor of how far the axis is pushed. 
+            //Makes right speed up by a factor of how far the axis is pushed. 
           left = (throttle - reverse) * sensitivity;
           right = (throttle - reverse) * sensitivity * (1 + turn);
         }
