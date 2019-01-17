@@ -14,9 +14,13 @@ import frc.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 public class HatchPickup extends Command {
+
+  int hatchChangePoint; //Subject to change
+
   public HatchPickup() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_hatchpickup);
+    hatchChangePoint = 0;// subject to change
   }
 
   // Called just before this Command runs the first time
