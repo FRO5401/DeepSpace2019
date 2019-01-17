@@ -2,8 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import org.usfirst.frc.team5401.robot.RobotMap;
-//import org.usfirst.frc.team5401.robot.commands.(put command that calls this subsystem)
+import frc.robot.RobotMap;
+import frc.robot.commands.PopHatch;
 
 
 public class HatchMechanism extends Subsystem {
