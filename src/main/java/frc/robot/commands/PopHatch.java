@@ -3,11 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PopHatch extends Command {
-  private boolean input;
-
-  public PopHatch(boolean oiInput) {
+  
+  public PopHatch() {
     requires(Robot.hatchmechansim);
-    input = oiInput;
   }
 
   // Called just before this Command runs the first time
@@ -20,9 +18,9 @@ public class PopHatch extends Command {
   protected void execute() {
     boolean hatchInOut = Robot.oi.xboxButton(RobotMap.XBOX_BUTTON_(put xbox button here), Robot.oi.xboxController_Operator);
 
-    if(input == true){
+    if(hatchInOut == true){
       Robot.hatchmechanism.openHatch();
-    } else if(input == false){
+    } else if(hatchInOut == false){
       Robot.hatchmechanism.closeHatch();
     }
   }
