@@ -39,6 +39,9 @@ public class RobotMap {
   public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
   public static final double SPIN_SENSITIVITY = 0.5;
 
+    //CargoRollers
+  public static final double SPT_MOTOR_SPEED = 1.0;
+
 
   /*** Operator Interfaces ***/
     //Controllers 
@@ -87,7 +90,7 @@ public class RobotMap {
     //SPT
     public static int SPT_MOTOR_LEFT = 0;
     public static int SPT_MOTOR_RIGHT = 0;
-    public static int SPT_MOTOR_ARM = 0;
+    public static int SPT_MOTOR_ARM = 0; //Talon
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT

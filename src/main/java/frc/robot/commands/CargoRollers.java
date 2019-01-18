@@ -2,11 +2,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 //variables
   
 
 public class CargoRollers extends Command {
+
+  //buttons
+  boolean in;
+  boolean out;
+
+  //motor speed
+  double speed = RobotMap.SPT_MOTOR_SPEED;
+
   public void SpinSPT() {
     requires(Robot.spt);
   }
@@ -18,7 +27,23 @@ public class CargoRollers extends Command {
 
   @Override //called repeatedly
   protected void execute() {
-    
+    //Read Buttons
+    in = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
+    out = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_B_OPERATOR);
+
+    //*** SPT Rollers ***/
+    if (in){
+      double left = speed;
+      double right = speed * -1;
+
+      Robot.spt.infeedMotors(left, right);
+    }
+    else if (out){
+      double left = speed * -1;
+      double right = speed;
+
+      Robot.spt.infeedMotors(left, right);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

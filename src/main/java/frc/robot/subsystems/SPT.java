@@ -16,9 +16,9 @@ public class SPT extends Subsystem {
   private TalonSRX sptTalon;
 
   public SPT() {
-    leftMotor = new VictorSP(RobotMap.leftMotor);
-    rightMotor = new VictorSP(RobotMap.rightMotor);
-    sptTalon = new TalonSRX(RobotMap.sptTalon);
+    leftMotor = new VictorSP(RobotMap.SPT_MOTOR_LEFT);
+    rightMotor = new VictorSP(RobotMap.SPT_MOTOR_RIGHT);
+    sptTalon = new TalonSRX(RobotMap.SPT_MOTOR_ARM);
   }
 
   @Override
@@ -28,15 +28,15 @@ public class SPT extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void infeedMotorsIn(double leftDesired, double rightDesired) {
+  public void infeedMotors(double leftDesired, double rightDesired) {
     leftMotor.set(leftDesired);
     rightMotor.set(rightDesired);
   }
   //following method might not be needed
-  public void infeedMotorsOut(double leftDesired, double rightDesired) {
-    leftMotor.set(leftDesired);
-    rightMotor.set(rightDesired);
-  }
+  //public void infeedMotorsOut(double leftDesired, double rightDesired) {
+  //  leftMotor.set(leftDesired);
+  //  rightMotor.set(rightDesired);
+  //}
 
   public void stop() {
     leftMotor.set(0);
