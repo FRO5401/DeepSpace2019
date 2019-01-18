@@ -3,6 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+//variables
+  
+
 public class CargoRollers extends Command {
   public void SpinSPT() {
     requires(Robot.spt);
