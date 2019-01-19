@@ -27,6 +27,9 @@ public class RobotMap {
   /*** Constants ***/
     //OI
   public static final double AXIS_THRESHOLD = 0.3;
+  
+    //Cargo Infeed
+  public static final double CARGO_FEED_SPEED = 0.7;
 
   /*** Operator Interfaces ***/
     //Controllers 
@@ -66,6 +69,9 @@ public class RobotMap {
   public static final int XBOX_AXIS_RIGHT_Y = 5;
     
   /*** Motors ***/
+    //Cargo Infeed
+  public static final int CARGO_INFEED_RIGHT_MOTOR = 0;
+  public static final int CARGO_INFEED_LEFT_MOTOR = 0;
  
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT
@@ -74,5 +80,7 @@ public class RobotMap {
   public static final int PCM_ID = 0;
 
   /*** Sensors ***/
+    //Cargo Infeed
+  public static final int LIGHT_SENSOR = 0;
   
 }

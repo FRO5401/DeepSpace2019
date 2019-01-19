@@ -22,7 +22,8 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  
+  public static CargoInfeed cargoInfeed;
+
   //OI is always last.
   public static OI oi;
 
@@ -35,7 +36,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    
+    cargoInfeed = new CargoInfeed();
+
     //OI is always last.
     oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
