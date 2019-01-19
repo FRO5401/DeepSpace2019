@@ -22,7 +22,6 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveBase drivebase;
   
   //OI is always last.
   public static OI oi;
@@ -36,8 +35,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-
-    drivebase = new DriveBase();
     
     //OI is always last.
     oi = new OI();
