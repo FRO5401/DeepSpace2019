@@ -84,6 +84,9 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_RIGHT_2 = 0;
   public static final int DRIVE_MOTOR_LEFT_2  = 0;
 
+  //Elevator
+  public static final int ELEVATOR_TALON_SRX  = 0;
+
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT
     //Solenoids have just one. 
@@ -92,6 +95,9 @@ public class RobotMap {
 
     //DriveBase
   public static final int GEAR_SHIFTER = 0;
+
+    //Elevator
+  public static final int ELEVATOR_SOLENOID = 0;
 
   /*** Sensors ***/
     //Encoders
