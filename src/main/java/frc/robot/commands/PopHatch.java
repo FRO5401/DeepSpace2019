@@ -1,11 +1,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class PopHatch extends Command {
   
   public PopHatch() {
-    requires(Robot.hatchmechansim);
+    requires(Robot.hatchmechanism);
   }
 
   // Called just before this Command runs the first time
@@ -16,7 +18,7 @@ public class PopHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean hatchInOut = Robot.oi.xboxButton(RobotMap.XBOX_BUTTON_(put xbox button here), Robot.oi.xboxController_Operator);
+    boolean hatchInOut = Robot.oi.xboxButton(RobotMap.XBOX_BUTTON_Y_OPERATOR, Robot.oi.xboxOperator);
 
     if(hatchInOut == true){
       Robot.hatchmechanism.openHatch();

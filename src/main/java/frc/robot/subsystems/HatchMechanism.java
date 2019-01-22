@@ -1,25 +1,25 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.RobotMap;
 import frc.robot.commands.PopHatch;
 
 
 public class HatchMechanism extends Subsystem {
 
-  private DoubleSolenoid hatchRelease;
+  private Solenoid hatchRelease;
   
   public HatchMechanism(){
-    hatchRelease = new DoubleSolenoid();
+    hatchRelease = new Solenoid();
   }
 
   public void openHatch(){
-    hatchRelease.set(DoubleSolenoid.Value.kForward);
+    hatchRelease.set(true);
   }
 
   public void closeHatch(){
-    hatchRelease.set(DoubleSolenoid.Value.kReverse);
+    hatchRelease.set(false);
   }
 
   @Override
