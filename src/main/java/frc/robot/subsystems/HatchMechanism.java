@@ -11,7 +11,7 @@ public class HatchMechanism extends Subsystem {
   private Solenoid hatchRelease;
   
   public HatchMechanism(){
-    hatchRelease = new Solenoid();
+    Solenoid hatchRelease = new Solenoid(RobotMap.HATCH_EXTENDER);
   }
 
   public void openHatch(){
