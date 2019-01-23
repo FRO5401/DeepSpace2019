@@ -36,23 +36,23 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(left && dPadInput == ){ //UP //Rocket High Ball
+    if(left && (dPadInput == 0 || dPadInput == 45)){ //UP //Rocket High Ball
 
-    }else if(right && dPadInput == ){ //UP //Rocket High Hatch
+    }else if(right && (dPadInput == 0 || dPadInput == 45)){ //UP //Rocket High Hatch
 
-    }else if(left && dPadInput == ){ //LEFT //Rocket Mid Ball
+    }else if(left && (dPadInput == 270 || dPadInput == 315)){ //LEFT //Rocket Mid Ball
 
-    }else if(right && dPadInput == ){ //LEFT //Rocket Mid Hatch
+    }else if(right && (dPadInput == 270 || dPadInput == 315)){ //LEFT //Rocket Mid Hatch
 
-    }else if(left && dPadInput == ){ //RIGHT //Rocket Low Ball
+    }else if(left && (dPadInput == 90 || dPadInput == 135)){ //RIGHT //Rocket Low Ball
       
-    }else if(right && dPadInput == ){ //RIGHT //Hatch Feed Station
+    }else if(right && (dPadInput == 90 || dPadInput == 135)){ //RIGHT //Hatch Feed Station
       
     }else if(left && right && dPadInput == ){ //GAME RESET
       
-    }else if(right && dPadInput == ){ //DOWN //Cargo Ship Ball
+    }else if(right && (dPadInput == 180 || dPadInput == 225)){ //DOWN //Cargo Ship Ball
       
-    }else if(left && dPadInput == ){ //DOWN //Ball Infeed Station
+    }else if(left && (dPadInput == 180 || dPadInput == 225)){ //DOWN //Ball Infeed Station
       
     }else if(){ //END GAME
       
