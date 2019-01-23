@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.RobotMap;
 import frc.robot.commands.PanelPneumatic;
 
@@ -17,16 +18,16 @@ public class Panel extends Subsystem {
 
   private DoubleSolenoid panelPneumatic;
   
-  public HatchMechanism(){
-    Solenoid hatchRelease = new Solenoid(RobotMap.HATCH_EXTENDER);
+  public Panel(){
+    DoubleSolenoid panelLevel = new DoubleSolenoid(RobotMap.PANEL_PENUMATIC);
   }
 
-  public void openHatch(){
-    hatchRelease.set(true);
+  public void liftPanel(){
+    panelPneumatic.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void closeHatch(){
-    hatchRelease.set(false);
+  public void lowerPanel(){
+    panelPneumatic.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
