@@ -23,7 +23,7 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
   public static DriveBase drivebase;
-  
+  public static Elevator elevator;
   //OI is always last.
   public static OI oi;
 
@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     drivebase = new DriveBase();
-    
+    elevator = new Elevator();
     //OI is always last.
     oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());

@@ -65,7 +65,7 @@ public class OI {
 	Button xboxBack_Operator		= new JoystickButton(xboxOperator, 7);
 	Button xboxStart_Operator		= new JoystickButton(xboxOperator, 8);
 	Button xboxL3_Operator		  	= new JoystickButton(xboxOperator, 9);
-	Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, 10);
+  Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, 10);
 
   public OI(){
   }
@@ -89,4 +89,9 @@ public class OI {
       return 0;
     }
   }
-}
+  
+  //D-Pad
+  public double xboxDPad(Joystick userMap){
+      return userMap.getPOV();
+    }
+  }
