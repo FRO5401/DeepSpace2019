@@ -80,7 +80,6 @@ public class RobotMap {
     //Solenoids have just one. 
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
+  
   /*** Sensors ***/
-    //Cargo Infeed
-  public static final int CARGO_DETECTOR = 0;
 }

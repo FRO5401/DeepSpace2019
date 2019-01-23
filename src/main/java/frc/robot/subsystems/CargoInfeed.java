@@ -25,7 +25,7 @@ public class CargoInfeed extends Subsystem {
 
   VictorSP feederMotors = new VictorSP(RobotMap.CARGO_FEED_ROLLERS);
   TalonSRX armTalon = new TalonSRX(RobotMap.ARM_TALON_CHANNEL);
-
+  
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new FeedCargo());
