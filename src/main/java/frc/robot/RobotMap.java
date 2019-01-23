@@ -28,17 +28,10 @@ public class RobotMap {
     //OI
   public static final double AXIS_THRESHOLD = 0.3;
 
-    //DriveBase
-  public static final double LOW_GEAR_LEFT_DPP = 0;
-  public static final double LOW_GEAR_RIGHT_DPP = 0;
-  public static final double HIGH_GEAR_LEFT_DPP = 0;
-  public static final double HIGH_GEAR_RIGHT_DPP = 0;
-
-    //XboxMove
-  public static final double DRIVE_SENSITIVITY_PRECISION = 0.5;
-  public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
-  public static final double SPIN_SENSITIVITY = 0.5;
-
+    //Cargo Infeed
+  public static final double ARM_ANGLE_PER_PULSE = 0;
+  public static final double ARM_SPEED = 0.6;
+  public static final double FEEDER_SPEED = 0.6;
 
   /*** Operator Interfaces ***/
     //Controllers 
@@ -78,25 +71,16 @@ public class RobotMap {
   public static final int XBOX_AXIS_RIGHT_Y = 5;
     
   /*** Motors ***/
-    //DriveBase
-  public static final int DRIVE_MOTOR_RIGHT_1 = 0;
-  public static final int DRIVE_MOTOR_LEFT_1  = 0;
-  public static final int DRIVE_MOTOR_RIGHT_2 = 0;
-  public static final int DRIVE_MOTOR_LEFT_2  = 0;
+    //Cargo Infeed
+  public static final int ARM_TALON_CHANNEL = 0;
+  public static final int CARGO_FEED_ROLLERS = 0;
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT
     //Solenoids have just one. 
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
-
-    //DriveBase
-  public static final int GEAR_SHIFTER = 0;
-
   /*** Sensors ***/
-    //Encoders
-  public static final int DRIVE_ENC_LEFT_A = 0;
-  public static final int DRIVE_ENC_RIGHT_A = 0;
-  public static final int DRIVE_ENC_LEFT_B = 0;
-  public static final int DRIVE_ENC_RIGHT_B = 0;
+    //Cargo Infeed
+  public static final int CARGO_DETECTOR = 0;
 }
