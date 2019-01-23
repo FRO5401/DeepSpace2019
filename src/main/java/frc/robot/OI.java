@@ -68,6 +68,7 @@ public class OI {
 	Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, 10);
 
   public OI(){
+  
   }
 
   public double xboxAxis(Joystick xboxController, int xboxAxis){
@@ -76,6 +77,10 @@ public class OI {
 
   public boolean xboxButton(Joystick xboxController, int xboxButton){
     return xboxController.getRawButton(xboxButton);
+  }
+
+  public int xboxDPad(Joystick xboxController){
+    return xboxController.getPOV();
   }
 
   public int xboxAxisAsButton(Joystick xboxController, int xboxAxis){
