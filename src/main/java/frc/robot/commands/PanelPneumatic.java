@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class PanelPneumatic extends Command {
   
-  public PopHatch() {
-    requires(Robot.hatchmechanism);
+  public PanelPneumatic() {
+    requires(Robot.panel);
   }
 
   // Called just before this Command runs the first time
@@ -29,9 +29,9 @@ public class PanelPneumatic extends Command {
     boolean hatchInOut = Robot.oi.xboxButton(RobotMap.XBOX_BUTTON_Y_OPERATOR, Robot.oi.xboxOperator);
 
     if(hatchInOut == true){
-      Robot.hatchmechanism.openHatch();
+      Robot.panel.liftPanel();
     } else if(hatchInOut == false){
-      Robot.hatchmechanism.closeHatch();
+      Robot.panel.lowerPanel();
     }
   }
 

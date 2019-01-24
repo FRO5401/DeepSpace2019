@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   
   //OI is always last.
   public static OI oi;
-  public static HatchMechanism hatchmechanism;
+  public static Panel panel;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
