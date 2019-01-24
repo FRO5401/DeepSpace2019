@@ -115,7 +115,7 @@ public class Elevator extends Subsystem {
   }
 
   /*
-  public void elevatorLimitT(){
+  public void elevatorLimitT(){                           //Meant for Limit Switches, logic is in command now
     if(stopHigh.get() == true){
       elevatorSRX1.set(ControlMode.PercentOutput, 0);
 		  elevatorSRX2.set(ControlMode.PercentOutput, 0);
