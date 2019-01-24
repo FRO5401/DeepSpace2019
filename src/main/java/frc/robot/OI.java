@@ -97,8 +97,5 @@ public class OI {
     }
   }
 
-public boolean xboxButton(int xboxButtonYOperator, Joystick xboxOperator2) {
-	return false;
-}
 }
 
