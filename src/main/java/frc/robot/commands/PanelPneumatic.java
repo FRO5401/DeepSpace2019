@@ -26,11 +26,11 @@ public class PanelPneumatic extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean hatchInOut = Robot.oi.xboxButton(RobotMap.XBOX_BUTTON_Y_OPERATOR, Robot.oi.xboxOperator);
+    boolean panelPneumatic = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_B_OPERATOR);
 
-    if(hatchInOut == true){
+    if(panelPneumatic == true){
       Robot.panel.liftPanel();
-    } else if(hatchInOut == false){
+    } else if(panelPneumatic == false){
       Robot.panel.lowerPanel();
     }
   }

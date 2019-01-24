@@ -86,7 +86,8 @@ public class RobotMap {
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT
-  public static final int PANEL_PNEUMATIC = 0;
+  public static final int PANEL_PNEUMATIC_UP = 0;
+  public static final int PANEL_PNEUMATIC_DOWN = 0;
     //Solenoids have just one. 
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;

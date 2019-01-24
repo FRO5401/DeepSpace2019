@@ -19,7 +19,7 @@ public class Panel extends Subsystem {
   private DoubleSolenoid panelPneumatic;
   
   public Panel(){
-    DoubleSolenoid panelLevel = new DoubleSolenoid(RobotMap.PANEL_PNEUMATIC);
+    DoubleSolenoid panelPneumatic = new DoubleSolenoid(RobotMap.PANEL_PNEUMATIC_UP, RobotMap.PANEL_PNEUMATIC_DOWN);
   }
 
   public void liftPanel(){
