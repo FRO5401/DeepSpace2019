@@ -34,7 +34,11 @@ public class CargoInfeed extends Subsystem {
     //Moves the arm to the desired angle (native units)
   public void armSetPoint(double desiredAngleNativeUnits){ 
     armTalon.set(ControlMode.Position, desiredAngleNativeUnits);
-    getArmAngle();
+  }
+
+    //Moves the arm manually, given velocity
+  public void armOverrideMOve(double armVelocity){
+    armTalon.set(ControlMode.PercentOutput, armVelocity);
   }
 
     //Sets the neutral mode of the Talons (Coast or Brake), post to Dashboard
