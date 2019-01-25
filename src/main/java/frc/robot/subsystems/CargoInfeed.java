@@ -22,6 +22,7 @@ import frc.robot.commands.*;
  */
 public class CargoInfeed extends Subsystem {
   double armAngle;
+  double armHeight;
 
   VictorSP feederMotors = new VictorSP(RobotMap.CARGO_FEED_ROLLERS);
   TalonSRX armTalon = new TalonSRX(RobotMap.ARM_TALON_CHANNEL);
@@ -59,6 +60,12 @@ public class CargoInfeed extends Subsystem {
     SmartDashboard.putNumber("Arm Angle (Native)", armAngle);
     SmartDashboard.putNumber("Arm Angle (Degrees)", (armAngle * RobotMap.ARM_ANGLE_PER_PULSE));
     return armAngle;
+  }
+
+  public double getArmDistance(){
+    armHeight = armTalon.getSensorCollection().getQuadraturePosition();
+    SmartDashboard.putNumber("Arm Height (Height)", (armHeight * RobotMap.ARM_DISTANCE_PER_PULSE));
+    return armHeight;
   }
 
 }

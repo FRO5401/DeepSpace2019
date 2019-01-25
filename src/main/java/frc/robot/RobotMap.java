@@ -30,6 +30,7 @@ public class RobotMap {
 
     //Cargo Infeed
   public static final double ARM_ANGLE_PER_PULSE = 0;
+  public static final double ARM_DISTANCE_PER_PULSE = 0;
   public static final double ARM_SPEED = 0.6;
   public static final double FEEDER_SPEED = 0.6;
 
