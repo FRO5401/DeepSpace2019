@@ -22,7 +22,6 @@ import frc.robot.commands.*;
  */
 public class CargoInfeed extends Subsystem {
   double armAngle;
-  double armHeight;
 
   VictorSP feederMotors = new VictorSP(RobotMap.CARGO_FEED_ROLLERS);
   TalonSRX armTalon = new TalonSRX(RobotMap.ARM_TALON_CHANNEL);
@@ -32,40 +31,38 @@ public class CargoInfeed extends Subsystem {
     setDefaultCommand(new FeedCargo());
   }
 
+    //Moves the arm to the desired angle (native units)
   public void armSetPoint(double desiredAngleNativeUnits){ 
-    double desiredNativePoint = desiredAngleNativeUnits;
-    armTalon.set(ControlMode.Position, desiredNativePoint);
+    armTalon.set(ControlMode.Position, desiredAngleNativeUnits);
     getArmAngle();
   }
 
+    //Sets the neutral mode of the Talons (Coast or Brake), post to Dashboard
   public void armSetTalonNeutralMode(NeutralMode neutralMode){
     armTalon.setNeutralMode(neutralMode);
     SmartDashboard.putString("Neutral Mode", neutralMode.toString());
   }
 
+    //Set motors to feed in
   public void feedIn(){
     feederMotors.set(RobotMap.FEEDER_SPEED);
   }
   
+    //Set motors to feed out
   public void feedOut(){
     feederMotors.set(-1 * RobotMap.FEEDER_SPEED);
   }
 
+    //Set motors to stop feeding
   public void feedStop(){
     feederMotors.set(0);
   }
 
+    //Get talon encoder value, post vals to Dashboard.
   public double getArmAngle(){
     armAngle = armTalon.getSensorCollection().getQuadraturePosition();
     SmartDashboard.putNumber("Arm Angle (Native)", armAngle);
     SmartDashboard.putNumber("Arm Angle (Degrees)", (armAngle * RobotMap.ARM_ANGLE_PER_PULSE));
     return armAngle;
   }
-
-  public double getArmDistance(){
-    armHeight = armTalon.getSensorCollection().getQuadraturePosition();
-    SmartDashboard.putNumber("Arm Height (Height)", (armHeight * RobotMap.ARM_DISTANCE_PER_PULSE));
-    return armHeight;
-  }
-
 }
