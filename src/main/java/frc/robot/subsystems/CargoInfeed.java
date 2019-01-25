@@ -37,11 +37,6 @@ public class CargoInfeed extends Subsystem {
     getArmAngle();
   }
 
-  public void armOverrideMove(double armDirection){
-    armTalon.set(ControlMode.PercentOutput, armDirection);
-    getArmAngle();
-  }
-
   public void armSetTalonNeutralMode(NeutralMode neutralMode){
     armTalon.setNeutralMode(neutralMode);
     SmartDashboard.putString("Neutral Mode", neutralMode.toString());
