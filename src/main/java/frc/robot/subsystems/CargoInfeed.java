@@ -37,7 +37,7 @@ public class CargoInfeed extends Subsystem {
   }
 
     //Moves the arm manually, given velocity
-  public void armOverrideMOve(double armVelocity){
+  public void armOverrideMove(double armVelocity){
     armTalon.set(ControlMode.PercentOutput, armVelocity);
   }
 
