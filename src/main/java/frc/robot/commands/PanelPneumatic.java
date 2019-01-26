@@ -14,24 +14,34 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class PanelPneumatic extends Command {
   
+  int panelPosition;
+
   public PanelPneumatic() {
     requires(Robot.panel);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() { // sets the default panelPosition to 1
+    panelPosition = 1;
+    Robot.panel.position1();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean panelPneumatic = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_B_OPERATOR);
+    boolean panelMove = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y_OPERATOR);
+    //the xbox button is y
 
-    if(panelPneumatic == true){
-      Robot.panel.liftPanel();
-    } else if(panelPneumatic == false){
-      Robot.panel.lowerPanel();
+    if(panelMove == true && panelPosition == 1){ // sets panel position to 2 which sets L1 and R1 to true
+      panelPosition = 2; 
+      Robot.panel.position2();
+    } else if (panelMove == true && panelPosition == 2) { // sets panel position to 3 which alters L1, R1, L2, and R2 to true
+      panelPosition = 3; 
+      Robot.panel.position3();
+    } else if (panelMove == true && panelPosition == 3){ // sets panel position to 1 which alters L1, R1, L2, and R2 to false
+      panelPosition = 1;
+      Robot.panel.position1();
     }
   }
 

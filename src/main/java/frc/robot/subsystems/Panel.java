@@ -15,19 +15,38 @@ import frc.robot.commands.PanelPneumatic;
 
 
 public class Panel extends Subsystem {
-
-  private DoubleSolenoid panelPneumatic;
+// variables 
+  private Solenoid L1;
+  private Solenoid L2;
+  private Solenoid R1;
+  private Solenoid R2;
   
-  public Panel(){
-    DoubleSolenoid panelPneumatic = new DoubleSolenoid(RobotMap.PANEL_PNEUMATIC_UP, RobotMap.PANEL_PNEUMATIC_DOWN);
+  public Panel(){ // Solenoid extansiation <-- I can't spell
+    Solenoid L1 = new Solenoid(RobotMap.LEFT_PANEL_1);
+    Solenoid L2 = new Solenoid(RobotMap.LEFT_PANEL_2);
+    Solenoid R1 = new Solenoid(RobotMap.RIGHT_PANEL_1);
+    Solenoid R2 = new Solenoid(RobotMap.RIGHT_PANEL_2);
   }
 
-  public void liftPanel(){
-    panelPneumatic.set(DoubleSolenoid.Value.kForward);
+  public void position1(){ // sets panels to point upwards
+    L1.set(false);
+    L2.set(false);
+    R1.set(false);
+    R2.set(false);
   }
 
-  public void lowerPanel(){
-    panelPneumatic.set(DoubleSolenoid.Value.kReverse);
+  public void position2(){ // sets panels to be at a right angle
+    L1.set(true);
+    L2.set(false);
+    R1.set(true);
+    R2.set(false);
+  }
+
+  public void position3(){ // sets panels to face straight forward
+    L1.set(true);
+    L2.set(true);
+    R1.set(true);
+    R2.set(true);
   }
 
   @Override
