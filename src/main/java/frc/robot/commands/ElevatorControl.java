@@ -71,9 +71,10 @@ public class ElevatorControl extends Command {
           Robot.elevator.setPoint(cargoShipBall);
         }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
           Robot.elevator.setPoint(cargoBallInfeed);
-        }else if(){ //END GAME
-          Robot.elevator.setPoint(0);
-        }else if(theAButton){ //Ball Infeed Floor
+        }//else if(){ //END GAME
+         // Robot.elevator.setPoint(0);
+         //}
+        else if(theAButton){ //Ball Infeed Floor
           Robot.elevator.setPoint(ballInfeedFloor);
         }
       } 
