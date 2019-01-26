@@ -7,47 +7,54 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class FeedCargo extends Command {
+  boolean overrideButton;
   boolean feedIn;
   boolean feedOut;
-  boolean lightSensor;
 
+  double armUpDown;
+  
   public FeedCargo() {
-    requires(Robot.cargoInfeed);
+    requires(Robot.cargoinfeed);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.cargoinfeed.armSetTalonNeutralMode(NeutralMode.Brake);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    /*** Inputs ***/
-      //Buttons
+      //Read buttons
+    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
     feedIn = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
     feedOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
-    lightSensor = Robot.cargoInfeed.getLightSensor();
 
-      //If lightsensor is not tripped, allow it to feedIn.
-    if(!lightSensor){
-      if((feedIn) && (!feedOut)){
-        Robot.cargoInfeed.feedCargo(1);
-      }
-      if((feedOut) && (!feedIn)){
-        Robot.cargoInfeed.feedCargo(-1);
-      }
+      //Read axis
+    armUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
+
+      //Arm Move logic.
+    if(overrideButton){
+      Robot.cargoinfeed.armOverrideMove(armUpDown);
     }
-      //If lightsensor IS tripped, DON'T allow it to feedIn.
-    else if(lightSensor){
-      if((feedOut) && (!feedIn)){
-        Robot.cargoInfeed.feedCargo(-1);
-      }
+      
+      //Feeder Logic
+    if(feedIn && (!feedOut)){
+      Robot.cargoinfeed.feedIn();
+    }
+    else if(feedOut && (!feedIn)){
+      Robot.cargoinfeed.feedOut();
+    }
+    else{
+      Robot.cargoinfeed.feedStop();
     }
   }
 
@@ -60,11 +67,15 @@ public class FeedCargo extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.cargoinfeed.feedStop();
+    Robot.cargoinfeed.armOverrideMove(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.cargoinfeed.feedStop();
+    Robot.cargoinfeed.armOverrideMove(0);
   }
 }
