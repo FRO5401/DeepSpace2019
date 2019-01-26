@@ -28,10 +28,15 @@ public class Elevator extends Subsystem {
 
   DigitalInput stopHigh, stopLow;
 
-  private double kPid, iPid, dPidm, fPid;
-
   private boolean elevatorPidEnabled;
-	private int loopIndex, slotIndex;
+  private int loopIndex, slotIndex;
+  
+  private double ELEVATOR_kF = 0;
+  private double ELEVATOR_kP = 0;
+  private double ELEVATOR_kI = 0;
+  private double ELEVATOR_kD = 0;
+
+  public double ELEVATOR_DISTANCE_PER_PULSE = 0;
 
   public Elevator(){
 
@@ -55,10 +60,10 @@ public class Elevator extends Subsystem {
     elevatorSRX1.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRX1.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
      
-    elevatorSRX1.config_kF(slotIndex, RobotMap.ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.config_kP(slotIndex, RobotMap.ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.config_kI(slotIndex, RobotMap.ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.config_kD(slotIndex, RobotMap.ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
+    elevatorSRX1.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRX1.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRX1.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRX1.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
   }
 
   //Override Methods
@@ -80,7 +85,7 @@ public class Elevator extends Subsystem {
 
   //Sets the point to which the elevator will move
   public void setPoint(double setPoint){
-		double setPointNativeUnits = setPoint / RobotMap.ELEVATOR_DISTANCE_PER_PULSE;
+		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
     elevatorSRX1.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
     elevatorSRX2.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
 		elevatorSRX1.set(ControlMode.Position, setPointNativeUnits);

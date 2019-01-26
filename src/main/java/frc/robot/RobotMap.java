@@ -110,12 +110,6 @@ public class RobotMap {
   public static final int TIMEOUT_LIMIT_IN_Ms = 0;
   public static final int ELEVATOR_THRESHOLD_FOR_PID = 0;
 
-  public static final double ELEVATOR_kF = 0;
-  public static final double ELEVATOR_kP = 0;
-  public static final double ELEVATOR_kI = 0;
-  public static final double ELEVATOR_kD = 0;
-
-  public static final double ELEVATOR_DISTANCE_PER_PULSE = 0;
     //Limit switches
   public static final int E_STOP_HIGH = 0;
   public static final int E_STOP_LOW = 0;
