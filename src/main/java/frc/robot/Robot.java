@@ -23,10 +23,11 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
   public static DriveBase drivebase;
-  
+  public static Panel panel;
+
   //OI is always last.
   public static OI oi;
-  public static Panel panel;
+  
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     drivebase = new DriveBase();
+    panel = new Panel();
     
     //OI is always last.
     oi = new OI();
