@@ -33,6 +33,13 @@ public class RobotMap {
   public static final double ARM_DISTANCE_PER_PULSE = 0;
   public static final double ARM_SPEED = 0.6;
   public static final double FEEDER_SPEED = 0.6;
+      //Values for ARM PID.
+  public static final double ARM_kF = 0;
+  public static final double ARM_kP = 0;
+  public static final double ARM_kI = 0;
+  public static final double ARM_kD = 0;
+  public static final int TIMEOUT_LIMIT_MS = 10;
+  public static final int ARM_PID_THRESHOLD = 2;
 
   /*** Operator Interfaces ***/
     //Controllers 

@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -21,10 +22,35 @@ import frc.robot.commands.*;
  * Add your docs here.
  */
 public class CargoInfeed extends Subsystem {
-  double armAngle;
+  private double armAngle;
+  private int loopIndex, slotIndex;
 
-  VictorSP feederMotors = new VictorSP(RobotMap.CARGO_FEED_ROLLERS);
-  TalonSRX armTalon = new TalonSRX(RobotMap.ARM_TALON_CHANNEL);
+  VictorSP feederMotors;
+  TalonSRX armTalon;
+
+  public CargoInfeed(){
+    feederMotors = new VictorSP(RobotMap.CARGO_FEED_ROLLERS);
+    armTalon = new TalonSRX(RobotMap.ARM_TALON_CHANNEL);
+
+    loopIndex = 0;
+    slotIndex = 0;
+
+      //Setting the sensor and the threshold for error.
+    armTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.configAllowableClosedloopError(slotIndex, RobotMap.ARM_PID_THRESHOLD, RobotMap.TIMEOUT_LIMIT_MS);
+    
+      //Setting Max and Min values. 
+    armTalon.configNominalOutputForward(0, 	RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.configNominalOutputReverse(0, 	RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_MS);
+    
+      //Setting the PID values.
+    armTalon.config_kF(slotIndex, RobotMap.ARM_kF, RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.config_kP(slotIndex, RobotMap.ARM_kP, RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.config_kI(slotIndex, RobotMap.ARM_kI, RobotMap.TIMEOUT_LIMIT_MS);
+    armTalon.config_kD(slotIndex, RobotMap.ARM_kD, RobotMap.TIMEOUT_LIMIT_MS);   
+  }
   
   @Override
   public void initDefaultCommand() {
