@@ -80,14 +80,14 @@ public class RobotMap {
   /*** Motors ***/
     //DriveBase
   public static final int DRIVE_MOTOR_RIGHT_1 = 0;
-  public static final int DRIVE_MOTOR_LEFT_1  = 0;
-  public static final int DRIVE_MOTOR_RIGHT_2 = 0;
-  public static final int DRIVE_MOTOR_LEFT_2  = 0;
+  public static final int DRIVE_MOTOR_LEFT_1  = 2;
+  public static final int DRIVE_MOTOR_RIGHT_2 = 1;
+  public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT
     //Solenoids have just one. 
-  public static final int LEFT_PANEL_1 = 0;
+  public static final int LEFT_PANEL_1 = 2;
   public static final int LEFT_PANEL_2 = 0;
   public static final int RIGHT_PANEL_1 = 0;
   public static final int RIGHT_PANEL_2 = 0;
