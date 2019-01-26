@@ -69,7 +69,7 @@ public class DriveBase extends Subsystem {
     leftDrive1.set(leftDriveDesired);
     leftDrive2.set(leftDriveDesired);
     rightDrive1.set(rightDriveDesired);
-    rightDrive2.set(rightDriveDesired);
+    rightDrive2.set(rightDriveDesired * -1);
   
     //Periodic reporting
     reportEncoders();
