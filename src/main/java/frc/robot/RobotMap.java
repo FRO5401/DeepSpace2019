@@ -97,11 +97,11 @@ public class RobotMap {
 
   /*** Sensors ***/
     //Encoders
-  //public static final int DRIVE_ENC_LEFT_A = 0;
-  //public static final int DRIVE_ENC_RIGHT_A = 0;
-  //public static final int DRIVE_ENC_LEFT_B = 0;
-  //public static final int DRIVE_ENC_RIGHT_B = 0;
-  //public static final int DRIVE_ENC_LEFT_C = 0;
-  //public static final int DRIVE_ENC_RIGHT_C = 0;
+  public static final int DRIVE_ENC_LEFT_A = 0;
+  public static final int DRIVE_ENC_RIGHT_A = 0;
+  public static final int DRIVE_ENC_LEFT_B = 0;
+  public static final int DRIVE_ENC_RIGHT_B = 0;
+  public static final int DRIVE_ENC_LEFT_C = 0;
+  public static final int DRIVE_ENC_RIGHT_C = 0;
 
 }
