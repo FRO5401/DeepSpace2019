@@ -30,8 +30,6 @@ public class DriveBase extends Subsystem {
   private VictorSP rightDrive1;
   private VictorSP leftDrive2;
   private VictorSP rightDrive2;
-  private VictorSP leftDrive3;
-  private VictorSP rightDrive3;
 
     //Solenoids
   private Solenoid gearShifter;
@@ -46,8 +44,6 @@ public class DriveBase extends Subsystem {
     rightDrive1 = new VictorSP(RobotMap.DRIVE_MOTOR_RIGHT_1);
     leftDrive2 = new VictorSP(RobotMap.DRIVE_MOTOR_LEFT_2);
     rightDrive2 = new VictorSP(RobotMap.DRIVE_MOTOR_RIGHT_2);
-    leftDrive3 = new VictorSP(RobotMap.DRIVE_MOTOR_LEFT_3);
-    rightDrive3 = new VictorSP(RobotMap.DRIVE_MOTOR_RIGHT_3);
 
     gearShifter = new Solenoid(RobotMap.GEAR_SHIFTER);
 
@@ -72,10 +68,9 @@ public class DriveBase extends Subsystem {
   public void drive(double leftDriveDesired, double rightDriveDesired){
     leftDrive1.set(leftDriveDesired);
     leftDrive2.set(leftDriveDesired);
-    leftDrive3.set(leftDriveDesired);
     rightDrive1.set(rightDriveDesired);
     rightDrive2.set(rightDriveDesired);
-    rightDrive3.set(rightDriveDesired);
+    
   
     //Periodic reporting
     reportEncoders();
@@ -87,10 +82,8 @@ public class DriveBase extends Subsystem {
   public void stopMotors(){
     leftDrive1.set(0);
     leftDrive2.set(0);
-    leftDrive3.set(0);
     rightDrive1.set(0);
     rightDrive2.set(0);
-    rightDrive3.set(0);
   }
 
   public void shiftHighToLow(){
