@@ -80,11 +80,9 @@ public class RobotMap {
   /*** Motors ***/
     //DriveBase
   public static final int DRIVE_MOTOR_RIGHT_1 = 0;
-  public static final int DRIVE_MOTOR_LEFT_1  = 4;
+  public static final int DRIVE_MOTOR_LEFT_1  = 2;
   public static final int DRIVE_MOTOR_RIGHT_2 = 1;
-  public static final int DRIVE_MOTOR_LEFT_2  = 5;
-  public static final int DRIVE_MOTOR_RIGHT_3 = 2;
-  public static final int DRIVE_MOTOR_LEFT_3 = 6;
+  public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and an OUT constant. 
@@ -97,11 +95,8 @@ public class RobotMap {
 
   /*** Sensors ***/
     //Encoders
-  //public static final int DRIVE_ENC_LEFT_A = 0;
-  //public static final int DRIVE_ENC_RIGHT_A = 0;
-  //public static final int DRIVE_ENC_LEFT_B = 0;
-  //public static final int DRIVE_ENC_RIGHT_B = 0;
-  //public static final int DRIVE_ENC_LEFT_C = 0;
-  //public static final int DRIVE_ENC_RIGHT_C = 0;
-
+  public static final int DRIVE_ENC_LEFT_A = 0;
+  public static final int DRIVE_ENC_RIGHT_A = 0;
+  public static final int DRIVE_ENC_LEFT_B = 0;
+  public static final int DRIVE_ENC_RIGHT_B = 0;
 }
