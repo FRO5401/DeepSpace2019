@@ -72,9 +72,6 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("NavX Angle", navxGyro.getAngle());
   }
 
-  public void driveButton(double speed){
-  }
-
   public void stopMotors(){
     leftDrive1.set(0);
     leftDrive2.set(0);
@@ -84,12 +81,12 @@ public class DriveBase extends Subsystem {
 
   public void shiftHighToLow(){
     gearShifter.set(true);
-    setDPPHighGear();
+    setDPPLowGear();
   }
 
   public void shiftLowToHigh(){
     gearShifter.set(false);
-    setDPPLowGear();
+    setDPPHighGear();
   }
 
   public boolean getCurrentGear(){
@@ -130,7 +127,7 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("Left Enc Adj", leftEncoder.getDistance());
     SmartDashboard.putNumber("Right Enc Adj", rightEncoder.getDistance());
   }
-
+    //Runs continuously while robot is on.
   public void reportGyro(){
     SmartDashboard.putBoolean("NavX Connection", navxGyro.isConnected());
     SmartDashboard.putNumber("NaxX Angle", navxGyro.getAngle());
@@ -138,6 +135,7 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("NavX Yaw", navxGyro.getYaw());
   }
 
+    //Gets Gyro Angle for Auto. 
   public double getGyroAngle(){
     double currentAngle = navxGyro.getAngle();
     SmartDashboard.putBoolean("NavX Connected", navxGyro.isConnected());

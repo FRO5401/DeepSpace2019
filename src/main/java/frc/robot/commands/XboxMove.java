@@ -24,7 +24,6 @@ public class XboxMove extends Command {
   boolean precision;
   boolean gearShiftHigh;
   boolean gearShiftLow;
-  boolean speedButt;
 
     //Instance Vars
   double left;
@@ -39,7 +38,6 @@ public class XboxMove extends Command {
   @Override
   protected void initialize() {
     Robot.drivebase.shiftHighToLow();
-    Robot.drivebase.setDPPLowGear();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -57,7 +55,6 @@ public class XboxMove extends Command {
     precision = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_DRIVER);
     gearShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START_DRIVER);
     gearShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_BACK_DRIVER);
-    speedButt = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_A_DRIVER);
 
     /*** Gear Shifting ***/
       //Press for High Gear
@@ -83,6 +80,8 @@ public class XboxMove extends Command {
       //Braking
     if(brake){
       Robot.drivebase.stopMotors();
+      left = 0;
+      right = 0;
     }
       //Not Braking
     else{
@@ -117,7 +116,7 @@ public class XboxMove extends Command {
         }
       }
     }
-
+      //After speed manipulation, send to drivebase. 
     Robot.drivebase.drive(left, right);
   }
 
