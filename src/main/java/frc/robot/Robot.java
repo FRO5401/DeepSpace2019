@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
       //DriveBase Reporting
     Robot.drivebase.reportEncoders();
-    Robot.drivebase.getGyroAngle();
+    Robot.drivebase.reportGyro();
   }
 
   /**

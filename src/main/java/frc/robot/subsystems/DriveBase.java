@@ -131,6 +131,13 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("Right Enc Adj", rightEncoder.getDistance());
   }
 
+  public void reportGyro(){
+    SmartDashboard.putBoolean("NavX Connection", navxGyro.isConnected());
+    SmartDashboard.putNumber("NaxX Angle", navxGyro.getAngle());
+    SmartDashboard.putNumber("NavX Pitch", navxGyro.getPitch());
+    SmartDashboard.putNumber("NavX Yaw", navxGyro.getYaw());
+  }
+
   public double getGyroAngle(){
     double currentAngle = navxGyro.getAngle();
     SmartDashboard.putBoolean("NavX Connected", navxGyro.isConnected());
@@ -141,7 +148,6 @@ public class DriveBase extends Subsystem {
   public void resetEncoders(){
     leftEncoder.reset();
     rightEncoder.reset();
-    reportEncoders();
   }
 
   //
