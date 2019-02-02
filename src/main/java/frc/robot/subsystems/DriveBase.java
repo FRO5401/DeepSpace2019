@@ -62,9 +62,11 @@ public class DriveBase extends Subsystem {
     setDefaultCommand(new XboxMove());
   }
 
+    //Sets victors to desired speed giving from XboxMove.
   public void drive(double leftDriveDesired, double rightDriveDesired){
-    leftDrive1.set(leftDriveDesired);
-    leftDrive2.set(leftDriveDesired);
+      //Left inverted in accordance to physical wiring.
+    leftDrive1.set(-1 * leftDriveDesired);
+    leftDrive2.set(-1 * leftDriveDesired);
     rightDrive1.set(rightDriveDesired);
     rightDrive2.set(rightDriveDesired);
 
@@ -72,6 +74,7 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("NavX Angle", navxGyro.getAngle());
   }
 
+    //Sets Victors to 0.
   public void stopMotors(){
     leftDrive1.set(0);
     leftDrive2.set(0);
@@ -79,25 +82,25 @@ public class DriveBase extends Subsystem {
     rightDrive2.set(0);
   }
 
+    //Set shifter to low. 
   public void shiftHighToLow(){
     gearShifter.set(true);
     setDPPLowGear();
   }
 
+    //Set shifter to High.
   public void shiftLowToHigh(){
     gearShifter.set(false);
     setDPPHighGear();
   }
 
-  public boolean getCurrentGear(){
-    return gearShifter.get();
-  }
-
+    //Sets DPP for low gear. 
   public void setDPPLowGear(){
     leftEncoder.setDistancePerPulse(RobotMap.LOW_GEAR_LEFT_DPP);
     rightEncoder.setDistancePerPulse(RobotMap.LOW_GEAR_RIGHT_DPP);
   }
 
+    //Sets DPP for high gear.
   public void setDPPHighGear(){
     leftEncoder.setDistancePerPulse(RobotMap.HIGH_GEAR_LEFT_DPP);
     rightEncoder.setDistancePerPulse(RobotMap.HIGH_GEAR_RIGHT_DPP);
@@ -119,7 +122,20 @@ public class DriveBase extends Subsystem {
       return avgDistance;
     }
   }
+  
+  //Get the current shifter value. 
+  public boolean getCurrentGear(){
+    return gearShifter.get();
+  }
 
+    //Gets Gyro Angle for Auto. 
+  public double getGyroAngle(){
+    double currentAngle = navxGyro.getAngle();
+    SmartDashboard.putBoolean("NavX Connected", navxGyro.isConnected());
+    SmartDashboard.putNumber("NavX Angle", currentAngle);
+    return currentAngle;
+  }
+    
     //Runs continuously while robot is on. 
   public void reportEncoders(){
     SmartDashboard.putNumber("Left Enc Raw", leftEncoder.get());
@@ -135,22 +151,14 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("NavX Yaw", navxGyro.getYaw());
   }
 
-    //Gets Gyro Angle for Auto. 
-  public double getGyroAngle(){
-    double currentAngle = navxGyro.getAngle();
-    SmartDashboard.putBoolean("NavX Connected", navxGyro.isConnected());
-    SmartDashboard.putNumber("NavX Angle", currentAngle);
-    return currentAngle;
-  }
-
+    //Resets the Encoders. 
   public void resetEncoders(){
     leftEncoder.reset();
     rightEncoder.reset();
   }
 
-  //
+  //Resets the Gyro. 
   public void resetGyro(){
     navxGyro.reset();
   }
-
 }
