@@ -91,12 +91,12 @@ public class RobotMap {
   public static final int PCM_ID = 0;
 
     //DriveBase
-  public static final int GEAR_SHIFTER = 0;
+  public static final int GEAR_SHIFTER = 1;
 
   /*** Sensors ***/
     //Encoders
-  public static final int DRIVE_ENC_LEFT_A = 0;
-  public static final int DRIVE_ENC_RIGHT_A = 0;
-  public static final int DRIVE_ENC_LEFT_B = 0;
-  public static final int DRIVE_ENC_RIGHT_B = 0;
+  public static final int DRIVE_ENC_LEFT_A = 1;
+  public static final int DRIVE_ENC_RIGHT_A = 2;
+  public static final int DRIVE_ENC_LEFT_B = 3;
+  public static final int DRIVE_ENC_RIGHT_B = 4;
 }
