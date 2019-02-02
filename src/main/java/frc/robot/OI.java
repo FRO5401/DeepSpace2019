@@ -44,28 +44,28 @@ public class OI {
   public Joystick xboxOperator = new Joystick(RobotMap.XBOX_CONTROLLER_OPERATOR);
 
     //Buttons (Driver)
-  Button xboxA_Driver			  = new JoystickButton(xboxDriver, 1);
-	Button xboxB_Driver			  = new JoystickButton(xboxDriver, 2);
-	Button xboxX_Driver			  = new JoystickButton(xboxDriver, 3);
-	Button xboxY_Driver			  = new JoystickButton(xboxDriver, 4);
-	Button xboxLeftBumper_Driver  = new JoystickButton(xboxDriver, 5);
-	Button xboxRightBumper_Driver = new JoystickButton(xboxDriver, 6);
-	Button xboxBack_Driver		  = new JoystickButton(xboxDriver, 7);
-	Button xboxStart_Driver		  = new JoystickButton(xboxDriver, 8);
-	Button xboxL3_Driver		  = new JoystickButton(xboxDriver, 9);
-	Button xboxR3_Driver		  = new JoystickButton(xboxDriver, 10);
+  Button xboxA_Driver			  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_A_DRIVER);
+	Button xboxB_Driver			  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_B_DRIVER);
+	Button xboxX_Driver			  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_X_DRIVER);
+	Button xboxY_Driver			  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_Y_DRIVER);
+	Button xboxLeftBumper_Driver  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_LEFT_BUMPER_DRIVER);
+	Button xboxRightBumper_Driver = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_DRIVER);
+	Button xboxBack_Driver		  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_BACK_DRIVER);
+	Button xboxStart_Driver		  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_START_DRIVER);
+	Button xboxL3_Driver		  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_L3_DRIVER);
+	Button xboxR3_Driver		  = new JoystickButton(xboxDriver, RobotMap.XBOX_BUTTON_R3_DRIVER);
   
     //Buttons (Operator)
-  Button xboxA_Operator			= new JoystickButton(xboxOperator, 1);
-	Button xboxB_Operator			= new JoystickButton(xboxOperator, 2);
-	Button xboxX_Operator			= new JoystickButton(xboxOperator, 3);
-	Button xboxY_Operator			= new JoystickButton(xboxOperator, 4);
-	Button xboxLeftBumper_Operator  = new JoystickButton(xboxOperator, 5);
-	Button xboxRightBumper_Operator = new JoystickButton(xboxOperator, 6);
-	Button xboxBack_Operator		= new JoystickButton(xboxOperator, 7);
-	Button xboxStart_Operator		= new JoystickButton(xboxOperator, 8);
-	Button xboxL3_Operator		  	= new JoystickButton(xboxOperator, 9);
-	Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, 10);
+  Button xboxA_Operator			= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
+	Button xboxB_Operator			= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_B_OPERATOR);
+	Button xboxX_Operator			= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_X_OPERATOR);
+	Button xboxY_Operator			= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_Y_OPERATOR);
+	Button xboxLeftBumper_Operator  = new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
+	Button xboxRightBumper_Operator = new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
+	Button xboxBack_Operator		= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_BACK_OPERATOR);
+	Button xboxStart_Operator		= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_START_OPERATOR);
+	Button xboxL3_Operator		  	= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
+	Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_R3_OPERATOR);
 
   public OI(){
   }

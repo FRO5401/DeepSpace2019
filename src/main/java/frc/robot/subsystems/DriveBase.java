@@ -51,9 +51,6 @@ public class DriveBase extends Subsystem {
     leftEncoder = new Encoder(RobotMap.DRIVE_ENC_LEFT_A, RobotMap.DRIVE_ENC_LEFT_B, true, EncodingType.k4X);
     rightEncoder = new Encoder(RobotMap.DRIVE_ENC_RIGHT_A, RobotMap.DRIVE_ENC_RIGHT_B, false, EncodingType.k4X);
 
-    //Initial report
-    reportEncoders();
-
     //Initial report of the gyro angle. 
     SmartDashboard.putNumber("NavX Angle", navxGyro.getAngle());
   }
@@ -70,13 +67,12 @@ public class DriveBase extends Subsystem {
     leftDrive2.set(leftDriveDesired);
     rightDrive1.set(rightDriveDesired);
     rightDrive2.set(rightDriveDesired);
-    
-  
-    //Periodic reporting
-    reportEncoders();
 
     //Report gyro angle
     SmartDashboard.putNumber("NavX Angle", navxGyro.getAngle());
+  }
+
+  public void driveButton(double speed){
   }
 
   public void stopMotors(){
@@ -110,12 +106,11 @@ public class DriveBase extends Subsystem {
     rightEncoder.setDistancePerPulse(RobotMap.HIGH_GEAR_RIGHT_DPP);
   }
 
+    //For autonomous driving
   public double getEncoderDistance(int encoderNumber){
     double leftDistAdj = leftEncoder.getDistance();
     double rightDistAdj = rightEncoder.getDistance();  
     double avgDistance = (leftDistAdj + rightDistAdj) / 2;
-
-    reportEncoders();
 
     if(encoderNumber == 1){
       return leftDistAdj;
@@ -128,6 +123,7 @@ public class DriveBase extends Subsystem {
     }
   }
 
+    //Runs continuously while robot is on. 
   public void reportEncoders(){
     SmartDashboard.putNumber("Left Enc Raw", leftEncoder.get());
     SmartDashboard.putNumber("Right Enc Raw", rightEncoder.get());

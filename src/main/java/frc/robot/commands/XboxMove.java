@@ -24,6 +24,7 @@ public class XboxMove extends Command {
   boolean precision;
   boolean gearShiftHigh;
   boolean gearShiftLow;
+  boolean speedButt;
 
     //Instance Vars
   double left;
@@ -56,6 +57,7 @@ public class XboxMove extends Command {
     precision = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_DRIVER);
     gearShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START_DRIVER);
     gearShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_BACK_DRIVER);
+    speedButt = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_A_DRIVER);
 
     /*** Gear Shifting ***/
       //Press for High Gear
@@ -115,6 +117,7 @@ public class XboxMove extends Command {
         }
       }
     }
+
     Robot.drivebase.drive(left, right);
   }
 

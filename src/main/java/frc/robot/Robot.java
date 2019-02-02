@@ -43,6 +43,9 @@ public class Robot extends TimedRobot {
     oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    Robot.drivebase.resetEncoders();
+    Robot.drivebase.resetGyro();
   }
 
   /**
@@ -55,6 +58,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+      //DriveBase Reporting
+    Robot.drivebase.reportEncoders();
+    Robot.drivebase.getGyroAngle();
   }
 
   /**
