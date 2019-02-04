@@ -99,14 +99,14 @@ public class XboxMove extends Command {
           //Turning right
         if(turn > RobotMap.AXIS_THRESHOLD){
             //Makes left slow down by a factor of how far the axis is pushed. 
-          left = (throttle - reverse) * sensitivity * (1 - turn);
-          right = (throttle - reverse) * sensitivity;
+          left = (throttle - reverse) * sensitivity;
+          right = (throttle - reverse) * sensitivity * (1 - turn);
         }
           //Turning left
         else if(turn < (-1 * RobotMap.AXIS_THRESHOLD)){
             //Makes right speed up by a factor of how far the axis is pushed. 
-          left = (throttle - reverse) * sensitivity;
-          right = (throttle - reverse) * sensitivity * (1 + turn);
+          left = (throttle - reverse) * sensitivity * (1 + turn);
+          right = (throttle - reverse) * sensitivity;
         }
           //Driving straight 
         else{

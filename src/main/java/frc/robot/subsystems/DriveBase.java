@@ -65,10 +65,12 @@ public class DriveBase extends Subsystem {
     //Sets victors to desired speed giving from XboxMove.
   public void drive(double leftDriveDesired, double rightDriveDesired){
       //Left inverted in accordance to physical wiring.
-    leftDrive1.set(-1 * leftDriveDesired);
-    leftDrive2.set(-1 * leftDriveDesired);
-    rightDrive1.set(rightDriveDesired);
-    rightDrive2.set(rightDriveDesired);
+    leftDrive1.set(leftDriveDesired);
+    leftDrive2.set(leftDriveDesired);
+    rightDrive1.set(-1 * rightDriveDesired);
+    rightDrive2.set(-1 * rightDriveDesired);
+
+    reportEncoders();
 
     //Report gyro angle
     SmartDashboard.putNumber("NavX Angle", navxGyro.getAngle());

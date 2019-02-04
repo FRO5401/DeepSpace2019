@@ -26,7 +26,7 @@ public class RobotMap {
 
   /*** Constants ***/
     //OI
-  public static final double AXIS_THRESHOLD = 1;
+  public static final double AXIS_THRESHOLD = 0.25;
 
     //DriveBase
   public static final double LOW_GEAR_LEFT_DPP = 0.15;
@@ -88,15 +88,15 @@ public class RobotMap {
     //DoubleSolenoids have an IN and an OUT constant. 
     //Solenoids have just one constant. 
     //PCM (Pneumatic Control Module)
-  public static final int PCM_ID = 0;
+  public static final int PCM_ID = 1;
 
     //DriveBase
   public static final int GEAR_SHIFTER = 1;
 
   /*** Sensors ***/
     //Encoders
-  public static final int DRIVE_ENC_LEFT_A = 1;
-  public static final int DRIVE_ENC_RIGHT_A = 2;
+  public static final int DRIVE_ENC_LEFT_A = 2;
+  public static final int DRIVE_ENC_RIGHT_A = 0;
   public static final int DRIVE_ENC_LEFT_B = 3;
-  public static final int DRIVE_ENC_RIGHT_B = 4;
+  public static final int DRIVE_ENC_RIGHT_B = 1;
 }
