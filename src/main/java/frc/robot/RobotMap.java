@@ -29,8 +29,8 @@ public class RobotMap {
   public static final double AXIS_THRESHOLD = 0.25;
 
     //DriveBase
-  public static final double LOW_GEAR_LEFT_DPP = 0.15;
-  public static final double LOW_GEAR_RIGHT_DPP = 0.15;
+  public static final double LOW_GEAR_LEFT_DPP = 0.1515151515;
+  public static final double LOW_GEAR_RIGHT_DPP = 0.1426533524 /*0.1477104874*/;
   public static final double HIGH_GEAR_LEFT_DPP = 0;
   public static final double HIGH_GEAR_RIGHT_DPP = 0;
 
@@ -99,4 +99,9 @@ public class RobotMap {
   public static final int DRIVE_ENC_RIGHT_A = 0;
   public static final int DRIVE_ENC_LEFT_B = 3;
   public static final int DRIVE_ENC_RIGHT_B = 1;
+
+  /*** Autonomous ***/
+    public static final int ANGLE_THRESHOLD = 2;
+    public static final double AUTO_TURN_SPEED = 0.5;
+    public static final double AUTO_TURN_PRECISION = 0.2;
 }

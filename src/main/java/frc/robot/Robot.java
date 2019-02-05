@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
+import frc.robot.autonomous.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +29,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
 
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -42,7 +43,13 @@ public class Robot extends TimedRobot {
     //OI is always last.
     oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    chooser.setDefaultOption("DoNothing", new DoNothing());
+    chooser.addOption("Drive Straight", new DriveStraight());
+    chooser.addOption("Turn Turn Turn", new TurnTurnTurn());
+    chooser.addOption("Down and Back", new DownAndBack());
+
+    SmartDashboard.putData("Auto mode", chooser);
+    
 
     Robot.drivebase.resetEncoders();
     Robot.drivebase.resetGyro();
@@ -90,7 +97,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
