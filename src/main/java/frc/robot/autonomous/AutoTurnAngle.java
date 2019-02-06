@@ -1,38 +1,19 @@
 package frc.robot.autonomous;
 
-
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-
-/**
-
- * 
-
- */
-
 public class AutoTurnAngle extends Command {
 
-	
-
 	private double desiredTurnAngleRelativeToInitAngle;
-
 	private double currentAngleRelativeToInitAngle;
-
 	private double initAngle;
-
 	private boolean finished;
-
 	private double angleReport;
-
 	
-
-	
-
-    public AutoTurnAngle(double angle) {
+	public AutoTurnAngle(double angle) {
     	//Units are degrees
     	requires(Robot.drivebase);    	
 
@@ -63,7 +44,6 @@ public class AutoTurnAngle extends Command {
         finished = true;
         
     	} else {
-
     		if (desiredTurnAngleRelativeToInitAngle > 0 && (currentAngleRelativeToInitAngle < Math.abs(desiredTurnAngleRelativeToInitAngle) - RobotMap.ANGLE_THRESHOLD)){
     			Robot.drivebase.drive(RobotMap.AUTO_TURN_SPEED * RobotMap.AUTO_TURN_PRECISION, -RobotMap.AUTO_TURN_SPEED * RobotMap.AUTO_TURN_PRECISION);
     			finished = false;
@@ -83,19 +63,14 @@ public class AutoTurnAngle extends Command {
     	double angle = Robot.drivebase.getGyroAngle();
     	SmartDashboard.putNumber("Relative to Inital Angle", currentAngleRelativeToInitAngle);
     }
-
     // Make this return true when this Command no longer needs to run execute()
     @Override
 	protected boolean isFinished() {
         return finished;
     }
 
-
-
     // Called once after isFinished returns true
-
     @Override
-
 	protected void end() {
     	Robot.drivebase.stopMotors();
     	System.out.println("AutoTurnAngle end()");
@@ -108,5 +83,4 @@ public class AutoTurnAngle extends Command {
     	Robot.drivebase.stopMotors();
     	System.out.println("AutoTurnAngle Interrupted");
     }
-
 }
