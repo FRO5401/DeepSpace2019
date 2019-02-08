@@ -29,8 +29,8 @@ public class RobotMap {
   public static final double AXIS_THRESHOLD = 0.25;
 
     //DriveBase
-  public static final double LOW_GEAR_LEFT_DPP = 0.1515151515;
-  public static final double LOW_GEAR_RIGHT_DPP = 0.1426533524 /*0.1477104874*/;
+  public static final double LOW_GEAR_LEFT_DPP = 0.1655629139; //These are for practice bot
+  public static final double LOW_GEAR_RIGHT_DPP = 0.1655629139; //Right DPP: 0.1757469244 Left:0.1655629139
   public static final double HIGH_GEAR_LEFT_DPP = 0;
   public static final double HIGH_GEAR_RIGHT_DPP = 0;
 

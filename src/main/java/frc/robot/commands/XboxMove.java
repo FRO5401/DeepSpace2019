@@ -24,6 +24,10 @@ public class XboxMove extends Command {
   boolean precision;
   boolean gearShiftHigh;
   boolean gearShiftLow;
+  boolean resetSensors;
+  boolean speedConstant1;
+  boolean speedConstant2;
+  boolean speedConstant3;
 
     //Instance Vars
   double left;
@@ -55,6 +59,10 @@ public class XboxMove extends Command {
     precision = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_DRIVER);
     gearShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START_DRIVER);
     gearShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_BACK_DRIVER);
+    resetSensors = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_Y_DRIVER);
+    speedConstant1 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_X_DRIVER);
+    speedConstant2 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_A_DRIVER);
+    speedConstant3 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_B_DRIVER);
 
     /*** Gear Shifting ***/
       //Press for High Gear
@@ -82,6 +90,19 @@ public class XboxMove extends Command {
       Robot.drivebase.stopMotors();
       left = 0;
       right = 0;
+    }
+      //Drives at constant speed
+    else if(speedConstant1){
+      left = (1.0 / 3);
+      right = (1.0 / 3);
+    }
+    else if(speedConstant2){
+      left = (2.0 / 3);
+      right = (2.0 / 3);
+    }
+    else if(speedConstant3){
+      left = (1.0);
+      right = (1.0);
     }
       //Not Braking
     else{
