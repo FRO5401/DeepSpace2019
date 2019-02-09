@@ -48,7 +48,10 @@ public class Robot extends TimedRobot {
     chooser.addOption("Turn Turn Turn", new TurnTurnTurn());
     chooser.addOption("Down and Back", new DownAndBack());
     chooser.addOption("LeftFrontHatch1", new LeftFrontHatch1());
+    chooser.addOption("LeftFrontHatch2", new LeftFrontHatch2());
     chooser.addOption("RightFrontHatch1", new RightFrontHatch1());
+    chooser.addOption("RightFrontHatch2", new RightFrontHatch2());
+    chooser.addOption("RightRocketHatchLow", new RightRocketHatchLow());
 
     SmartDashboard.putData("Auto mode", chooser);
     

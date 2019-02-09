@@ -11,19 +11,19 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.*;
 
-public class LeftFrontHatch1 extends CommandGroup {
+public class LeftFrontHatch2 extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public LeftFrontHatch1() {
+  public LeftFrontHatch2() {
     //addSequential(new WaitCommand(0.1));
-    addSequential(new AutoDrive(50, 0.5));
+    addSequential(new AutoDrive(90, 0.5));
     addSequential(new AutoTurnAngle(30));
     Robot.drivebase.resetEncoders();
     addSequential(new WaitCommand(0.5));
     addSequential(new AutoDrive(50, 0.5));
     addSequential(new WaitCommand(0.25));
-    addSequential(new AutoTurnAngle(-30));
+    addSequential(new AutoTurnAngle(-28));
     Robot.drivebase.resetGyro();
     Robot.drivebase.resetEncoders();
     addSequential(new WaitCommand(0.5));

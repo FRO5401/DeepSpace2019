@@ -19,11 +19,13 @@ public class RightFrontHatch1 extends CommandGroup {
     //addSequential(new WaitCommand(0.1));
     addSequential(new AutoDrive(50, 0.5));
     addSequential(new AutoTurnAngle(-30));
+    Robot.drivebase.resetEncoders();
     addSequential(new WaitCommand(0.5));
     addSequential(new AutoDrive(52, 0.5));
     addSequential(new WaitCommand(0.25));
     addSequential(new AutoTurnAngle(31));
     Robot.drivebase.resetGyro();
+    Robot.drivebase.resetEncoders();
     addSequential(new WaitCommand(0.5));
     addSequential(new AutoDrive(50, 0.5));
 

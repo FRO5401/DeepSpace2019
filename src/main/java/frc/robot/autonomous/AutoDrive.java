@@ -64,7 +64,7 @@ public class AutoDrive extends Command {
 	protected void execute() {
 		//Resets pitch if Z axis changes too much
 		navXPitch = Robot.drivebase.getGyroPitch();
-		if (navXPitchInit + 7 < navXPitch){
+		if ((navXPitch - navXPitchInit) > 1.0){
 			Robot.drivebase.resetGyro();
 		}
 
