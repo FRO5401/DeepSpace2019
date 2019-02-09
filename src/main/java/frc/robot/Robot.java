@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 import frc.robot.autonomous.*;
+import frc.robot.commands.VisionDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +25,7 @@ import frc.robot.autonomous.*;
  */
 public class Robot extends TimedRobot {
   public static DriveBase drivebase;
+  public static VisionAuto visionAuto;
   
   //OI is always last.
   public static OI oi;
@@ -39,6 +41,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     drivebase = new DriveBase();
+    visionAuto = new VisionAuto();
     
     //OI is always last.
     oi = new OI();
