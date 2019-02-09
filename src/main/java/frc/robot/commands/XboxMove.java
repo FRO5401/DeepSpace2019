@@ -64,6 +64,12 @@ public class XboxMove extends Command {
     speedConstant2 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_A_DRIVER);
     speedConstant3 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_B_DRIVER);
 
+    //Resets Sensors
+    if(resetSensors){
+      Robot.drivebase.resetEncoders();
+      Robot.drivebase.resetGyro();
+    }    
+    
     /*** Gear Shifting ***/
       //Press for High Gear
     if(gearShiftHigh){

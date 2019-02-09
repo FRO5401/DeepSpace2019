@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
       //DriveBase Reporting
     Robot.drivebase.reportEncoders();
     Robot.drivebase.reportGyro();
+    Robot.drivebase.getVictorSpeed();
   }
 
   /**

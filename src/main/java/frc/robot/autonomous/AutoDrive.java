@@ -77,8 +77,12 @@ public class AutoDrive extends Command {
     					Robot.drivebase.drive(autoDriveSpeed + (kP_Drift * drift), autoDriveSpeed);
 						System.out.print(distanceTraveled);//Adjust right motor when driving forward
 						
-//    				} else if (drift < -.5){
-//    					Robot.drivebase.drive(autoDriveSpeed, autoDriveSpeed + (kP_Drift * drift));
+    				} else if (drift < -.5){
+						//Robot.drivebase.drive(autoDriveSpeed - (kP_Drift * drift), autoDriveSpeed);
+						//System.out.print(distanceTraveled);//Adjust right motor when driving forward
+						
+						Robot.drivebase.drive(autoDriveSpeed, autoDriveSpeed + (kP_Drift * (drift / 2)));
+						//Works with kP_Drift as 0.1, must be added because drift is negative
     				}
 
     				else {

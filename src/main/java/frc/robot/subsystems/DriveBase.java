@@ -147,8 +147,8 @@ public class DriveBase extends Subsystem {
   }
     //Runs continuously while robot is on.
   public void reportGyro(){
-    SmartDashboard.putBoolean("NavX Connection", navxGyro.isConnected());
-    SmartDashboard.putNumber("NaxX Angle", navxGyro.getAngle());
+    //SmartDashboard.putBoolean("NavX Connection", navxGyro.isConnected());
+    //SmartDashboard.putNumber("NaxX Angle", navxGyro.getAngle());
     SmartDashboard.putNumber("NavX Pitch", navxGyro.getPitch());
     SmartDashboard.putNumber("NavX Yaw", navxGyro.getYaw());
   }
@@ -162,5 +162,13 @@ public class DriveBase extends Subsystem {
   //Resets the Gyro. 
   public void resetGyro(){
     navxGyro.reset();
+  }
+
+  //Gets the victor speeds
+  public void getVictorSpeed(){
+    SmartDashboard.putNumber("Left VSP1 Speed", leftDrive1.getSpeed());
+    SmartDashboard.putNumber("Left VSP2 Speed", leftDrive2.getSpeed());
+    SmartDashboard.putNumber("Right VSP1", rightDrive1.getSpeed());
+    SmartDashboard.putNumber("Right VSP2", rightDrive2.getSpeed());
   }
 }

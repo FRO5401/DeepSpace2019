@@ -30,7 +30,7 @@ public class RobotMap {
 
     //DriveBase
   public static final double LOW_GEAR_LEFT_DPP = 0.1655629139; //These are for practice bot
-  public static final double LOW_GEAR_RIGHT_DPP = 0.1655629139; //Right DPP: 0.1757469244 Left:0.1655629139
+  public static final double LOW_GEAR_RIGHT_DPP = 0.1757469244; //Right DPP: 0.1757469244 Left:0.1655629139
   public static final double HIGH_GEAR_LEFT_DPP = 0;
   public static final double HIGH_GEAR_RIGHT_DPP = 0;
 
