@@ -17,7 +17,9 @@ public class AutoDrive extends Command {
 	private double drift;
 	private double kP_Drift;
 	private double velocitySample2;
-	private final double autoDistThresh;	
+	private final double autoDistThresh;
+	private double navXPitchInit;
+	private double navXPitch;	
 
     public AutoDrive(double DistanceInput, double SpeedInput) {
         // Use requires() here to declare subsystem dependencies
@@ -32,7 +34,7 @@ public class AutoDrive extends Command {
     	distanceTraveled = 0;
     	heading = Robot.drivebase.getGyroAngle();
     	kP_Drift = .1;
-    	velocitySample2 = 0;
+		velocitySample2 = 0;
 		//Final Variables
 		
     	autoDistThresh = 2;    
@@ -47,7 +49,8 @@ public class AutoDrive extends Command {
     	heading = Robot.drivebase.getGyroAngle();
     	drift = 0;
     	doneTraveling = true;
-    	distanceTraveled = 0;
+		distanceTraveled = 0;
+		navXPitchInit = Robot.drivebase.getGyroPitch();
 
     	//System.out.println("AutoDriveInitializing");
     	//System.out.println("Angle when starting DriveShift:" + Robot.drivebase.getGyroAngle());
@@ -59,6 +62,13 @@ public class AutoDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
+		//Resets pitch if Z axis changes too much
+		navXPitch = Robot.drivebase.getGyroPitch();
+		if (navXPitchInit + 7 < navXPitch){
+			Robot.drivebase.resetGyro();
+		}
+
+		//Driving
     	if (Math.abs(desiredDistance) <= autoDistThresh){
     		//DesiredDistance too small!
     		doneTraveling = true;
@@ -74,7 +84,7 @@ public class AutoDrive extends Command {
     				System.out.print(distanceTraveled + " Positive Marker");
 
     				if (drift > .5){ //Currently assumes we always drift right while going forwards
-    					Robot.drivebase.drive(autoDriveSpeed + (kP_Drift * drift), autoDriveSpeed);
+    					Robot.drivebase.drive(autoDriveSpeed + (kP_Drift * (drift / 2)), autoDriveSpeed);
 						System.out.print(distanceTraveled);//Adjust right motor when driving forward
 						
     				} else if (drift < -.5){

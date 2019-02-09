@@ -137,7 +137,10 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("NavX Angle", currentAngle);
     return currentAngle;
   }
-    
+  public double getGyroPitch(){
+    double pitch = navxGyro.getPitch();
+    return pitch;
+  }  
     //Runs continuously while robot is on. 
   public void reportEncoders(){
     SmartDashboard.putNumber("Left Enc Raw", leftEncoder.get());
