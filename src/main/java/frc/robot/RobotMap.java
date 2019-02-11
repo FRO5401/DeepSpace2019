@@ -108,8 +108,10 @@ public class RobotMap {
   
       //DoubleSolenoids have an IN and a OUT
   
-      //Solenoids have just one. 
-    public static final int HATCH_EXTENDER = 0;
+      //Solenoids have just one.
+    
+    public static final int HATCH_EXTENDER_RIGHT = 0; // Hatch Extender Is Made Up of Two Single Solenoids
+    public static final int HATCH_EXTENDER_LEFT = 0;
   
       //PCM (Pneumatic Control Module)
   

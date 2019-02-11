@@ -8,18 +8,22 @@ import frc.robot.commands.PopHatch;
 
 public class HatchMechanism extends Subsystem {
 
-  private Solenoid hatchRelease;
+  private Solenoid hatchReleaseRight;
+  private Solenoid hatchReleaseLeft;
   
   public HatchMechanism(){
-    Solenoid hatchRelease = new Solenoid(RobotMap.HATCH_EXTENDER);
+    Solenoid hatchReleaseLeft = new Solenoid(RobotMap.HATCH_EXTENDER_LEFT);
+    Solenoid hatchReleaseRight = new Solenoid(RobotMap.HATCH_EXTENDER_RIGHT);
   }
 
   public void openHatch(){
-    hatchRelease.set(true);
+    hatchReleaseRight.set(true);
+    hatchReleaseLeft.set(true);
   }
 
   public void closeHatch(){
-    hatchRelease.set(false);
+    hatchReleaseRight.set(false);
+    hatchReleaseLeft.set(false);
   }
 
   @Override
