@@ -47,8 +47,8 @@ public class Elevator extends Subsystem {
     elevatorSolenoid = new Solenoid(RobotMap.ELEVATOR_SOLENOID);
 
     //Limits
-    DigitalInput stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
-    DigitalInput stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
+    stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
+    stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
 
     elevatorSRX1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
     elevatorSRX1.setSensorPhase(true);
