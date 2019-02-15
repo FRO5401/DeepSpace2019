@@ -36,8 +36,17 @@ public class ElevatorControl extends Command {
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
     topLimit = Robot.elevator.getLimitT();
     bottomLimit = Robot.elevator.getLimitB();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+
+    //Setpoints
+    rocketHighBall = 0; //change these to correct setpoints
+    rocketHighHatch = 0;
+    rocketMidBall = 0;
+    rocketMidHatch = 0;
+    rocketLowBall = 0;
+    rocketLowHatch = 0;
+    cargoShipBall = 0;
+    cargoBallInfeed = 0;
+    ballInfeedFloor = 0;
   }
 
   // Called just before this Command runs the first time
@@ -48,7 +57,7 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      //override
+      //override control
       if(overrideButton){
         if((Robot.elevator.getLimitB() == false && Robot.elevator.getLimitT() == false)){
           Robot.elevator.overrideElevator(rightJoystickOperator); //Normal override Control
@@ -57,7 +66,8 @@ public class ElevatorControl extends Command {
         }else if(Robot.elevator.getLimitT() == true){
           Robot.elevator.overrideElevator(Math.abs(rightJoystickOperator) * -1); //Always go down
         }
-      } else { //PID Control
+      }
+      else { //PID Control
 
         //Limits for PID
         if(topLimit == true){
@@ -130,12 +140,10 @@ public class ElevatorControl extends Command {
            //}
            else if(theAButton){ //Ball Infeed Floor
             Robot.elevator.setPoint(ballInfeedFloor);
-           }
+          }
         }
       }
     }
-
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
