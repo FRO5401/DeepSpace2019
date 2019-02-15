@@ -24,7 +24,8 @@ public class Elevator extends Subsystem {
   // here. Call these from Commands.
   TalonSRX elevatorSRX1;
   TalonSRX elevatorSRX2;
-  Solenoid elevatorSolenoid;
+  Solenoid elevatorGearShifter;
+  Solenoid elevatorCollapseLeft, elevatorCollapseRight;
 
   DigitalInput stopHigh, stopLow;
 
@@ -44,11 +45,13 @@ public class Elevator extends Subsystem {
     slotIndex = 0;
   
     elevatorSRX1 = new TalonSRX(RobotMap.ELEVATOR_TALON_SRX);
-    elevatorSolenoid = new Solenoid(RobotMap.ELEVATOR_SOLENOID);
+    elevatorGearShifter   = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_GEAR_SHIFTER_SOLENOID);
+    elevatorCollapseLeft  = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_LEFT_SOLENOID);
+    elevatorCollapseRight = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_RIGHT_SOLENOID);
 
     //Limits
-    DigitalInput stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
-    DigitalInput stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
+    stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
+    stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
 
     elevatorSRX1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
     elevatorSRX1.setSensorPhase(true);
@@ -96,9 +99,9 @@ public class Elevator extends Subsystem {
   //Allows the elevator to move faster/slower
   public void elevatorGearShift(int button){
     if(button == RobotMap.XBOX_BUTTON_BACK_OPERATOR){
-      elevatorSolenoid.set(false);
+      elevatorGearShifter.set(false);
     }else if(button == RobotMap.XBOX_BUTTON_START_OPERATOR){
-      elevatorSolenoid.set(true);
+      elevatorGearShifter.set(true);
     }else{
       System.out.print("Some error was thrown, start/back wasn't pressed");
     }
@@ -118,6 +121,19 @@ public class Elevator extends Subsystem {
   public boolean getLimitT(){
     return stopHigh.get();
   }
+
+    //Lifts the elevator vertical
+  public void riseElevator(){
+    elevatorCollapseLeft.set(true);
+    elevatorCollapseRight.set(true);
+  }
+
+    //Drops the elevator horizontal
+  public void collapseElevator(){
+    elevatorCollapseLeft.set(false);
+    elevatorCollapseRight.set(false);
+  }
+
 
   /*
   public void elevatorLimitT(){                           //Meant for Limit Switches, logic is in command now
