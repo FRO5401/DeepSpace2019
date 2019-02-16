@@ -19,9 +19,9 @@ public class PopHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double hatchInOut = Robot.oi.xboxAxis(RobotMap.XBOX_CONTROLLER_OPERATOR, RobotMap.XBOX_AXIS_RIGHT_TRIGGER)
+    boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y_OPERATOR);
 
-    if(hatchInOut == 1){
+    if(hatchInOut == true){
       Robot.hatchmechanism.closeHatch();
     } else {
       Robot.hatchmechanism.openHatch();
