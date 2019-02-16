@@ -22,7 +22,7 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static CargoInfeed cargoinfeed;
+  public static CarriageInfeed carriageinfeed;
   
   //OI is always last.
   public static OI oi;
@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    cargoinfeed = new CargoInfeed();
+    carriageinfeed = new CarriageInfeed();
     
     //OI is always last.
     oi = new OI();
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    cargoinfeed.getArmAngle();
+    carriageinfeed.getCarriageAngle();
   }
 
   /**

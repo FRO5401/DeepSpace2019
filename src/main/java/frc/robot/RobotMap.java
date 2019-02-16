@@ -29,17 +29,17 @@ public class RobotMap {
   public static final double AXIS_THRESHOLD = 0.3;
 
     //Cargo Infeed
-  public static final double ARM_ANGLE_PER_PULSE = 0;
-  public static final double ARM_DISTANCE_PER_PULSE = 0;
-  public static final double ARM_SPEED = 0.6;
+  public static final double CARRIAGE_ANGLE_PER_PULSE = 0;
+  public static final double CARRIAGE_DISTANCE_PER_PULSE = 0;
+  public static final double CARRIAGE_SPEED = 0.6;
   public static final double FEEDER_SPEED = 0.6;
-      //Values for ARM PID.
-  public static final double ARM_kF = 0;
-  public static final double ARM_kP = 0;
-  public static final double ARM_kI = 0;
-  public static final double ARM_kD = 0;
+      //Values for CARRIAGE PID.
+/*public static final double CARRIAGE_kF = 0;
+  public static final double CARRIAGE_kP = 0;
+  public static final double CARRIAGE_kI = 0;
+  public static final double CARRIAGE_kD = 0;
   public static final int TIMEOUT_LIMIT_MS = 10;
-  public static final int ARM_PID_THRESHOLD = 2;
+  public static final int CARRIAGE_PID_THRESHOLD = 2;*/
 
   /*** Operator Interfaces ***/
     //Controllers 
@@ -79,9 +79,9 @@ public class RobotMap {
   public static final int XBOX_AXIS_RIGHT_Y = 5;
     
   /*** Motors ***/
-    //Cargo Infeed
-  public static final int ARM_TALON_CHANNEL = 0;
-  public static final int CARGO_FEED_ROLLERS = 0;
+    //Carriage Infeed
+  public static final int CARRIAGE_TALON_CHANNEL = 0;
+  public static final int CARRIAGE_FEED_ROLLERS = 0;
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and a OUT

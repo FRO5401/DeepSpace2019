@@ -7,27 +7,36 @@
 
 package frc.robot.commands;
 
+import javax.naming.spi.NamingManager;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class FeedCargo extends Command {
+public class FeedCarriage extends Command {
   boolean overrideButton;
   boolean feedIn;
   boolean feedOut;
 
-  double armUpDown;
+  double carriageUpDown;
+  double carriageReset;
+  double carriageMiddle;
+  double carriageGround;
   
-  public FeedCargo() {
-    requires(Robot.cargoinfeed);
+  public FeedCarriage() {
+    requires(Robot.carriageinfeed);
   }
+
+  
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cargoinfeed.armSetTalonNeutralMode(NeutralMode.Brake);
+    Robot.carriageinfeed.carriageSetTalonNeutralMode(NeutralMode.Brake);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,26 +44,34 @@ public class FeedCargo extends Command {
   protected void execute() {
       //Read buttons
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
-    feedIn = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
-    feedOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
+    feedIn = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
+    feedOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
 
       //Read axis
-    armUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
+    carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
 
-      //Arm Move logic.
+      //carriage Move logic.
     if(overrideButton){
-      Robot.cargoinfeed.armOverrideMove(armUpDown);
+      //Forces elevator to go down/up when too high/low
+      if(elevator angle == highest){
+        Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown) * -1);
+
+      }
+      else if(elevator angle == lowest){
+        Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown));
+        }  
+      Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
     }
       
       //Feeder Logic
     if(feedIn && (!feedOut)){
-      Robot.cargoinfeed.feedIn();
+      Robot.carriageinfeed.feedIn();
     }
     else if(feedOut && (!feedIn)){
-      Robot.cargoinfeed.feedOut();
+      Robot.carriageinfeed.feedOut();
     }
     else{
-      Robot.cargoinfeed.feedStop();
+      Robot.carriageinfeed.feedStop();
     }
   }
 
@@ -67,15 +84,15 @@ public class FeedCargo extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.cargoinfeed.feedStop();
-    Robot.cargoinfeed.armOverrideMove(0);
+    Robot.carriageinfeed.feedStop();
+    Robot.carriageinfeed.carriageOverrideMove(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.cargoinfeed.feedStop();
-    Robot.cargoinfeed.armOverrideMove(0);
+    Robot.carriageinfeed.feedStop();
+    Robot.carriageinfeed.carriageOverrideMove(0);
   }
 }
