@@ -13,17 +13,18 @@ public class PopHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.hatchmechanism.openHatch();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y_OPERATOR);
+    double hatchInOut = Robot.oi.xboxAxis(RobotMap.XBOX_CONTROLLER_OPERATOR, RobotMap.XBOX_AXIS_RIGHT_TRIGGER)
 
-    if(hatchInOut == true){
-      Robot.hatchmechanism.openHatch();
-    } else if(hatchInOut == false){
+    if(hatchInOut == 1){
       Robot.hatchmechanism.closeHatch();
+    } else {
+      Robot.hatchmechanism.openHatch();
     }
   }
 
