@@ -26,7 +26,7 @@ public class RobotMap {
 
   /*** Constants ***/
     //OI
-  public static final double AXIS_THRESHOLD = 0.25;
+  public static final double AXIS_THRESHOLD = 0.2;
 
     //DriveBase
   public static final double LOW_GEAR_LEFT_DPP = 0.1466004558282468; //These are for practice bot, skewed a lot
@@ -37,7 +37,7 @@ public class RobotMap {
     //XboxMove
   public static final double DRIVE_SENSITIVITY_PRECISION = 0.5;
   public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
-  public static final double SPIN_SENSITIVITY = 0.5;
+  public static final double SPIN_SENSITIVITY = 0.2;
 
 
   /*** Operator Interfaces ***/

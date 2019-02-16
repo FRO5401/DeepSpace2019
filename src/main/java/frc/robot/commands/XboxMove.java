@@ -93,7 +93,7 @@ public class XboxMove extends Command {
     /*** Driving ***/
       //Braking
     if(brake){
-      Robot.drivebase.stopMotors();
+      //Robot.drivebase.stopMotors();
       left = 0;
       right = 0;
     }
@@ -119,6 +119,11 @@ public class XboxMove extends Command {
             //Sets it to spin the desired direction.
           left = RobotMap.SPIN_SENSITIVITY * turn;
           right = RobotMap.SPIN_SENSITIVITY * (turn * -1);
+        }
+          //If its not past the threshold stop spinning
+        else if(Math.abs(turn) < RobotMap.AXIS_THRESHOLD){
+          left = 0;
+          right = 0;
         }
       }
         //Not pirouetting (Not turning in place).
