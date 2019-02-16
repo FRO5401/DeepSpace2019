@@ -22,6 +22,8 @@ public class ElevatorControl extends Command {
   double cargoBallInfeed;
   double ballInfeedFloor; 
   double endGame;
+  boolean topLimit;
+  boolean bottomLimit;
 
   public ElevatorControl() {
     requires(Robot.elevator);
@@ -32,8 +34,19 @@ public class ElevatorControl extends Command {
     right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
     theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    topLimit = Robot.elevator.getLimitT();
+    bottomLimit = Robot.elevator.getLimitB();
+
+    //Setpoints
+    rocketHighBall = 0; //change these to correct setpoints
+    rocketHighHatch = 0;
+    rocketMidBall = 0;
+    rocketMidHatch = 0;
+    rocketLowBall = 0;
+    rocketLowHatch = 0;
+    cargoShipBall = 0;
+    cargoBallInfeed = 0;
+    ballInfeedFloor = 0;
   }
 
   // Called just before this Command runs the first time
@@ -44,6 +57,7 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+      //override control
       if(overrideButton){
         if((Robot.elevator.getLimitB() == false && Robot.elevator.getLimitT() == false)){
           Robot.elevator.overrideElevator(rightJoystickOperator); //Normal override Control
@@ -52,32 +66,83 @@ public class ElevatorControl extends Command {
         }else if(Robot.elevator.getLimitT() == true){
           Robot.elevator.overrideElevator(Math.abs(rightJoystickOperator) * -1); //Always go down
         }
-      } else { //PID Control
-        if(left && dPadInput == 0){ //UP //Rocket High Ball
-          Robot.elevator.setPoint(rocketHighBall);
-        }else if(right && dPadInput == 0){ //UP //Rocket High Hatch
-          Robot.elevator.setPoint(rocketHighHatch);
-        }else if(left && dPadInput == 270){ //LEFT //Rocket Mid Ball
-          Robot.elevator.setPoint(rocketMidBall);
-        }else if(right && dPadInput == 270){ //LEFT //Rocket Mid Hatch
-          Robot.elevator.setPoint(rocketMidHatch);
-        }else if(left && dPadInput == 90){ //RIGHT //Rocket Low Ball
-          Robot.elevator.setPoint(rocketLowBall);
-        }else if(right && dPadInput == 90){ //RIGHT //Hatch Feed Station
-          Robot.elevator.setPoint(rocketLowHatch);
-        }else if(left && right && dPadInput == 135){ //RIGHT and DOWN //GAME RESET
-          Robot.elevator.setPoint(0);
-        }else if(right && dPadInput == 180){ //DOWN //Cargo Ship Ball
-          Robot.elevator.setPoint(cargoShipBall);
-        }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
-          Robot.elevator.setPoint(cargoBallInfeed);
-        }//else if(){ //END GAME
-         // Robot.elevator.setPoint(0);
-         //}
-        else if(theAButton){ //Ball Infeed Floor
-          Robot.elevator.setPoint(ballInfeedFloor);
+      }
+      else { //PID Control
+
+        //Limits for PID
+        if(topLimit == true){
+          //Doesn't allow highest setpoint
+          if(right && dPadInput == 0){ //UP //Rocket High Hatch
+            Robot.elevator.setPoint(rocketHighHatch);
+          }else if(left && dPadInput == 270){ //LEFT //Rocket Mid Ball
+            Robot.elevator.setPoint(rocketMidBall);
+          }else if(right && dPadInput == 270){ //LEFT //Rocket Mid Hatch
+            Robot.elevator.setPoint(rocketMidHatch);
+          }else if(left && dPadInput == 90){ //RIGHT //Rocket Low Ball
+            Robot.elevator.setPoint(rocketLowBall);
+          }else if(right && dPadInput == 90){ //RIGHT //Hatch Feed Station
+            Robot.elevator.setPoint(rocketLowHatch);
+          }else if(left && right && dPadInput == 135){ //RIGHT and DOWN //GAME RESET
+            Robot.elevator.setPoint(0);
+          }else if(right && dPadInput == 180){ //DOWN //Cargo Ship Ball
+            Robot.elevator.setPoint(cargoShipBall);
+          }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
+            Robot.elevator.setPoint(cargoBallInfeed);
+          }
         }
-      } 
+        else if(bottomLimit == true){
+          //Doesn't allow lowest setpoint
+          if(left && dPadInput == 0){ //UP //Rocket High Ball
+            Robot.elevator.setPoint(rocketHighBall);
+          }else if(right && dPadInput == 0){ //UP //Rocket High Hatch
+            Robot.elevator.setPoint(rocketHighHatch);
+          }else if(left && dPadInput == 270){ //LEFT //Rocket Mid Ball
+            Robot.elevator.setPoint(rocketMidBall);
+          }else if(right && dPadInput == 270){ //LEFT //Rocket Mid Hatch
+            Robot.elevator.setPoint(rocketMidHatch);
+          }else if(left && dPadInput == 90){ //RIGHT //Rocket Low Ball
+            Robot.elevator.setPoint(rocketLowBall);
+          }else if(right && dPadInput == 90){ //RIGHT //Hatch Feed Station
+            Robot.elevator.setPoint(rocketLowHatch);
+          }else if(left && right && dPadInput == 135){ //RIGHT and DOWN //GAME RESET
+            Robot.elevator.setPoint(0);
+          }else if(right && dPadInput == 180){ //DOWN //Cargo Ship Ball
+            Robot.elevator.setPoint(cargoShipBall);
+          }//else if(){ //END GAME
+           // Robot.elevator.setPoint(0);
+           //}
+          else if(theAButton){ //Ball Infeed Floor
+          Robot.elevator.setPoint(ballInfeedFloor);
+          }
+        }
+        else{
+
+          if(left && dPadInput == 0){ //UP //Rocket High Ball
+            Robot.elevator.setPoint(rocketHighBall);
+          }else if(right && dPadInput == 0){ //UP //Rocket High Hatch
+            Robot.elevator.setPoint(rocketHighHatch);
+          }else if(left && dPadInput == 270){ //LEFT //Rocket Mid Ball
+            Robot.elevator.setPoint(rocketMidBall);
+          }else if(right && dPadInput == 270){ //LEFT //Rocket Mid Hatch
+            Robot.elevator.setPoint(rocketMidHatch);
+          }else if(left && dPadInput == 90){ //RIGHT //Rocket Low Ball
+            Robot.elevator.setPoint(rocketLowBall);
+          }else if(right && dPadInput == 90){ //RIGHT //Hatch Feed Station
+            Robot.elevator.setPoint(rocketLowHatch);
+          }else if(left && right && dPadInput == 135){ //RIGHT and DOWN //GAME RESET
+            Robot.elevator.setPoint(0);
+          }else if(right && dPadInput == 180){ //DOWN //Cargo Ship Ball
+            Robot.elevator.setPoint(cargoShipBall);
+          }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
+            Robot.elevator.setPoint(cargoBallInfeed);
+          }//else if(){ //END GAME
+           // Robot.elevator.setPoint(0);
+           //}
+           else if(theAButton){ //Ball Infeed Floor
+            Robot.elevator.setPoint(ballInfeedFloor);
+          }
+        }
+      }
     }
 
   // Make this return true when this Command no longer needs to run execute()
