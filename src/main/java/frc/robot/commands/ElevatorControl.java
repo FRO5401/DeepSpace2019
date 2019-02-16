@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 public class ElevatorControl extends Command {
 
   double dPadInput, rightJoystickOperator;
-  boolean left, right, theAButton, overrideButton;
+  boolean left, right, theAButton, theXButton, theBButton, overrideButton;
   double rocketHighBall, rocketHighHatch;
   double rocketMidBall, rocketMidHatch;
   double rocketLowBall, rocketLowHatch;
@@ -33,6 +33,7 @@ public class ElevatorControl extends Command {
     left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
     right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
     theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
+    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X_OPERATOR);
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
     topLimit = Robot.elevator.getLimitT();
     bottomLimit = Robot.elevator.getLimitB();
@@ -57,6 +58,16 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    if(theXButton){
+      Robot.elevator.setPoint(0);
+      Robot.elevator.collapseElevator();
+    }
+
+    if(theBButton){
+      Robot.elevator.setPoint(0);
+      Robot.elevator.riseElevator();
+    }
       //override control
       if(overrideButton){
         if((Robot.elevator.getLimitB() == false && Robot.elevator.getLimitT() == false)){
