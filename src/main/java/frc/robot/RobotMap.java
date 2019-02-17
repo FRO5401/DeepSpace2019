@@ -80,9 +80,9 @@ public class RobotMap {
   /*** Motors ***/
     //DriveBase
   public static final int DRIVE_MOTOR_RIGHT_1 = 0;
-  public static final int DRIVE_MOTOR_LEFT_1  = 0;
-  public static final int DRIVE_MOTOR_RIGHT_2 = 0;
-  public static final int DRIVE_MOTOR_LEFT_2  = 0;
+  public static final int DRIVE_MOTOR_LEFT_1  = 2;
+  public static final int DRIVE_MOTOR_RIGHT_2 = 1;
+  public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
   //Elevator
   public static final int ELEVATOR_TALON_SRX  = 0;
@@ -98,8 +98,8 @@ public class RobotMap {
 
     //Elevator
   public static final int ELEVATOR_GEAR_SHIFTER_SOLENOID   = 0;
-  public static final int ELEVATOR_COLLAPSE_LEFT_SOLENOID  = 0;
-  public static final int ELEVATOR_COLLAPSE_RIGHT_SOLENOID = 0;
+  public static final int ELEVATOR_COLLAPSE_SOLENOID  = 1;
+
 
   /*** Sensors ***/
     //Encoders
@@ -113,6 +113,6 @@ public class RobotMap {
   public static final int ELEVATOR_THRESHOLD_FOR_PID = 0;
 
     //Limit switches
-  public static final int E_STOP_HIGH = 0;
-  public static final int E_STOP_LOW = 0;
+  public static final int E_STOP_HIGH = 1;
+  public static final int E_STOP_LOW = 2;
 }

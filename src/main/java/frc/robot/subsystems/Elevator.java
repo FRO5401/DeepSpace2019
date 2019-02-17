@@ -25,7 +25,7 @@ public class Elevator extends Subsystem {
   TalonSRX elevatorSRX1;
   TalonSRX elevatorSRX2;
   Solenoid elevatorGearShifter;
-  Solenoid elevatorCollapseLeft, elevatorCollapseRight;
+  Solenoid elevatorCollapse;
 
   DigitalInput stopHigh, stopLow;
 
@@ -46,8 +46,7 @@ public class Elevator extends Subsystem {
   
     elevatorSRX1 = new TalonSRX(RobotMap.ELEVATOR_TALON_SRX);
     elevatorGearShifter   = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_GEAR_SHIFTER_SOLENOID);
-    elevatorCollapseLeft  = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_LEFT_SOLENOID);
-    elevatorCollapseRight = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_RIGHT_SOLENOID);
+    elevatorCollapse  = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_SOLENOID);
 
     //Limits
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
@@ -124,14 +123,12 @@ public class Elevator extends Subsystem {
 
     //Lifts the elevator vertical
   public void riseElevator(){
-    elevatorCollapseLeft.set(true);
-    elevatorCollapseRight.set(true);
+    elevatorCollapse.set(true);
   }
 
     //Drops the elevator horizontal
   public void collapseElevator(){
-    elevatorCollapseLeft.set(false);
-    elevatorCollapseRight.set(false);
+    elevatorCollapse.set(false);
   }
 
 
