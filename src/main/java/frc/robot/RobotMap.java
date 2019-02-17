@@ -81,7 +81,7 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
     //CarriageInfeed
-  public static final int CARRIAGE_FEED_ROLLERS  = 0;
+  public static final int CARRIAGE_FEED_ROLLERS  = 6;
   public static final int CARRIAGE_TALON_CHANNEL = 0;
 
     //Elevator
@@ -100,6 +100,10 @@ public class RobotMap {
   public static final int ELEVATOR_GEAR_SHIFTER   = 0;
   public static final int ELEVATOR_COLLAPSE_LEFT  = 0;
   public static final int ELEVATOR_COLLAPSE_RIGHT = 0;
+
+    //Hatch Mechanism
+  public static final int HATCH_EXTENDER_LEFT  = 0;
+  public static final int HATCH_EXTENDER_RIGHT = 0;
 
   /*** Sensors ***/
     //Encoders

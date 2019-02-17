@@ -48,17 +48,20 @@ public class FeedCarriage extends Command {
       //Read axis
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
 
-      //carriage Move logic.
+      //Carriage Move logic.
     if(overrideButton){
-      //Forces elevator to go down/up when too high/low
-      if(Robot.carriageinfeed.getCarriageAngle() == 88){
+        //If the carriage goes to far UP, only let it go DOWN.
+      if(Robot.carriageinfeed.getCarriageAngle() >= 88){
         Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown) * -1);
-
       }
-      else if(Robot.carriageinfeed.getCarriageAngle() == -43){
+        //If the carriage goes to far DOWN, only let it go UP.
+      else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
         Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown));
-        }  
-      Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+      }
+        //Moving the carriage (within the threshold).
+      else{
+        Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+      }  
     }
       
       //Feeder Logic

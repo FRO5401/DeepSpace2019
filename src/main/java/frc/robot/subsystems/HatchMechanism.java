@@ -15,11 +15,13 @@ public class HatchMechanism extends Subsystem {
     hatchReleaseRight = new Solenoid(RobotMap.HATCH_EXTENDER_RIGHT);
   }
 
+    //OPENS the hatch.
   public void openHatch(){
     hatchReleaseLeft.set(true);
     hatchReleaseRight.set(true);
   }
 
+    //CLOSES the hatch.
   public void closeHatch(){
     hatchReleaseLeft.set(false);
     hatchReleaseRight.set(false);

@@ -90,8 +90,8 @@ public class CarriageInfeed extends Subsystem {
   }
 
     //Moves the carriage manually, given velocity
-  public void carriageOverrideMove(double carriageVelocity){
-    carriageTalon.set(ControlMode.PercentOutput, carriageVelocity);
+  public void carriageOverrideMove(double carriagePercentSpeed){
+    carriageTalon.set(ControlMode.PercentOutput, carriagePercentSpeed);
   }
 
     //Sets the neutral mode of the Talons (Coast or Brake), post to Dashboard

@@ -84,25 +84,25 @@ public class DriveBase extends Subsystem {
     rightDrive2.set(0);
   }
 
-    //Set shifter to low. 
+    //Set shifter to LOW. 
   public void shiftHighToLow(){
     gearShifter.set(true);
     setDPPLowGear();
   }
 
-    //Set shifter to High.
+    //Set shifter to HIGH.
   public void shiftLowToHigh(){
     gearShifter.set(false);
     setDPPHighGear();
   }
 
-    //Sets DPP for low gear. 
+    //Sets DPP for LOW gear. 
   public void setDPPLowGear(){
     leftEncoder.setDistancePerPulse(RobotMap.LOW_GEAR_LEFT_DPP);
     rightEncoder.setDistancePerPulse(RobotMap.LOW_GEAR_RIGHT_DPP);
   }
 
-    //Sets DPP for high gear.
+    //Sets DPP for HIGH gear.
   public void setDPPHighGear(){
     leftEncoder.setDistancePerPulse(RobotMap.HIGH_GEAR_LEFT_DPP);
     rightEncoder.setDistancePerPulse(RobotMap.HIGH_GEAR_RIGHT_DPP);
@@ -137,18 +137,22 @@ public class DriveBase extends Subsystem {
     SmartDashboard.putNumber("NavX Angle", currentAngle);
     return currentAngle;
   }
+
+    //Gets Gyro Pitch
   public double getGyroPitch(){
     double pitch = navxGyro.getPitch();
     return pitch;
   }  
-    //Runs continuously while robot is on. 
+
+    //Posts the encoder values to SmartDashboard.
   public void reportEncoders(){
     SmartDashboard.putNumber("Left Enc Raw", leftEncoder.get());
     SmartDashboard.putNumber("Right Enc Raw", rightEncoder.get());
     SmartDashboard.putNumber("Left Enc Adj", leftEncoder.getDistance());
     SmartDashboard.putNumber("Right Enc Adj", rightEncoder.getDistance());
   }
-    //Runs continuously while robot is on.
+
+    //Posts Gyro Values to SmartDashboard.
   public void reportGyro(){
     //SmartDashboard.putBoolean("NavX Connection", navxGyro.isConnected());
     //SmartDashboard.putNumber("NaxX Angle", navxGyro.getAngle());
@@ -162,12 +166,12 @@ public class DriveBase extends Subsystem {
     rightEncoder.reset();
   }
 
-  //Resets the Gyro. 
+    //Resets the Gyro. 
   public void resetGyro(){
     navxGyro.reset();
   }
 
-  //Gets the victor speeds
+    //Gets the victor speeds
   public void getVictorSpeed(){
     SmartDashboard.putNumber("Left VSP1 Speed", leftDrive1.getSpeed());
     SmartDashboard.putNumber("Left VSP2 Speed", leftDrive2.getSpeed());

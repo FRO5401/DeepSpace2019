@@ -8,8 +8,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -57,11 +58,13 @@ public class Elevator extends Subsystem {
 
     elevatorSRX1.configAllowableClosedloopError(slotIndex, RobotMap.ELEVATOR_THRESHOLD_FOR_PID, RobotMap.TIMEOUT_LIMIT_IN_Ms);
   
+      //Configuring the max & min percentage output. 
     elevatorSRX1.configNominalOutputForward(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRX1.configNominalOutputReverse(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRX1.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRX1.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
-     
+
+      //Configuring PID values. 
     elevatorSRX1.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRX1.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRX1.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
@@ -75,23 +78,25 @@ public class Elevator extends Subsystem {
   }
 
   public void overrideStopped(){
-		elevatorSRX1.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
 		elevatorPidEnabled = false;
 	}
 
   //Elevator Stopped with PID/Interrupted
   public void elevatorStop(){
 		elevatorPidEnabled = false;
-		elevatorSRX1.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Brake);
   }
 
   //Sets the point to which the elevator will move
   public void setPoint(double setPoint){
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
-    elevatorSRX1.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
 		elevatorSRX1.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
-	}
+  }
+  
+  //Sets the NeutralMode of the elevator (BRAKE or COAST)
+  public void setElevatorNeutralMode(NeutralMode neutralMode){
+    elevatorSRX1.setNeutralMode(neutralMode);
+  }
 
   //Allows the elevator to move faster/slower
   //false = lowgear, true = highgear
@@ -106,21 +111,23 @@ public class Elevator extends Subsystem {
 		//getClosedLoopT gets the SetPoint already set (or moving to)
   }
 
+  //Get if the BOTTOM limit is tripped. 
   public boolean getLimitB(){
     return stopLow.get();
   }
 
+  //Get if the TOP limit is tripped. 
   public boolean getLimitT(){
     return stopHigh.get();
   }
 
-    //Lifts the elevator vertical
+    //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseLeft.set(true);
     elevatorCollapseRight.set(true);
   }
 
-    //Drops the elevator horizontal
+    //Drop the elevator FLAT.
   public void collapseElevator(){
     elevatorCollapseLeft.set(false);
     elevatorCollapseRight.set(false);
