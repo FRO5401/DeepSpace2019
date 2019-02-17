@@ -39,6 +39,14 @@ public class RobotMap {
   public static final double DRIVE_SENSITIVITY_DEFAULT = 1;
   public static final double SPIN_SENSITIVITY = 0.2;
 
+    //CarriageInfeed
+  public static final double CARRIAGE_FEEDER_SPEED = 0;
+  public static final double CARRIAGE_ANGLE_PER_PULSE = 0;
+
+    //Elevator
+  public static final int TIMEOUT_LIMIT_IN_Ms = 10;
+  public static final int ELEVATOR_THRESHOLD = 0;
+
 
   /*** Operator Interfaces ***/
     //Controllers 
@@ -84,6 +92,13 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_RIGHT_2 = 1;
   public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
+    //CarriageInfeed
+  public static final int CARRIAGE_FEED_ROLLERS = 0;
+  public static final int CARRIAGE_TALON_CHANNEL = 0;
+
+    //Elevator
+  public static final int ELEVATOR_TALON_CHANNEL = 0;
+
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and an OUT constant. 
     //Solenoids have just one constant. 
@@ -92,6 +107,11 @@ public class RobotMap {
 
     //DriveBase
   public static final int GEAR_SHIFTER = 1;
+  
+    //Elevator
+  public static final int ELEVATOR_GEAR_SHIFTER = 0;
+  public static final int ELEVATOR_COLLAPSE_LEFT = 0;
+  public static final int ELEVATOR_COLLAPSE_RIGHT = 0;
 
   /*** Sensors ***/
     //Encoders
@@ -99,6 +119,10 @@ public class RobotMap {
   public static final int DRIVE_ENC_RIGHT_A = 0;
   public static final int DRIVE_ENC_LEFT_B = 3;
   public static final int DRIVE_ENC_RIGHT_B = 1;
+
+    //Elevator
+  public static final int E_STOP_HIGH = 0;
+  public static final int E_STOP_LOW  = 0;
 
   /*** Autonomous ***/
     public static final int ANGLE_THRESHOLD = 2;

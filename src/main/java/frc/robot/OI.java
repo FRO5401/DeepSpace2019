@@ -89,4 +89,8 @@ public class OI {
       return 0;
     }
   }
+
+  public int xboxDPad(Joystick xboxController){
+    return xboxController.getPOV();
+  }
 }

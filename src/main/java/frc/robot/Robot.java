@@ -24,6 +24,9 @@ import frc.robot.autonomous.*;
  */
 public class Robot extends TimedRobot {
   public static DriveBase drivebase;
+  public static CarriageInfeed carriageinfeed;
+  public static Elevator elevator;
+  public static HatchMechanism hatchmechanism;
   
   //OI is always last.
   public static OI oi;
@@ -39,6 +42,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     drivebase = new DriveBase();
+    carriageinfeed = new CarriageInfeed();
+    elevator = new Elevator();
+    hatchmechanism = new HatchMechanism();
     
     //OI is always last.
     oi = new OI();
