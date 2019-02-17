@@ -45,8 +45,8 @@ public class Elevator extends Subsystem {
     slotIndex = 0;
   
     elevatorSRX1 = new TalonSRX(RobotMap.ELEVATOR_TALON_SRX);
-    elevatorGearShifter   = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_GEAR_SHIFTER_SOLENOID);
-    elevatorCollapse  = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_SOLENOID);
+    elevatorGearShifter   = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER_SOLENOID);
+    elevatorCollapse  = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_SOLENOID);
 
     //Limits
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
