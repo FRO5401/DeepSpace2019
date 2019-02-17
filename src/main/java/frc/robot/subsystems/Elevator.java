@@ -23,7 +23,6 @@ public class Elevator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   TalonSRX elevatorSRX1;
-  TalonSRX elevatorSRX2;
   Solenoid elevatorGearShifter;
   Solenoid elevatorCollapseLeft, elevatorCollapseRight;
 
@@ -90,9 +89,7 @@ public class Elevator extends Subsystem {
   public void setPoint(double setPoint){
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
     elevatorSRX1.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
-    elevatorSRX2.setNeutralMode(com.ctre.phoenix.motorcontrol.NeutralMode.Coast);
 		elevatorSRX1.set(ControlMode.Position, setPointNativeUnits);
-		elevatorSRX2.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
 	}
 
@@ -133,27 +130,6 @@ public class Elevator extends Subsystem {
     elevatorCollapseLeft.set(false);
     elevatorCollapseRight.set(false);
   }
-
-
-  /*
-  public void elevatorLimitT(){                           //Meant for Limit Switches, logic is in command now
-    if(stopHigh.get() == true){
-      elevatorSRX1.set(ControlMode.PercentOutput, 0);
-		  elevatorSRX2.set(ControlMode.PercentOutput, 0);
-    } else if(stopHigh.get() == false){
-      System.out.print("Limit Top has not been hit");
-    }
-  }
-  
-  public void elevatorLimitB(){
-    if(stopLow.get() == true){
-      elevatorSRX1.set(ControlMode.PercentOutput, 0);
-		  elevatorSRX2.set(ControlMode.PercentOutput, 0);
-    } else if(stopLow.get() == false){
-      System.out.print("Limit Bottom has not been hit");
-    }
-  }
-*/
 
   @Override
   public void initDefaultCommand() {
