@@ -59,12 +59,14 @@ public class XboxMove extends Command {
     precision = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_DRIVER);
     gearShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START_DRIVER);
     gearShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_BACK_DRIVER);
+
+      //TODO: Remove these testing buttons for competition.
     resetSensors = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_Y_DRIVER);
     speedConstant1 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_X_DRIVER);
     speedConstant2 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_A_DRIVER);
     speedConstant3 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_B_DRIVER);
 
-    //Resets Sensors
+      //TODO: Remove this testing method for competition.
     if(resetSensors){
       Robot.drivebase.resetEncoders();
       Robot.drivebase.resetGyro();
@@ -97,7 +99,7 @@ public class XboxMove extends Command {
       left = 0;
       right = 0;
     }
-      //Drives at constant speed
+      //TODO: Remove these testing conditionals for competition. 
     else if(speedConstant1){
       left = (1.0 / 3);
       right = (1.0 / 3);
