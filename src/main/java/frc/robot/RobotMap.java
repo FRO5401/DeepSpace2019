@@ -45,7 +45,7 @@ public class RobotMap {
 
     //Elevator
   public static final int TIMEOUT_LIMIT_IN_Ms = 10;
-  public static final int ELEVATOR_THRESHOLD = 0;
+  public static final int ELEVATOR_THRESHOLD_FOR_PID = 0;
 
 
   /*** Operator Interfaces ***/
