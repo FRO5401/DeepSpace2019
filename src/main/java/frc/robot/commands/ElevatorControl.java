@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 public class ElevatorControl extends Command {
 
   double dPadInput, rightJoystickOperator;
-  boolean left, right, theAButton, theXButton, theBButton, overrideButton;
+  boolean left, right, theAButton, theXButton, theBButton, overrideButton, elevatorShiftLow, elevatorShiftHigh;
   double rocketHighBall, rocketHighHatch;
   double rocketMidBall, rocketMidHatch;
   double rocketLowBall, rocketLowHatch;
@@ -30,11 +30,13 @@ public class ElevatorControl extends Command {
 
     dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
     rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
-    left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
-    right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
-    theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
-    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X_OPERATOR);
-    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
+    left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER);
+    right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER);
+    theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A);
+    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X);
+    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
+    elevatorShiftLow = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
+    elevatorShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START);
     topLimit = Robot.elevator.getLimitT();
     bottomLimit = Robot.elevator.getLimitB();
 
@@ -58,6 +60,10 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    if(elevatorShiftHigh){
+      Robot.elevator.elevatorGearShift(true);
+    }
 
     if(theXButton){
       Robot.elevator.setPoint(0);
