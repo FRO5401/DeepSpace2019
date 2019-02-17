@@ -84,6 +84,7 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_RIGHT_2 = 1;
   public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
+
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and an OUT constant. 
     //Solenoids have just one constant. 
