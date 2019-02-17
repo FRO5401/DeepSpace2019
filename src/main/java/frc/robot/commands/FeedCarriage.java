@@ -55,12 +55,13 @@ public class FeedCarriage extends Command {
       //Forces elevator to go down/up when too high/low
       if(Robot.carriageinfeed.getCarriageAngle() == 88){
         Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown) * -1);
-
       }
       else if(Robot.carriageinfeed.getCarriageAngle() == -43){
         Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown));
-        }  
-      Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+      }  
+      else{
+        Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+      }
     }
       
       //Feeder Logic
