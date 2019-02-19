@@ -74,6 +74,7 @@ public class Robot extends TimedRobot {
     Robot.drivebase.reportEncoders();
     Robot.drivebase.reportGyro();
     Robot.drivebase.getVictorSpeed();
+    Robot.compressorsubsystem.getCompressorStatus();
   }
 
   /**
