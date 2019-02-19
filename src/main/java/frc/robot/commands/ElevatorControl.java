@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 public class ElevatorControl extends Command {
 
   double dPadInput, rightJoystickOperator;
-  boolean left, right, theAButton, theXButton, theBButton, overrideButton;
+  boolean left, right, theAButton, theXButton, theBButton, overrideButton, start, back;
   double rocketHighBall, rocketHighHatch;
   double rocketMidBall, rocketMidHatch;
   double rocketLowBall, rocketLowHatch;
@@ -50,6 +50,8 @@ public class ElevatorControl extends Command {
   protected void execute() {
     
     dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
+    start = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_START_OPERATOR);
+    back = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK_OPERATOR);
     rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
     left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
     right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
@@ -59,6 +61,14 @@ public class ElevatorControl extends Command {
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
     topLimit = Robot.elevator.getLimitT();
     bottomLimit = Robot.elevator.getLimitB();
+
+    if(start){
+      Robot.elevator.elevatorGearShiftLowtoHigh();
+    }
+
+    if(back){
+      Robot.elevator.elevatorGearShiftHightoLow();
+    }
 
     if(theXButton){
    //   Robot.elevator.setPoint(0);

@@ -97,14 +97,12 @@ public class Elevator extends Subsystem {
 	}
 
   //Allows the elevator to move faster/slower
-  public void elevatorGearShift(int button){
-    if(button == RobotMap.XBOX_BUTTON_BACK_OPERATOR){
-      elevatorGearShifter.set(false);
-    }else if(button == RobotMap.XBOX_BUTTON_START_OPERATOR){
-      elevatorGearShifter.set(true);
-    }else{
-      System.out.print("Some error was thrown, start/back wasn't pressed");
-    }
+  public void elevatorGearShiftHightoLow(){
+    elevatorGearShifter.set(false);
+  }
+
+  public void elevatorGearShiftLowtoHigh(){
+    elevatorGearShifter.set(true);
   }
 
   public boolean onTarget(){
