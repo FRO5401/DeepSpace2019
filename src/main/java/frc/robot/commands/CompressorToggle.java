@@ -1,9 +1,8 @@
-package org.usfirst.frc.team5401.robot.commands;
+package frc.robot.commands;
 
-import org.usfirst.frc.team5401.robot.Robot;
-import org.usfirst.frc.team5401.robot.RobotMap;
-import org.usfirst.frc.team5401.robot.subsystems.CompressorSubsystem;
-
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.CompressorSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -16,30 +15,30 @@ public class CompressorToggle extends Command {
     public CompressorToggle() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.compressorsubsystem);
-        
-        compressorToggle = Robot.oi.xboxButton(RobotMap.XBOX_BUTTON_START_OPERATOR, Robot.oi.xboxController_Operator);
     }
 
     // Called just before this Command runs the first time
     @Override
 	protected void initialize() {
-    	if(compressorToggle && Robot.compressorsubsystem.isEnabled()){
-    		Robot.compressorsubsystem.stopCompressor();
-    	}
-    	else if(compressorToggle && !Robot.compressorsubsystem.isEnabled()){
-    		Robot.compressorsubsystem.startCompressor();
-    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
+        compressorToggle = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK_OPERATOR);
+
+        if(compressorToggle && Robot.compressorsubsystem.isEnabled()){
+            Robot.compressorsubsystem.stopCompressor();
+        }
+        else if(compressorToggle && !(Robot.compressorsubsystem.isEnabled())){
+            Robot.compressorsubsystem.startCompressor();
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
 	protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

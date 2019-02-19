@@ -1,10 +1,10 @@
-package org.usfirst.frc.team5401.robot.subsystems;
-
-import org.usfirst.frc.team5401.robot.RobotMap;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
+import frc.robot.commands.CompressorToggle;
 
 /**
  *
@@ -21,18 +21,18 @@ public class CompressorSubsystem extends Subsystem {
     @Override
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-    }
+		setDefaultCommand(new CompressorToggle());
+	}
     
     public void startCompressor() {
     	compressor.setClosedLoopControl(true);
     	compressor.start();
-    	SmartDashboard.putBoolean("Compressor On/Off", true);
     	getCompressorStatus();
     }
     
     public void stopCompressor() {
-    	compressor.stop();
-    	SmartDashboard.putBoolean("Compressor On/Off", false);
+		compressor.stop();
+		getCompressorStatus();
     }
     
     public void getCompressorStatus(){
