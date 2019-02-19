@@ -28,16 +28,6 @@ public class ElevatorControl extends Command {
   public ElevatorControl() {
     requires(Robot.elevator);
 
-    dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
-    rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
-    left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
-    right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
-    theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
-    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X_OPERATOR);
-    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
-    topLimit = Robot.elevator.getLimitT();
-    bottomLimit = Robot.elevator.getLimitB();
-
     //Setpoints
     rocketHighBall = 0; //change these to correct setpoints
     rocketHighHatch = 0;
@@ -58,14 +48,25 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    
+    dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
+    rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
+    left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER_OPERATOR);
+    right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER_OPERATOR);
+    theBButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_B_OPERATOR);
+    theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A_OPERATOR);
+    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X_OPERATOR);
+    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3_OPERATOR);
+    topLimit = Robot.elevator.getLimitT();
+    bottomLimit = Robot.elevator.getLimitB();
 
     if(theXButton){
- //     Robot.elevator.setPoint(0);
+   //   Robot.elevator.setPoint(0);
       Robot.elevator.collapseElevator();
     }
-
-    if(theBButton){
-//      Robot.elevator.setPoint(0);
+    
+    if (theBButton){
+   //   Robot.elevator.setPoint(0);
       Robot.elevator.riseElevator();
     }
       //override control
