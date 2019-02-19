@@ -98,8 +98,7 @@ public class RobotMap {
 
     //Elevator
   public static final int ELEVATOR_GEAR_SHIFTER_SOLENOID   = 0;
-  public static final int ELEVATOR_COLLAPSE_LEFT_SOLENOID  = 0;
-  public static final int ELEVATOR_COLLAPSE_RIGHT_SOLENOID = 0;
+  public static final int ELEVATOR_COLLAPSE_SOLENOID  = 1;
 
   /*** Sensors ***/
     //Encoders

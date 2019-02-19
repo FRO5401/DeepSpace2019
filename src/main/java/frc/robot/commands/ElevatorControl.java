@@ -60,12 +60,12 @@ public class ElevatorControl extends Command {
   protected void execute() {
 
     if(theXButton){
-      Robot.elevator.setPoint(0);
+   //   Robot.elevator.setPoint(0);
       Robot.elevator.collapseElevator();
     }
 
     if(theBButton){
-      Robot.elevator.setPoint(0);
+   //   Robot.elevator.setPoint(0);
       Robot.elevator.riseElevator();
     }
       //override control
