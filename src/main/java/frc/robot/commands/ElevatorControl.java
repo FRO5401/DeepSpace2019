@@ -84,13 +84,15 @@ public class ElevatorControl extends Command {
         if((Robot.elevator.getLimitB() == false && Robot.elevator.getLimitT() == false)){
           Robot.elevator.overrideElevator(rightJoystickOperator); //Normal override Control
         }else if(Robot.elevator.getLimitB() == true){
-          Robot.elevator.overrideElevator(Math.abs(rightJoystickOperator)); //Always go up
+          if(rightJoystickOperator > 0){
+            Robot.elevator.overrideElevator(rightJoystickOperator);
+          } //Always go up
         }else if(Robot.elevator.getLimitT() == true){
-          Robot.elevator.overrideElevator(Math.abs(rightJoystickOperator) * -1); //Always go down
+          if(rightJoystickOperator < 0){
+            Robot.elevator.overrideElevator(rightJoystickOperator);
+          } //Always go down
         }
-      }
-      else { //PID Control
-
+      }else { //PID Control
         //Limits for PID
         if(topLimit == true){
           //Doesn't allow highest setpoint
@@ -110,9 +112,10 @@ public class ElevatorControl extends Command {
             Robot.elevator.setPoint(cargoShipBall);
           }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
             Robot.elevator.setPoint(cargoBallInfeed);
+          }else if(theAButton){ //Ball Infeed Floor
+            Robot.elevator.setPoint(ballInfeedFloor);
           }
-        }
-        else if(bottomLimit == true){
+        }else if(bottomLimit == true){
           //Doesn't allow lowest setpoint
           if(left && dPadInput == 0){ //UP //Rocket High Ball
             Robot.elevator.setPoint(rocketHighBall);
@@ -130,14 +133,9 @@ public class ElevatorControl extends Command {
             Robot.elevator.setPoint(0);
           }else if(right && dPadInput == 180){ //DOWN //Cargo Ship Ball
             Robot.elevator.setPoint(cargoShipBall);
-          }//else if(){ //END GAME
-           // Robot.elevator.setPoint(0);
-           //}
-          else if(theAButton){ //Ball Infeed Floor
-          Robot.elevator.setPoint(ballInfeedFloor);
-          }
-        }
-        else{
+          }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
+            Robot.elevator.setPoint(cargoBallInfeed);
+        }else{
 
           if(left && dPadInput == 0){ //UP //Rocket High Ball
             Robot.elevator.setPoint(rocketHighBall);
@@ -157,10 +155,7 @@ public class ElevatorControl extends Command {
             Robot.elevator.setPoint(cargoShipBall);
           }else if(left && dPadInput == 180){ //DOWN //Ball Infeed Station
             Robot.elevator.setPoint(cargoBallInfeed);
-          }//else if(){ //END GAME
-           // Robot.elevator.setPoint(0);
-           //}
-           else if(theAButton){ //Ball Infeed Floor
+          }else if(theAButton){ //Ball Infeed Floor
             Robot.elevator.setPoint(ballInfeedFloor);
           }
         }
