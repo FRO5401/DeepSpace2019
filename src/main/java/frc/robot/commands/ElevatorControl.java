@@ -103,12 +103,14 @@ public class ElevatorControl extends Command {
     if(overrideButton){
       if((Robot.elevator.getLimitB() == false && Robot.elevator.getLimitT() == false)){
         Robot.elevator.overrideElevator(rightJoystickOperator); //Normal override Control
-      }
-      else if(Robot.elevator.getLimitB() == true){
-        Robot.elevator.overrideElevator(Math.abs(rightJoystickOperator)); //Always go up
-      }
-      else if(Robot.elevator.getLimitT() == true){
-        Robot.elevator.overrideElevator(Math.abs(rightJoystickOperator) * -1); //Always go down
+      }else if(Robot.elevator.getLimitB() == true){
+        if(rightJoystickOperator > 0){
+          Robot.elevator.overrideElevator(rightJoystickOperator);
+        } //Always go up
+      }else if(Robot.elevator.getLimitT() == true){
+        if(rightJoystickOperator < 0){
+          Robot.elevator.overrideElevator(rightJoystickOperator);
+        } //Always go down
       }
     }
     else { //PID Control

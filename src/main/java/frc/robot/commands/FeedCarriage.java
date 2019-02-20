@@ -45,13 +45,21 @@ public class FeedCarriage extends Command {
 
       //Carriage Move logic.
     if(overrideButton){
+        //Normal Control
+      if(Robot.carriageinfeed.getCarriageAngle() >= 88 && Robot.carriageinfeed.getCarriageAngle() <= -43){
+        Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+      }
         //If the carriage goes to far UP, only let it go DOWN.
-      if(Robot.carriageinfeed.getCarriageAngle() >= 88){
-        Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown) * -1);
+      else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
+        if (carriageUpDown < 0){
+          Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+        }
       }
         //If the carriage goes to far DOWN, only let it go UP.
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
-        Robot.carriageinfeed.carriageOverrideMove(Math.abs(carriageUpDown));
+        if (carriageUpDown > 0){
+          Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+        }
       }
         //Moving the carriage (within the threshold).
       else{
