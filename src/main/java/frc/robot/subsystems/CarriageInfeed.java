@@ -36,7 +36,6 @@ public class CarriageInfeed extends Subsystem {
   private double groundAngle = -43;
   private double midAngle = 0;
 
-
   VictorSP feederMotors;
   TalonSRX carriageTalon;
 
@@ -72,7 +71,6 @@ public class CarriageInfeed extends Subsystem {
   //PID methods for carriage to run when elevator is moving
   public void setMidCarriageAngle(){
     carriageTalon.set(ControlMode.Position, midAngle);
-
   }
 
   public void setGroundCarriageAngle(){
@@ -121,5 +119,9 @@ public class CarriageInfeed extends Subsystem {
     SmartDashboard.putNumber("Carriage Angle (Native)", carriageAngle);
     SmartDashboard.putNumber("Carriage Angle (Degrees)", (carriageAngle * RobotMap.CARRIAGE_ANGLE_PER_PULSE));
     return carriageAngle;
+  }
+
+  public void reportCarriageInfeedSensors(){
+    SmartDashboard.putNumber("Infeed Direction", feederMotors.getSpeed());
   }
 }

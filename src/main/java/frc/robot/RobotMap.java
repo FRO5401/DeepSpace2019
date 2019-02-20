@@ -85,7 +85,8 @@ public class RobotMap {
   public static final int CARRIAGE_TALON_CHANNEL = 0;
 
     //Elevator
-  public static final int ELEVATOR_TALON_CHANNEL = 0;
+  public static final int ELEVATOR_TALON_MASTER_CHANNEL = 0;
+  public static final int ELEVATOR_TALON_SLAVE_CHANNEL  = 1;
 
   /*** Solenoids (Single and Double) ***/
     //DoubleSolenoids have an IN and an OUT constant. 
@@ -98,8 +99,7 @@ public class RobotMap {
   
     //Elevator
   public static final int ELEVATOR_GEAR_SHIFTER   = 0;
-  public static final int ELEVATOR_COLLAPSE_LEFT  = 0;
-  public static final int ELEVATOR_COLLAPSE_RIGHT = 0;
+  public static final int ELEVATOR_COLLAPSE  = 1;
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER_LEFT  = 0;

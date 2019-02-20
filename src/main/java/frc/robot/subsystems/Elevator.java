@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -23,9 +24,9 @@ import frc.robot.RobotMap;
 public class Elevator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  TalonSRX elevatorSRX1;
+  TalonSRX elevatorSRXMaster, elevatorSRXSlave;
   Solenoid elevatorGearShifter;
-  Solenoid elevatorCollapseLeft, elevatorCollapseRight;
+  Solenoid elevatorCollapse;
 
   DigitalInput stopHigh, stopLow;
 
@@ -44,37 +45,38 @@ public class Elevator extends Subsystem {
     loopIndex = 0;
     slotIndex = 0;
   
-    elevatorSRX1 = new TalonSRX(RobotMap.ELEVATOR_TALON_CHANNEL);
-    elevatorGearShifter   = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_GEAR_SHIFTER);
-    elevatorCollapseLeft  = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_LEFT);
-    elevatorCollapseRight = new Solenoid(RobotMap.PCM_ID, RobotMap.ELEVATOR_COLLAPSE_RIGHT);
+    elevatorSRXMaster   = new TalonSRX(RobotMap.ELEVATOR_TALON_MASTER_CHANNEL);
+    elevatorSRXSlave    = new TalonSRX(RobotMap.ELEVATOR_TALON_SLAVE_CHANNEL);
+    elevatorGearShifter = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER);
+    elevatorCollapse    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE);
 
     //Limits
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
     stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
 
-    elevatorSRX1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
-    elevatorSRX1.setSensorPhase(true);
+    elevatorSRXMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
+    elevatorSRXMaster.setSensorPhase(true);
 
-    elevatorSRX1.configAllowableClosedloopError(slotIndex, RobotMap.ELEVATOR_THRESHOLD_FOR_PID, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.configAllowableClosedloopError(slotIndex, RobotMap.ELEVATOR_THRESHOLD_FOR_PID, RobotMap.TIMEOUT_LIMIT_IN_Ms);
   
       //Configuring the max & min percentage output. 
-    elevatorSRX1.configNominalOutputForward(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.configNominalOutputReverse(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.configNominalOutputForward(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.configNominalOutputReverse(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
 
       //Configuring PID values. 
-    elevatorSRX1.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-    elevatorSRX1.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
-  }
+    elevatorSRXMaster.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+    elevatorSRXMaster.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
+    elevatorSRXSlave.set(ControlMode.Follower, elevatorSRXMaster.getDeviceID());
+  } 
 
   //Override Methods
   public void overrideElevator(double joystickSpeed){
-      elevatorPidEnabled = false;
-      elevatorSRX1.set(ControlMode.PercentOutput, joystickSpeed);
+    elevatorPidEnabled = false;
+    elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
   }
 
   public void overrideStopped(){
@@ -89,13 +91,13 @@ public class Elevator extends Subsystem {
   //Sets the point to which the elevator will move
   public void setPoint(double setPoint){
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
-		elevatorSRX1.set(ControlMode.Position, setPointNativeUnits);
+		elevatorSRXMaster.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
   }
   
   //Sets the NeutralMode of the elevator (BRAKE or COAST)
   public void setElevatorNeutralMode(NeutralMode neutralMode){
-    elevatorSRX1.setNeutralMode(neutralMode);
+    elevatorSRXMaster.setNeutralMode(neutralMode);
   }
 
   //Allows the elevator to move faster/slower
@@ -106,9 +108,19 @@ public class Elevator extends Subsystem {
 
   public boolean onTarget(){
 		//Method returns true if on target
-		boolean onTarget = Math.abs(elevatorSRX1.getSensorCollection().getQuadraturePosition() - elevatorSRX1.getClosedLoopTarget(loopIndex)) < RobotMap.ELEVATOR_THRESHOLD_FOR_PID;
+		boolean onTarget = Math.abs(elevatorSRXMaster.getSensorCollection().getQuadraturePosition() - elevatorSRXMaster.getClosedLoopTarget(loopIndex)) < RobotMap.ELEVATOR_THRESHOLD_FOR_PID;
 		return onTarget;
 		//getClosedLoopT gets the SetPoint already set (or moving to)
+  }
+  
+    //Stand the elevator UP
+  public void riseElevator(){
+    elevatorCollapse.set(true);
+  }
+
+    //Drop the elevator FLAT.
+  public void collapseElevator(){
+    elevatorCollapse.set(false);
   }
 
   //Get if the BOTTOM limit is tripped. 
@@ -121,16 +133,27 @@ public class Elevator extends Subsystem {
     return stopHigh.get();
   }
 
-    //Stand the elevator UP
-  public void riseElevator(){
-    elevatorCollapseLeft.set(true);
-    elevatorCollapseRight.set(true);
+  //Get the elevator's currently shifted GEAR.
+  public boolean getElevatorGear(){
+    return elevatorGearShifter.get();
   }
 
-    //Drop the elevator FLAT.
-  public void collapseElevator(){
-    elevatorCollapseLeft.set(false);
-    elevatorCollapseRight.set(false);
+  //Get if the elevator is collapsed or not.
+  public boolean getElevatorCollapsed(){
+    return elevatorCollapse.get();
+  }
+  
+  //Get the HEIGHT of the elevator. 
+  public double getElevatorHeight(){
+    return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
+  }
+
+  public void reportElevatorSensors(){
+    SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
+    SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());
+    SmartDashboard.putBoolean("Elevator Current Gear", getElevatorGear());
+    SmartDashboard.putBoolean("Elevator Collapsed", getElevatorCollapsed());
+    SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
   }
 
   @Override
