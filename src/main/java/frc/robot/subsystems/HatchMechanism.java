@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import frc.robot.commands.PopHatch;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -14,6 +16,11 @@ public class HatchMechanism extends Subsystem {
   public HatchMechanism(){
     hatchReleaseLeft = new Solenoid(RobotMap.HATCH_EXTENDER_LEFT);
     hatchReleaseRight = new Solenoid(RobotMap.HATCH_EXTENDER_RIGHT);
+  }
+
+  @Override
+  public void initDefaultCommand() {
+    setDefaultCommand(new PopHatch());
   }
 
     //OPENS the hatch.
@@ -31,11 +38,5 @@ public class HatchMechanism extends Subsystem {
   public void reportHatchMechanismSensors(){
     SmartDashboard.putBoolean("Hatch Release LEFT", hatchReleaseLeft.get());
     SmartDashboard.putBoolean("Hatch Release RIGHT", hatchReleaseRight.get());
-  }
-
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }

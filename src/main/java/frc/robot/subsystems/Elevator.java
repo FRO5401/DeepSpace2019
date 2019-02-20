@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import frc.robot.commands.ElevatorControl;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -72,6 +74,11 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
     elevatorSRXSlave.set(ControlMode.Follower, elevatorSRXMaster.getDeviceID());
   } 
+
+  @Override
+  public void initDefaultCommand() {
+    setDefaultCommand(new ElevatorControl());
+  }
 
   //Override Methods
   public void overrideElevator(double joystickSpeed){
@@ -158,10 +165,5 @@ public class Elevator extends Subsystem {
     SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
   }
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
 
 }
