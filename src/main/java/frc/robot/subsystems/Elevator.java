@@ -123,6 +123,8 @@ public class Elevator extends Subsystem {
     elevatorCollapse.set(false);
   }
 
+  //XXX: If during testing limits report opposite, instead of chasing down all
+  //their calls, make these methods return the opposite.
   //Get if the BOTTOM limit is tripped. 
   public boolean getLimitB(){
     return stopLow.get();

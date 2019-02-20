@@ -7,12 +7,7 @@
 
 package frc.robot.commands;
 
-import javax.naming.spi.NamingManager;
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;

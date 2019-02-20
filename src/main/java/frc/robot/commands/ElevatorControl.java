@@ -14,8 +14,13 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class ElevatorControl extends Command {
 
+    //DPad & Joysticks
   double dPadInput, rightJoystickOperator;
+    
+    //Buttons
   boolean left, right, theAButton, theXButton, theBButton, overrideButton, elevatorShiftLow, elevatorShiftHigh;
+  
+    //Constants
   double rocketHighBall, rocketHighHatch;
   double rocketMidBall, rocketMidHatch;
   double rocketLowBall, rocketLowHatch;
@@ -23,26 +28,16 @@ public class ElevatorControl extends Command {
   double cargoBallInfeed;
   double ballInfeedFloor; 
   double endGame;
+
+    //Limit switches
   boolean topLimit;
   boolean bottomLimit;
 
   public ElevatorControl() {
     requires(Robot.elevator);
 
-    dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
-    rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
-    left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER);
-    right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER);
-    theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A);
-    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X);
-    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
-    elevatorShiftLow = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
-    elevatorShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START);
-    topLimit = Robot.elevator.getLimitT();
-    bottomLimit = Robot.elevator.getLimitB();
-
-    //Setpoints
-    rocketHighBall = 0; //change these to correct setpoints
+      //Setpoints
+    rocketHighBall = 0; //TODO: change these to correct setpoints
     rocketHighHatch = 0;
     rocketMidBall = 0;
     rocketMidHatch = 0;
@@ -62,6 +57,27 @@ public class ElevatorControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+      //Read DPad
+    dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
+      
+      //Read Joysticks
+    rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
+
+      //Read Buttons
+    left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER);
+    right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER);
+    theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A);
+    theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X);
+    overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
+    elevatorShiftLow = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
+    elevatorShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START);
+    
+      //Read Limit Switches
+    topLimit = Robot.elevator.getLimitT();
+    bottomLimit = Robot.elevator.getLimitB();
+
+    /*** INPUT LOGIC ***/
+
       //If user shifts HIGH
     if(elevatorShiftHigh){
       Robot.elevator.elevatorGearShift(true);

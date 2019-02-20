@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
   public static CarriageInfeed carriageinfeed;
   public static Elevator elevator;
   public static HatchMechanism hatchmechanism;
+  public static CompressorSubsystem compressorsubsystem;
   
   //OI is always last.
   public static OI oi;
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
     carriageinfeed = new CarriageInfeed();
     elevator = new Elevator();
     hatchmechanism = new HatchMechanism();
+    compressorsubsystem = new CompressorSubsystem();
     
     //OI is always last.
     oi = new OI();
@@ -62,6 +64,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", chooser);
     
 
+      //TODO: Reset these where deemed necessary.
+      //Set to reset vals when robot turns on, might be more useful in
+      //either auto, disabled, or teleop init. 
     Robot.drivebase.resetEncoders();
     Robot.drivebase.resetGyro();
   }
@@ -81,6 +86,7 @@ public class Robot extends TimedRobot {
     Robot.elevator.reportElevatorSensors();
     Robot.carriageinfeed.reportCarriageInfeedSensors();
     Robot.hatchmechanism.reportHatchMechanismSensors();
+    Robot.compressorsubsystem.reportCompressorStatus();
   }
 
   /**
