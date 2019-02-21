@@ -83,6 +83,7 @@ public class Elevator extends Subsystem {
   //Override Methods
   public void overrideElevator(double joystickSpeed){
     elevatorPidEnabled = false;
+    joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
     elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
   }
 
@@ -130,16 +131,14 @@ public class Elevator extends Subsystem {
     elevatorCollapse.set(false);
   }
 
-  //XXX: If during testing limits report opposite, instead of chasing down all
-  //their calls, make these methods return the opposite.
   //Get if the BOTTOM limit is tripped. 
   public boolean getLimitB(){
-    return stopLow.get();
+    return !stopLow.get();
   }
 
   //Get if the TOP limit is tripped. 
   public boolean getLimitT(){
-    return stopHigh.get();
+    return !stopHigh.get();
   }
 
   //Get the elevator's currently shifted GEAR.
@@ -160,10 +159,8 @@ public class Elevator extends Subsystem {
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());
-    SmartDashboard.putBoolean("Elevator Current Gear", getElevatorGear());
+    SmartDashboard.putBoolean("Elevator In High Gear", getElevatorGear());
     SmartDashboard.putBoolean("Elevator Collapsed", getElevatorCollapsed());
     SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
   }
-
-
 }

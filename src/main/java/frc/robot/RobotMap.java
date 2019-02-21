@@ -26,7 +26,7 @@ public class RobotMap {
 
   /*** Constants ***/
     //OI
-  public static final double AXIS_THRESHOLD = 0.2;
+  public static final double AXIS_THRESHOLD = 0.25;
 
     //DriveBase
   public static final double LOW_GEAR_LEFT_DPP  = 0.1466004558282468; //These are for practice bot, skewed a lot
@@ -40,12 +40,13 @@ public class RobotMap {
   public static final double SPIN_SENSITIVITY            = 0.2;
 
     //CarriageInfeed
-  public static final double CARRIAGE_FEEDER_SPEED    = 0;
+  public static final double CARRIAGE_FEEDER_SPEED    = .4;
   public static final double CARRIAGE_ANGLE_PER_PULSE = 0;
 
     //Elevator
   public static final int TIMEOUT_LIMIT_IN_Ms        = 10;
   public static final int ELEVATOR_THRESHOLD_FOR_PID = 0;
+  public static final double ELEVATOR_SPEED_SENSITIVITY = .25;
 
 
   /*** Operator Interfaces ***/
@@ -82,7 +83,7 @@ public class RobotMap {
 
     //CarriageInfeed
   public static final int CARRIAGE_FEED_ROLLERS  = 6;
-  public static final int CARRIAGE_TALON_CHANNEL = 0;
+  public static final int CARRIAGE_TALON_CHANNEL = 2;
 
     //Elevator
   public static final int ELEVATOR_TALON_MASTER_CHANNEL = 0;
@@ -92,29 +93,29 @@ public class RobotMap {
     //DoubleSolenoids have an IN and an OUT constant. 
     //Solenoids have just one constant. 
     //PCM (Pneumatic Control Module)
-  public static final int PCM_ID = 1;
+  public static final int PCM_ID = 0;
 
     //DriveBase
-  public static final int GEAR_SHIFTER = 1;
+  public static final int GEAR_SHIFTER = 6;
   
     //Elevator
-  public static final int ELEVATOR_GEAR_SHIFTER   = 0;
-  public static final int ELEVATOR_COLLAPSE  = 1;
+  public static final int ELEVATOR_GEAR_SHIFTER   = 4;
+  public static final int ELEVATOR_COLLAPSE  = 5;
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER_LEFT  = 0;
-  public static final int HATCH_EXTENDER_RIGHT = 0;
+  public static final int HATCH_EXTENDER_RIGHT = 2;
 
   /*** Sensors ***/
     //Encoders
-  public static final int DRIVE_ENC_LEFT_A  = 2;
-  public static final int DRIVE_ENC_RIGHT_A = 0;
-  public static final int DRIVE_ENC_LEFT_B  = 3;
-  public static final int DRIVE_ENC_RIGHT_B = 1;
+  public static final int DRIVE_ENC_LEFT_A  = 3;
+  public static final int DRIVE_ENC_RIGHT_A = 1;
+  public static final int DRIVE_ENC_LEFT_B  = 4;
+  public static final int DRIVE_ENC_RIGHT_B = 2;
 
     //Elevator
-  public static final int E_STOP_HIGH = 0;
-  public static final int E_STOP_LOW  = 0;
+  public static final int E_STOP_HIGH = 5;
+  public static final int E_STOP_LOW  = 6;
 
   /*** Autonomous ***/
     public static final int ANGLE_THRESHOLD        = 2;

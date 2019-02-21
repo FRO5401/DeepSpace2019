@@ -15,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class ElevatorControl extends Command {
 
     //DPad & Joysticks
-  double dPadInput, rightJoystickOperator;
+  double dPadInput, leftJoystickOperator;
     
     //Buttons
   boolean left, right, theAButton, theXButton, theBButton, overrideButton, elevatorShiftLow, elevatorShiftHigh;
@@ -61,7 +61,7 @@ public class ElevatorControl extends Command {
     dPadInput = Robot.oi.xboxDPad(Robot.oi.xboxOperator);
       
       //Read Joysticks
-    rightJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
+    leftJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
 
       //Read Buttons
     left = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_LEFT_BUMPER);
@@ -69,8 +69,8 @@ public class ElevatorControl extends Command {
     theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A);
     theXButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_X);
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
-    elevatorShiftLow = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
-    elevatorShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START);
+    elevatorShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_X);
+    elevatorShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_Y);
     
       //Read Limit Switches
     topLimit = Robot.elevator.getLimitT();
@@ -101,16 +101,27 @@ public class ElevatorControl extends Command {
 
       //override control
     if(overrideButton){
-      if((Robot.elevator.getLimitB() == false && Robot.elevator.getLimitT() == false)){
-        Robot.elevator.overrideElevator(rightJoystickOperator); //Normal override Control
-      }else if(Robot.elevator.getLimitB() == true){
-        if(rightJoystickOperator > 0){
-          Robot.elevator.overrideElevator(rightJoystickOperator);
+        //If BOTTOM and TOP are NOT tripped. 
+      if((bottomLimit == false) && (topLimit == false)){
+        Robot.elevator.overrideElevator(leftJoystickOperator); //Normal override Control
+      }
+        //if BOTTOM is tripped but TOP is not.
+      else if((bottomLimit == true) && (topLimit == false)){
+        if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
+          Robot.elevator.overrideElevator(leftJoystickOperator);
         } //Always go up
-      }else if(Robot.elevator.getLimitT() == true){
-        if(rightJoystickOperator < 0){
-          Robot.elevator.overrideElevator(rightJoystickOperator);
+        else if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
+          Robot.elevator.overrideElevator(0);
+        }
+      }
+        //if TOP is tripped and BOTTOM is false.
+      else if((topLimit == true) && (bottomLimit == false)){
+        if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
+          Robot.elevator.overrideElevator(leftJoystickOperator);
         } //Always go down
+        else if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
+          Robot.elevator.overrideElevator(0);
+        }
       }
     }
     else { //PID Control
