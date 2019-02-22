@@ -28,7 +28,7 @@ public class Elevator extends Subsystem {
   // here. Call these from Commands.
   TalonSRX elevatorSRXMaster, elevatorSRXSlave;
   Solenoid elevatorGearShifter;
-  Solenoid elevatorCollapse;
+  Solenoid elevatorCollapseTop, elevatorCollapseBottom;
 
   DigitalInput stopHigh, stopLow;
 
@@ -50,7 +50,8 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster   = new TalonSRX(RobotMap.ELEVATOR_TALON_MASTER_CHANNEL);
     elevatorSRXSlave    = new TalonSRX(RobotMap.ELEVATOR_TALON_SLAVE_CHANNEL);
     elevatorGearShifter = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER);
-    elevatorCollapse    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE);
+    elevatorCollapseTop    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_TOP);
+    elevatorCollapseBottom    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_BOTTOM);
 
     //Limits
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
@@ -123,12 +124,14 @@ public class Elevator extends Subsystem {
   
     //Stand the elevator UP
   public void riseElevator(){
-    elevatorCollapse.set(true);
+    elevatorCollapseTop.set(true);
+    elevatorCollapseBottom.set(true);
   }
 
     //Drop the elevator FLAT.
   public void collapseElevator(){
-    elevatorCollapse.set(false);
+    elevatorCollapseTop.set(false);
+    elevatorCollapseBottom.set(false);
   }
 
   //Get if the BOTTOM limit is tripped. 
