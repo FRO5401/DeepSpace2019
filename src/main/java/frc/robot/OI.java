@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import frc.robot.commands.CompressorToggle;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -68,6 +70,8 @@ public class OI {
 	Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_R3);
 
   public OI(){
+    xboxBack_Operator.whenPressed(new CompressorToggle());
+  
   }
 
   public double xboxAxis(Joystick xboxController, int xboxAxis){
