@@ -151,7 +151,7 @@ public class Elevator extends Subsystem {
 
   //Get if the elevator is collapsed or not.
   public boolean getElevatorCollapsed(){
-    return elevatorCollapse.get();
+    return elevatorCollapseTop.get();
   }
   
   //Get the HEIGHT of the elevator. 
