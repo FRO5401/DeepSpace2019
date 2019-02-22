@@ -103,7 +103,7 @@ public class ElevatorControl extends Command {
     if(overrideButton){
         //If BOTTOM and TOP are NOT tripped. 
       if((bottomLimit == false) && (topLimit == false)){
-        if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
+        if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator); //Normal override Control
         }
       }
