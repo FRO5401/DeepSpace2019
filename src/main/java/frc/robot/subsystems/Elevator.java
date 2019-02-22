@@ -150,10 +150,14 @@ public class Elevator extends Subsystem {
   }
 
   //Get if the elevator is collapsed or not.
-  public boolean getElevatorCollapsed(){
+  public boolean getElevatorCollapsedTop(){
     return elevatorCollapseTop.get();
   }
   
+  public boolean getElevatorCollapsedBottom(){
+    return elevatorCollapseBottom.get();
+  }
+
   //Get the HEIGHT of the elevator. 
   public double getElevatorHeight(){
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
@@ -163,7 +167,8 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());
     SmartDashboard.putBoolean("Elevator In High Gear", getElevatorGear());
-    SmartDashboard.putBoolean("Elevator Collapsed", getElevatorCollapsed());
+    SmartDashboard.putBoolean("Elevator Collapsed Top", getElevatorCollapsedTop());
+    SmartDashboard.putBoolean("Elevator Collapsed Bottom", getElevatorCollapsedBottom());
     SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
   }
 }
