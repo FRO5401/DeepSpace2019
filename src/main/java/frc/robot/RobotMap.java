@@ -104,9 +104,7 @@ public class RobotMap {
   public static final int ELEVATOR_COLLAPSE_BOTTOM = 0;//TODO Set RobotMap value for this
 
     //Hatch Mechanism
-    //TODO: HATCHES ARE T'd, REMOVE THE LEFT, REAL PORT IS 2. 
-  public static final int HATCH_EXTENDER_LEFT  = 7;
-  public static final int HATCH_EXTENDER_RIGHT = 2;
+  public static final int HATCH_EXTENDER = 2;
 
   /*** Sensors ***/
     //Encoders

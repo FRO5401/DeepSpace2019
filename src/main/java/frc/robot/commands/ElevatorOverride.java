@@ -66,7 +66,7 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-      //TODO: IF ELEVATOR LIMITS STILL DONT DO CORRECT, FLIP THE TRUE AND FALSE FOR NOW.
+      //TODO: Elevator Logic is backwards, fixed in a wacky way... correct POST Hatboro. 
         //if BOTTOM is tripped but TOP is not.
       else if((bottomLimit == true) && (topLimit == false)){
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
