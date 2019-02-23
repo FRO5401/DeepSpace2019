@@ -49,8 +49,8 @@ public class ElevatorOverride extends Command {
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
     
       //Read Limit Switches
-    topLimit = Robot.elevator.getLimitT();
-    bottomLimit = Robot.elevator.getLimitB();
+    topLimit = Robot.elevator.getLimitB();
+    bottomLimit = Robot.elevator.getLimitT();
 
     /*** INPUT LOGIC ***/
 
@@ -66,6 +66,7 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
+      //TODO: IF ELEVATOR LIMITS STILL DONT DO CORRECT, FLIP THE TRUE AND FALSE FOR NOW.
         //if BOTTOM is tripped but TOP is not.
       else if((bottomLimit == true) && (topLimit == false)){
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
@@ -106,7 +107,7 @@ public class ElevatorOverride extends Command {
   @Override
   protected void end() {
     Robot.elevator.overrideStopped();
-    new ElevatorPID();
+    //new ElevatorPID();
   }
 
   // Called when another command which requires one or more of the same

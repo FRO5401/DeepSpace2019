@@ -42,7 +42,8 @@ public class Elevator extends Subsystem {
   private double ELEVATOR_kI = 0;
   private double ELEVATOR_kD = 0;
 
-  public double ELEVATOR_DISTANCE_PER_PULSE = 0;
+    //Previous try was .0003800114;
+  public double ELEVATOR_DISTANCE_PER_PULSE = -0.00037948;
 
   public Elevator(){
 
@@ -173,5 +174,6 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Elevator Collapsed Top", getElevatorCollapsedTop());
     SmartDashboard.putBoolean("Elevator Collapsed Bottom", getElevatorCollapsedBottom());
     SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
+    SmartDashboard.putNumber("Elevator Height (Raw)", elevatorSRXMaster.getSensorCollection().getQuadraturePosition());
   }
 }

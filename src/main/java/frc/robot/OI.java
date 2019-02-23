@@ -77,8 +77,6 @@ public class OI {
     
       //Start Override Move
     xboxL3_Operator.whenPressed(new ElevatorOverride());
-
-      //Solenoid Controls (GearShifter and Collapsing)
       
       //Elevator HIGH gear
     xboxStart_Operator.whenPressed(new ElevatorControl(1));
