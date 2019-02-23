@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.CompressorToggle;
+import frc.robot.commands.ElevatorControl;
+import frc.robot.commands.ElevatorOverride;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -70,7 +72,25 @@ public class OI {
 	Button xboxR3_Operator		  	= new JoystickButton(xboxOperator, RobotMap.XBOX_BUTTON_R3);
 
   public OI(){
+      //Toggle Compressor
     xboxBack_Operator.whenPressed(new CompressorToggle());
+    
+      //Start Override Move
+    xboxL3_Operator.whenPressed(new ElevatorOverride());
+
+      //Solenoid Controls (GearShifter and Collapsing)
+      
+      //Elevator HIGH gear
+    xboxStart_Operator.whenPressed(new ElevatorControl(1));
+      
+      //Elevator LOW gear
+    xboxBack_Operator.whenPressed(new ElevatorControl(2));
+      
+      //COLLAPSE elevator
+    xboxB_Operator.whenPressed(new ElevatorControl(3));
+    
+      //RISE elevator
+    xboxX_Operator.whenPressed(new ElevatorControl(4));
   }
 
   public double xboxAxis(Joystick xboxController, int xboxAxis){

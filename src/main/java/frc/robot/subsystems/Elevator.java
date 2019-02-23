@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import frc.robot.commands.ElevatorControl;
+import frc.robot.commands.ElevatorOverride;
+import frc.robot.commands.ElevatorPID;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -78,7 +80,6 @@ public class Elevator extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorControl());
   }
 
   //Override Methods
@@ -89,7 +90,9 @@ public class Elevator extends Subsystem {
   }
 
   public void overrideStopped(){
-		elevatorPidEnabled = false;
+    elevatorSRXMaster.setNeutralMode(NeutralMode.Brake);
+    elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
+    elevatorPidEnabled = false;
 	}
 
   //Elevator Stopped with PID/Interrupted
