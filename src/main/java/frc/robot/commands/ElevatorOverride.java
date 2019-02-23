@@ -49,8 +49,8 @@ public class ElevatorOverride extends Command {
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
     
       //Read Limit Switches
-    topLimit = Robot.elevator.getLimitT();
-    bottomLimit = Robot.elevator.getLimitB();
+    topLimit = Robot.elevator.getLimitB();
+    bottomLimit = Robot.elevator.getLimitT();
 
     /*** INPUT LOGIC ***/
 
