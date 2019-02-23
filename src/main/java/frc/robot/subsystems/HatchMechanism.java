@@ -10,12 +10,10 @@ import frc.robot.RobotMap;
 
 public class HatchMechanism extends Subsystem {
 
-  private Solenoid hatchReleaseRight;
-  private Solenoid hatchReleaseLeft;
+  private Solenoid hatchRelease;
   
   public HatchMechanism(){
-    hatchReleaseLeft = new Solenoid(RobotMap.HATCH_EXTENDER_LEFT);
-    hatchReleaseRight = new Solenoid(RobotMap.HATCH_EXTENDER_RIGHT);
+    hatchRelease = new Solenoid(RobotMap.HATCH_EXTENDER);
   }
 
   @Override
@@ -25,18 +23,15 @@ public class HatchMechanism extends Subsystem {
 
     //OPENS the hatch.
   public void openHatch(){
-    hatchReleaseLeft.set(true);
-    hatchReleaseRight.set(true);
+    hatchRelease.set(true);
   }
 
     //CLOSES the hatch.
   public void closeHatch(){
-    hatchReleaseLeft.set(false);
-    hatchReleaseRight.set(false);
+    hatchRelease.set(false);
   }
 
   public void reportHatchMechanismSensors(){
-    SmartDashboard.putBoolean("Hatch Release LEFT", hatchReleaseLeft.get());
-    SmartDashboard.putBoolean("Hatch Release RIGHT", hatchReleaseRight.get());
+    SmartDashboard.putBoolean("Hatch Release LEFT", hatchRelease.get());
   }
 }
