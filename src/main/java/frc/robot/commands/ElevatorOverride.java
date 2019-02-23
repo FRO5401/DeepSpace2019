@@ -51,6 +51,7 @@ public class ElevatorOverride extends Command {
       //Read Limit Switches
     topLimit = Robot.elevator.getLimitB();
     bottomLimit = Robot.elevator.getLimitT();
+    //Limit switches are reversed, are read backwards due to the motor being negative
 
     /*** INPUT LOGIC ***/
 
@@ -106,7 +107,6 @@ public class ElevatorOverride extends Command {
   @Override
   protected void end() {
     Robot.elevator.overrideStopped();
-    new ElevatorPID();
   }
 
   // Called when another command which requires one or more of the same
