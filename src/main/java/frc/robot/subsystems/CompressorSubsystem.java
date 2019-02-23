@@ -19,7 +19,7 @@ public class CompressorSubsystem extends Subsystem {
 	
     @Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new CompressorToggle());
+		//Default command not needed, called from OI.
 	}
     
     public void startCompressor() {
@@ -30,7 +30,7 @@ public class CompressorSubsystem extends Subsystem {
     public void stopCompressor() {
 		compressor.stop();
     }
-    
+
     public void reportCompressorStatus(){
     	SmartDashboard.putBoolean("Compressor Enabled", compressor.enabled());
     	SmartDashboard.putBoolean("Compressor in Closed Looop", compressor.getClosedLoopControl());

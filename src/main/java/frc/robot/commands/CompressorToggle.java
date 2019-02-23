@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CompressorToggle extends Command {
 
-    private boolean compressorToggle;
-	
     public CompressorToggle() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.compressorsubsystem);
@@ -29,20 +27,12 @@ public class CompressorToggle extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
-        compressorToggle = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
-
-        if(compressorToggle && Robot.compressorsubsystem.isEnabled()){
-            Robot.compressorsubsystem.stopCompressor();
-        }
-        else if(compressorToggle && !(Robot.compressorsubsystem.isEnabled())){
-            Robot.compressorsubsystem.startCompressor();
-        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
 	protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
