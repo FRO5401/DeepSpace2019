@@ -13,10 +13,11 @@ import frc.robot.RobotMap;
 
 public class ElevatorPID extends Command {
 
+  //Controls on the XBox
   double dPadInput;
-    
   boolean left, right, theAButton;
  
+  //PID Setpoints
   double rocketHighBall, rocketHighHatch;
   double rocketMidBall, rocketMidHatch;
   double rocketLowBall, rocketLowHatch;
@@ -25,6 +26,7 @@ public class ElevatorPID extends Command {
   double ballInfeedFloor; 
   double endGame;
 
+  //Limit Switches to detect if the elevator has reached the upper or lower limit
   boolean topLimit;
   boolean bottomLimit;
 

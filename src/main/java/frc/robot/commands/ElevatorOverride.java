@@ -14,10 +14,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class ElevatorOverride extends Command {
 
+  //XBox Button Controls
   double dPadInput, leftJoystickOperator;
-    
   boolean left, right, theAButton, theXButton, theBButton, overrideButton, elevatorShiftLow, elevatorShiftHigh;
 
+  //Limit switches to limit the movement
   boolean topLimit;
   boolean bottomLimit;
 

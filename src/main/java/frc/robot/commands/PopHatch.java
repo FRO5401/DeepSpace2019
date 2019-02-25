@@ -6,6 +6,7 @@ import frc.robot.RobotMap;
 
 public class PopHatch extends Command {
   
+  //A command to pop a hatch from the robot
   public PopHatch() {
     requires(Robot.hatchmechanism);
   }
@@ -17,6 +18,7 @@ public class PopHatch extends Command {
 
   @Override
   protected void execute() {
+    //Y-button is attached to the hatch mechanism
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
 
     if(hatchInOut){

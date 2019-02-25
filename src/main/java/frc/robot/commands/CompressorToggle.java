@@ -31,9 +31,10 @@ public class CompressorToggle extends Command {
 	protected void execute() {
         compressorToggle = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
 
+        //Compressor is set to stop if it is already enabled
         if(compressorToggle && Robot.compressorsubsystem.isEnabled()){
             Robot.compressorsubsystem.stopCompressor();
-        }
+        } //else, the compressor is set to run
         else if(compressorToggle && !(Robot.compressorsubsystem.isEnabled())){
             Robot.compressorsubsystem.startCompressor();
         }

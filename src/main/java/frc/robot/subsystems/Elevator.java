@@ -34,9 +34,13 @@ public class Elevator extends Subsystem {
 
   DigitalInput stopHigh, stopLow;
 
+  //Whether or not the PID is enabled
   private boolean elevatorPidEnabled;
+
+  //Loop and slot indices are used to configure the PID control
   private int loopIndex, slotIndex;
   
+  //PID values in the elevator
   private double ELEVATOR_kF = 0;
   private double ELEVATOR_kP = 0;
   private double ELEVATOR_kI = 0;
@@ -88,6 +92,7 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
   }
 
+  //
   public void overrideStopped(){
     elevatorSRXMaster.setNeutralMode(NeutralMode.Brake);
     elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
@@ -98,6 +103,7 @@ public class Elevator extends Subsystem {
 		elevatorPidEnabled = false;
   }
 
+  //Sets the setpoint to a specified value
   public void setPoint(double setPoint){
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
 		elevatorSRXMaster.set(ControlMode.Position, setPointNativeUnits);
@@ -149,9 +155,11 @@ public class Elevator extends Subsystem {
     return elevatorCollapseBottom.get();
   }
 
+  //Gets the height of the elevator
   public double getElevatorHeight(){
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
   }
+
 
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());

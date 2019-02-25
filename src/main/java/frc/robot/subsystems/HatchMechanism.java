@@ -10,6 +10,7 @@ import frc.robot.RobotMap;
 
 public class HatchMechanism extends Subsystem {
 
+  //For releasing hatches
   private Solenoid hatchRelease;
   
   public HatchMechanism(){
