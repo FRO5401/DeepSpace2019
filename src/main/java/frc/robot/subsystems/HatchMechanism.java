@@ -21,12 +21,10 @@ public class HatchMechanism extends Subsystem {
     setDefaultCommand(new PopHatch());
   }
 
-    //OPENS the hatch.
   public void openHatch(){
     hatchRelease.set(true);
   }
 
-    //CLOSES the hatch.
   public void closeHatch(){
     hatchRelease.set(false);
   }

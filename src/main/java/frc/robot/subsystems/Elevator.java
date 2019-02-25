@@ -71,7 +71,6 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
 
-      //Configuring PID values. 
     elevatorSRXMaster.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
@@ -83,7 +82,6 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
   }
 
-  //Override Methods
   public void overrideElevator(double joystickSpeed){
     elevatorPidEnabled = false;
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
@@ -96,25 +94,20 @@ public class Elevator extends Subsystem {
     elevatorPidEnabled = false;
 	}
 
-  //Elevator Stopped with PID/Interrupted
   public void elevatorStop(){
 		elevatorPidEnabled = false;
   }
 
-  //Sets the point to which the elevator will move
   public void setPoint(double setPoint){
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
 		elevatorSRXMaster.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
   }
   
-  //Sets the NeutralMode of the elevator (BRAKE or COAST)
   public void setElevatorNeutralMode(NeutralMode neutralMode){
     elevatorSRXMaster.setNeutralMode(neutralMode);
   }
 
-  //Allows the elevator to move faster/slower
-  //false = lowgear, true = highgear
   public void elevatorGearShift(boolean shifterValue){
     elevatorGearShifter.set(shifterValue);
   }
@@ -126,34 +119,28 @@ public class Elevator extends Subsystem {
 		//getClosedLoopT gets the SetPoint already set (or moving to)
   }
   
-    //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseTop.set(true);
     elevatorCollapseBottom.set(true);
   }
 
-    //Drop the elevator FLAT.
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
     elevatorCollapseBottom.set(false);
   }
 
-  //Get if the BOTTOM limit is tripped. 
   public boolean getLimitB(){
     return !stopLow.get();
   }
 
-  //Get if the TOP limit is tripped. 
   public boolean getLimitT(){
     return !stopHigh.get();
   }
 
-  //Get the elevator's currently shifted GEAR.
   public boolean getElevatorGear(){
     return elevatorGearShifter.get();
   }
 
-  //Get if the elevator is collapsed or not.
   public boolean getElevatorCollapsedTop(){
     return elevatorCollapseTop.get();
   }
@@ -162,7 +149,6 @@ public class Elevator extends Subsystem {
     return elevatorCollapseBottom.get();
   }
 
-  //Get the HEIGHT of the elevator. 
   public double getElevatorHeight(){
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
   }

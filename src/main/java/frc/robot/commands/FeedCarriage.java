@@ -26,48 +26,38 @@ public class FeedCarriage extends Command {
     requires(Robot.carriageinfeed);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.carriageinfeed.carriageSetTalonNeutralMode(NeutralMode.Brake);
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      //Read buttons
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_R3);
     feedIn = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_TRIGGER);
     feedOut = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_TRIGGER);
 
-      //Read axis
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
 
-      //Carriage Move logic.
     if(overrideButton){
-        //Normal Control
       if(Robot.carriageinfeed.getCarriageAngle() >= 88 && Robot.carriageinfeed.getCarriageAngle() <= -43){
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }
-        //If the carriage goes to far UP, only let it go DOWN.
       else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
         if (carriageUpDown < 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
-        //If the carriage goes to far DOWN, only let it go UP.
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
         if (carriageUpDown > 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
-        //Moving the carriage (within the threshold).
       else{
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }  
     }
       
-      //Feeder Logic
     if(feedIn > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedIn();
     }
@@ -79,21 +69,17 @@ public class FeedCarriage extends Command {
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.carriageinfeed.feedStop();
     Robot.carriageinfeed.carriageOverrideMove(0);
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
     Robot.carriageinfeed.feedStop();

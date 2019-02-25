@@ -10,13 +10,11 @@ public class PopHatch extends Command {
     requires(Robot.hatchmechanism);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.hatchmechanism.openHatch();
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
@@ -29,19 +27,15 @@ public class PopHatch extends Command {
     }
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
   protected void interrupted() {
   }

@@ -46,17 +46,14 @@ public class CarriageInfeed extends Subsystem {
     loopIndex = 0;
     slotIndex = 0;
 
-      //Setting the sensor and the threshold for error.
     carriageTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, TIMEOUT_LIMIT_MS);
     carriageTalon.configAllowableClosedloopError(slotIndex, CARRIAGE_PID_THRESHOLD, TIMEOUT_LIMIT_MS);
     
-      //Setting Max and Min values. 
     carriageTalon.configNominalOutputForward(0, TIMEOUT_LIMIT_MS);
     carriageTalon.configNominalOutputReverse(0, TIMEOUT_LIMIT_MS);
     carriageTalon.configPeakOutputForward(1, TIMEOUT_LIMIT_MS);
     carriageTalon.configPeakOutputReverse(-1, TIMEOUT_LIMIT_MS);
     
-      //Setting the PID values.
     carriageTalon.config_kF(slotIndex, CARRIAGE_kF, TIMEOUT_LIMIT_MS);
     carriageTalon.config_kP(slotIndex, CARRIAGE_kP, TIMEOUT_LIMIT_MS);
     carriageTalon.config_kI(slotIndex, CARRIAGE_kI, TIMEOUT_LIMIT_MS);
@@ -68,7 +65,6 @@ public class CarriageInfeed extends Subsystem {
     setDefaultCommand(new FeedCarriage());
   }
 
-  //PID methods for carriage to run when elevator is moving
   public void setMidCarriageAngle(){
     carriageTalon.set(ControlMode.Position, midAngle);
   }
@@ -78,42 +74,33 @@ public class CarriageInfeed extends Subsystem {
   }
 
   public void resetCarriageAngle(){
-  //Reset to 90 degrees (default)
     carriageTalon.set(ControlMode.Position, resetAngle);
   }
-    //Moves the carriage to the desired angle (native units)
   public void carriageSetPoint(double desiredAngleNativeUnits){ 
-    //solve for a.p.p later
     carriageTalon.set(ControlMode.Position, desiredAngleNativeUnits);
   }
 
-    //Moves the carriage manually, given velocity
   public void carriageOverrideMove(double carriagePercentSpeed){
     carriageTalon.set(ControlMode.PercentOutput, carriagePercentSpeed);
   }
 
-    //Sets the neutral mode of the Talons (Coast or Brake), post to Dashboard
   public void carriageSetTalonNeutralMode(NeutralMode neutralMode){
     carriageTalon.setNeutralMode(neutralMode);
     SmartDashboard.putString("Neutral Mode", neutralMode.toString());
   }
 
-    //Set motors to feed in
   public void feedIn(){
     feederMotors.set(RobotMap.CARRIAGE_FEEDER_SPEED);
   }
   
-    //Set motors to feed out
   public void feedOut(){
     feederMotors.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
   }
 
-    //Set motors to stop feeding
   public void feedStop(){
     feederMotors.set(0);
   }
 
-    //Get talon encoder value, post vals to Dashboard.
   public double getCarriageAngle(){
     carriageAngle = carriageTalon.getSensorCollection().getQuadraturePosition();
     return carriageAngle;
