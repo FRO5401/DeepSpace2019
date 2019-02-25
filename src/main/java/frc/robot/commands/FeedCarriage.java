@@ -39,31 +39,38 @@ public class FeedCarriage extends Command {
 
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
 
+    //when R3 is pressed
     if(overrideButton){
+      //allows normal movement between maximum and minimum angles
       if(Robot.carriageinfeed.getCarriageAngle() >= 88 && Robot.carriageinfeed.getCarriageAngle() <= -43){
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }
+      //allows only downward movement if at highest angle
       else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
         if (carriageUpDown < 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
+      //allows only upward movement if at lowest angle
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
         if (carriageUpDown > 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
+      //allows normal control if no previous conditions are met
       else{
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }  
     }
-      
+    //When right trigger is pressed passed threshold, feed in cargo  
     if(feedIn > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedIn();
     }
+    //when left trigger is pressed passed threshold, feed cargo out
     else if(feedOut > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedOut();
     }
+    //if nothing is pressed, do nothing
     else{
       Robot.carriageinfeed.feedStop();
     }

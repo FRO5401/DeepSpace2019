@@ -19,9 +19,11 @@ public class PopHatch extends Command {
   protected void execute() {
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
 
+    //if Y button is pressed, close hatch
     if(hatchInOut){
       Robot.hatchmechanism.closeHatch();
     }
+    //if nothing is pressed, open hatch (default position)
     else{
       Robot.hatchmechanism.openHatch();
     }

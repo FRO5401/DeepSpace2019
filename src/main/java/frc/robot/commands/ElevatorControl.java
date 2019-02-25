@@ -14,6 +14,8 @@ public class ElevatorControl extends Command {
   
   int controlSelected;
 
+  //sets controlSelected to button pressed from OI
+  //on operator controller, 1 is start, 2 is back, 3 is B, 4 is X
   public ElevatorControl(int buttonSelected) {
     requires(Robot.elevator);
 
@@ -22,18 +24,20 @@ public class ElevatorControl extends Command {
 
   @Override
   protected void initialize() {
+    //high gear
     if(controlSelected == 1){
       Robot.elevator.elevatorGearShift(true);
     }
+    //low gear
     else if(controlSelected == 2){
       Robot.elevator.elevatorGearShift(false);
     }
-
+    //collapses elevator
     if(controlSelected == 3){
       Robot.elevator.setPoint(0);
       Robot.elevator.collapseElevator();
     }
-
+    //rises elevator
     if(controlSelected == 4){
       Robot.elevator.setPoint(0);
       Robot.elevator.riseElevator();

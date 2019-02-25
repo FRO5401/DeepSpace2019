@@ -45,34 +45,45 @@ public class ElevatorOverride extends Command {
 
 
     if(overrideButton){
+      //when both limit switches are not pressed
       if((bottomLimit == false) && (topLimit == false)){
+        //allows movement in both directions
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator); 
         }
+        //stops movement when input is between threshold
         else{
           Robot.elevator.overrideElevator(0);
         }
       }
+      //when bottom switch is pressed
       else if((bottomLimit == true) && (topLimit == false)){
+        //only allows movement upwards
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
           Robot.elevator.overrideElevator(leftJoystickOperator);
         }
+        //stops movement when input is below threshold
         else{
           Robot.elevator.overrideElevator(0);
         }
       }
+      //when top switch is pressed
       else if((topLimit == true) && (bottomLimit == false)){
+        //only allows movement downwards
         if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
           Robot.elevator.overrideElevator(leftJoystickOperator);
         }
+        //stops movement when input is above threshold
         else{
           Robot.elevator.overrideElevator(0);
         }
       }
+      //stops movement when there is not input
       else{
         Robot.elevator.overrideElevator(0);
       }
     }
+    //sets overrideFinished to true to know it's done
     else if(!overrideButton) {
       overrideFinished = true;
     }
