@@ -51,9 +51,11 @@ public class Elevator extends Subsystem {
 
   public Elevator(){
 
+    //PID Configuration values
     loopIndex = 0;
     slotIndex = 0;
   
+    //Elevator Motors
     elevatorSRXMaster   = new TalonSRX(RobotMap.ELEVATOR_TALON_MASTER_CHANNEL);
     elevatorSRXSlave    = new TalonSRX(RobotMap.ELEVATOR_TALON_SLAVE_CHANNEL);
     elevatorGearShifter = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER);
@@ -64,6 +66,7 @@ public class Elevator extends Subsystem {
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
     stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
 
+    //Configures PID
     elevatorSRXMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
     elevatorSRXMaster.setSensorPhase(true);
 
@@ -75,6 +78,7 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
 
+    //Configures the PID values
     elevatorSRXMaster.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
@@ -86,19 +90,21 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
   }
 
+  //Joystick can override PID if PID is faulty
   public void overrideElevator(double joystickSpeed){
     elevatorPidEnabled = false;
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
     elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
   }
 
-  //
+  //Until the joystick is not used anymore
   public void overrideStopped(){
     elevatorSRXMaster.setNeutralMode(NeutralMode.Brake);
     elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
     elevatorPidEnabled = false;
 	}
 
+  //Stops the elevator from moving
   public void elevatorStop(){
 		elevatorPidEnabled = false;
   }
