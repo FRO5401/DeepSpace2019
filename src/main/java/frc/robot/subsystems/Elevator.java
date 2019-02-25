@@ -82,18 +82,21 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
   }
 
+  //used to override the elevator
   public void overrideElevator(double joystickSpeed){
     elevatorPidEnabled = false;
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
     elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
   }
 
+  //used to cancel an override
   public void overrideStopped(){
     elevatorSRXMaster.setNeutralMode(NeutralMode.Brake);
     elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
     elevatorPidEnabled = false;
 	}
 
+  //stops the elevator by disabling its pid
   public void elevatorStop(){
 		elevatorPidEnabled = false;
   }
@@ -104,10 +107,12 @@ public class Elevator extends Subsystem {
 		elevatorPidEnabled = true;
   }
   
+  //sets the elevator to neutral mode.
   public void setElevatorNeutralMode(NeutralMode neutralMode){
     elevatorSRXMaster.setNeutralMode(neutralMode);
   }
 
+  //shifts the elevator's gear to the value that has been requested for the gear.
   public void elevatorGearShift(boolean shifterValue){
     elevatorGearShifter.set(shifterValue);
   }
@@ -119,40 +124,49 @@ public class Elevator extends Subsystem {
 		//getClosedLoopT gets the SetPoint already set (or moving to)
   }
   
+  //raises the elevator by setting values to true
   public void riseElevator(){
     elevatorCollapseTop.set(true);
     elevatorCollapseBottom.set(true);
   }
 
+  //raises the elevator by setting values to false
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
     elevatorCollapseBottom.set(false);
   }
 
+  //gets the bottom limit
   public boolean getLimitB(){
     return !stopLow.get();
   }
 
+  //gets the top limit
   public boolean getLimitT(){
     return !stopHigh.get();
   }
 
+  //gets the current elevator gear
   public boolean getElevatorGear(){
     return elevatorGearShifter.get();
   }
 
+  //checks to see if the top is collapsed
   public boolean getElevatorCollapsedTop(){
     return elevatorCollapseTop.get();
   }
   
+  //checks to see if the bottom is collapsed
   public boolean getElevatorCollapsedBottom(){
     return elevatorCollapseBottom.get();
   }
 
+  //retrieves the current elevator height
   public double getElevatorHeight(){
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
   }
 
+  //reports elevator input to the smart dashboard
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());

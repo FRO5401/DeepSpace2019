@@ -65,18 +65,18 @@ public class CarriageInfeed extends Subsystem {
     setDefaultCommand(new FeedCarriage()); //creates a new instance of the FeedCarriage command
   }
 
-  public void setMidCarriageAngle(){
+  public void setMidCarriageAngle(){ //points the carriage to a middle position to expel or receive cargo
     carriageTalon.set(ControlMode.Position, midAngle);
   }
 
-  public void setGroundCarriageAngle(){
+  public void setGroundCarriageAngle(){ //points the carriage to the ground to pick up floor cargo.
     carriageTalon.set(ControlMode.Position, groundAngle);
   }
 
-  public void resetCarriageAngle(){
+  public void resetCarriageAngle(){ //points the carriage back to its starting position
     carriageTalon.set(ControlMode.Position, resetAngle);
   }
-  public void carriageSetPoint(double desiredAngleNativeUnits){ 
+  public void carriageSetPoint(double desiredAngleNativeUnits){  
     carriageTalon.set(ControlMode.Position, desiredAngleNativeUnits);
   }
 
@@ -84,7 +84,7 @@ public class CarriageInfeed extends Subsystem {
     carriageTalon.set(ControlMode.PercentOutput, carriagePercentSpeed);
   }
 
-  public void carriageSetTalonNeutralMode(NeutralMode neutralMode){
+  public void carriageSetTalonNeutralMode(NeutralMode neutralMode){ //sets the carriage to neutral mode and reports that to smart dashboard
     carriageTalon.setNeutralMode(neutralMode);
     SmartDashboard.putString("Neutral Mode", neutralMode.toString());
   }
@@ -104,7 +104,7 @@ public class CarriageInfeed extends Subsystem {
     feederMotors.set(0);
   }
 
-  public double getCarriageAngle(){
+  public double getCarriageAngle(){ //returns the carriage angle to be used for the robot. Actually processes what has been done.
     carriageAngle = carriageTalon.getSensorCollection().getQuadraturePosition();
     return carriageAngle;
   }
