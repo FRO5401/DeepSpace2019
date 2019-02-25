@@ -40,8 +40,8 @@ public class CarriageInfeed extends Subsystem {
   TalonSRX carriageTalon;
 
   public CarriageInfeed(){
-    feederMotors = new VictorSP(RobotMap.CARRIAGE_FEED_ROLLERS);
-    carriageTalon = new TalonSRX(RobotMap.CARRIAGE_TALON_CHANNEL);
+    feederMotors = new VictorSP(RobotMap.CARRIAGE_FEED_ROLLERS); //exstaniates feederMotors as a new VictorSP; VictorSP is a speed controller
+    carriageTalon = new TalonSRX(RobotMap.CARRIAGE_TALON_CHANNEL); //exstaniates carriageTalon as a new TalonSRX; TalonSRX's are independent controllers
 
     loopIndex = 0;
     slotIndex = 0;
@@ -62,7 +62,7 @@ public class CarriageInfeed extends Subsystem {
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new FeedCarriage());
+    setDefaultCommand(new FeedCarriage()); //creates a new instance of the FeedCarriage command
   }
 
   public void setMidCarriageAngle(){
@@ -89,14 +89,17 @@ public class CarriageInfeed extends Subsystem {
     SmartDashboard.putString("Neutral Mode", neutralMode.toString());
   }
 
+  //sets the feeder motors to the normal feeder speed so that it can load things
   public void feedIn(){
     feederMotors.set(RobotMap.CARRIAGE_FEEDER_SPEED);
   }
   
+  //sets the feeder motors to -1 times the noraml feeder speed sp that it can eject things
   public void feedOut(){
     feederMotors.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
   }
 
+  //stops the feeder motors because you don't need to run them all the time
   public void feedStop(){
     feederMotors.set(0);
   }
@@ -106,6 +109,7 @@ public class CarriageInfeed extends Subsystem {
     return carriageAngle;
   }
 
+  //sends a few reports to smart dashboard regarding what happened. 
   public void reportCarriageInfeedSensors(){
     SmartDashboard.putNumber("Infeed Direction", feederMotors.getSpeed());
     SmartDashboard.putNumber("Carriage Angle (Native)", carriageAngle);

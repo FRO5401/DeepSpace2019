@@ -23,8 +23,9 @@ public class ElevatorOverride extends Command {
 
   boolean overrideFinished;
 
+  //if you haven't done an override on the elevator, you can go do that.
   public ElevatorOverride() {
-    requires(Robot.elevator);
+    requires(Robot.elevator); //uses the elevator subsystem
     overrideFinished = false;
   }
 
@@ -40,12 +41,12 @@ public class ElevatorOverride extends Command {
 
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
     
-    topLimit = Robot.elevator.getLimitB();
-    bottomLimit = Robot.elevator.getLimitT();
+    topLimit = Robot.elevator.getLimitB(); //gets the height limit for the top
+    bottomLimit = Robot.elevator.getLimitT(); //gets the height limit for the bottom
 
 
-    if(overrideButton){
-      if((bottomLimit == false) && (topLimit == false)){
+    if(overrideButton) { //if L3 is pressed.
+      if((bottomLimit == false) && (topLimit == false)){ //if the bottom and top have no limit, then it can just freely go up and down
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator); 
         }
@@ -53,7 +54,7 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-      else if((bottomLimit == true) && (topLimit == false)){
+      else if((bottomLimit == true) && (topLimit == false)){ // if the bottom has a limit and the top doesn't, then you can just go up.
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
           Robot.elevator.overrideElevator(leftJoystickOperator);
         }
@@ -61,7 +62,7 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-      else if((topLimit == true) && (bottomLimit == false)){
+      else if((topLimit == true) && (bottomLimit == false)){ //if the bottom doesn't have a limit and the top does then you can just go down.
         if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
           Robot.elevator.overrideElevator(leftJoystickOperator);
         }
@@ -73,7 +74,7 @@ public class ElevatorOverride extends Command {
         Robot.elevator.overrideElevator(0);
       }
     }
-    else if(!overrideButton) {
+    else if(!overrideButton) { //if L3 isn't pressed then just, you didn't press it. 
       overrideFinished = true;
     }
   }

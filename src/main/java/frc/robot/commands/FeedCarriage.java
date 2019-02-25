@@ -13,7 +13,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class FeedCarriage extends Command {
-  boolean overrideButton;
+  boolean overrideButton; //that one overrides the button by toggling it on and off
   double feedIn;
   double feedOut;
 
@@ -23,7 +23,7 @@ public class FeedCarriage extends Command {
   double carriageGround;
   
   public FeedCarriage() {
-    requires(Robot.carriageinfeed);
+    requires(Robot.carriageinfeed); //uses the subsystem carriageinfeed to run the command.
   }
 
   @Override
