@@ -12,7 +12,7 @@ public class PopHatch extends Command {
 
   @Override
   protected void initialize() {
-    Robot.hatchmechanism.openHatch();
+    Robot.hatchmechanism.openHatch(); 
   }
 
   @Override

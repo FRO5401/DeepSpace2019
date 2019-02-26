@@ -76,7 +76,7 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
     elevatorSRXSlave.set(ControlMode.Follower, elevatorSRXMaster.getDeviceID());
-  } 
+  }   // Sets the four PID values for the elevator
 
   @Override
   public void initDefaultCommand() {

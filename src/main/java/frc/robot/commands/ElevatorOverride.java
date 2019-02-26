@@ -45,7 +45,7 @@ public class ElevatorOverride extends Command {
 
 
     if(overrideButton){
-      if((bottomLimit == false) && (topLimit == false)){
+      if((bottomLimit == false) && (topLimit == false)){  // If both limits are false, the operator can only move the elevator down since there is nowhere else up to go. 
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator); 
         }

@@ -12,7 +12,7 @@ public class HatchMechanism extends Subsystem {
 
   private Solenoid hatchRelease;
   
-  public HatchMechanism(){
+  public HatchMechanism(){  // Instantiate Variable
     hatchRelease = new Solenoid(RobotMap.HATCH_EXTENDER);
   }
 
@@ -21,11 +21,11 @@ public class HatchMechanism extends Subsystem {
     setDefaultCommand(new PopHatch());
   }
 
-  public void openHatch(){
+  public void openHatch(){  // If true, open hatch
     hatchRelease.set(true);
   }
 
-  public void closeHatch(){
+  public void closeHatch(){ // If false, close hatch
     hatchRelease.set(false);
   }
 
