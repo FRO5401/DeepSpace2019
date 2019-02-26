@@ -80,7 +80,7 @@ public class CarriageInfeed extends Subsystem {
   public void resetCarriageAngle(){ // Uses PID & Talon to set the Angle to 90 degrees 
     carriageTalon.set(ControlMode.Position, resetAngle);
   }
-  public void carriageSetPoint(double desiredAngleNativeUnits){ 
+  public void carriageSetPoint(double desiredAngleNativeUnits){ // Carriage is moved to desired set angle
     carriageTalon.set(ControlMode.Position, desiredAngleNativeUnits);
   }
 

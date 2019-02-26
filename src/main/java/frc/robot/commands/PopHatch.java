@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class PopHatch extends Command {
+public class PopHatch extends Command { // Command to pick up or release hatches
   
   public PopHatch() {
-    requires(Robot.hatchmechanism);
+    requires(Robot.hatchmechanism); // Uses HatchMechanism Subsystem
   }
 
   @Override
   protected void initialize() {
-    Robot.hatchmechanism.openHatch(); 
+    Robot.hatchmechanism.openHatch(); // Initialized with Open (Default)
   }
 
   @Override
-  protected void execute() {
+  protected void execute() {  // Pressing Y on the Operator Controller closes and then opens the mechanism
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
 
     if(hatchInOut){

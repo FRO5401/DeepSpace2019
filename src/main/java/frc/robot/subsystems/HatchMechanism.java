@@ -18,7 +18,7 @@ public class HatchMechanism extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new PopHatch());
+    setDefaultCommand(new PopHatch());  // New PopHatch Command to Open and Close 
   }
 
   public void openHatch(){  // If true, open hatch
@@ -29,7 +29,7 @@ public class HatchMechanism extends Subsystem {
     hatchRelease.set(false);
   }
 
-  public void reportHatchMechanismSensors(){
+  public void reportHatchMechanismSensors(){  // Report Encoder Values to the Smart Dashboard
     SmartDashboard.putBoolean("Hatch Release LEFT", hatchRelease.get());
   }
 }

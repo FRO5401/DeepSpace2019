@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
-public class ElevatorOverride extends Command {
+public class ElevatorOverride extends Command { // Manual Control of Elevator 
 
   double dPadInput, leftJoystickOperator;
     
@@ -23,8 +23,8 @@ public class ElevatorOverride extends Command {
 
   boolean overrideFinished;
 
-  public ElevatorOverride() {
-    requires(Robot.elevator);
+  public ElevatorOverride() { // Override is On
+    requires(Robot.elevator); // Uses Elevator Subsystem 
     overrideFinished = false;
   }
 
@@ -37,15 +37,17 @@ public class ElevatorOverride extends Command {
   protected void execute() {
   
     leftJoystickOperator = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_Y);
+    // Y-Axis of Left Joystick on the Operator Controller to Ascend and Descend
 
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_L3);
+    // Left Analogue Pressed Down = Override Button
     
-    topLimit = Robot.elevator.getLimitB();
-    bottomLimit = Robot.elevator.getLimitT();
+    topLimit = Robot.elevator.getLimitB();  // Limit for the highest it can ascend
+    bottomLimit = Robot.elevator.getLimitT(); // Limit for the lowest point it can descend to
 
 
-    if(overrideButton){
-      if((bottomLimit == false) && (topLimit == false)){  // If both limits are false, the operator can only move the elevator down since there is nowhere else up to go. 
+    if(overrideButton){ // If the Left Analogue is Pressed
+      if((bottomLimit == false) && (topLimit == false)){  // If neither limit is reached, then freely move manually until such limits are reached 
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator); 
         }
@@ -53,7 +55,7 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-      else if((bottomLimit == true) && (topLimit == false)){
+      else if((bottomLimit == true) && (topLimit == false)){  // If the bottom limit is reached, you cannot descend further. Only allow for upwards movement
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
           Robot.elevator.overrideElevator(leftJoystickOperator);
         }
@@ -61,7 +63,7 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-      else if((topLimit == true) && (bottomLimit == false)){
+      else if((topLimit == true) && (bottomLimit == false)){  // If the top limit is reached, you cannot ascend further, so only allow for downwards movement
         if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
           Robot.elevator.overrideElevator(leftJoystickOperator);
         }
@@ -73,7 +75,7 @@ public class ElevatorOverride extends Command {
         Robot.elevator.overrideElevator(0);
       }
     }
-    else if(!overrideButton) {
+    else if(!overrideButton) {  // When the Analogue is released, then Manual Override ends
       overrideFinished = true;
     }
   }

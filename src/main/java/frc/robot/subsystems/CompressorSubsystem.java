@@ -18,7 +18,7 @@ public class CompressorSubsystem extends Subsystem {
 	}
 	
     @Override
-	public void initDefaultCommand() {	// 
+	public void initDefaultCommand() {	// Creates a New Command
 		setDefaultCommand(new CompressorToggle());
 	}
     
@@ -31,14 +31,14 @@ public class CompressorSubsystem extends Subsystem {
 		compressor.stop();
     }
     
-    public void reportCompressorStatus(){
+    public void reportCompressorStatus(){	// Reports the changes in the compressor to the Smart Dashboard
     	SmartDashboard.putBoolean("Compressor Enabled", compressor.enabled());
     	SmartDashboard.putBoolean("Compressor in Closed Looop", compressor.getClosedLoopControl());
     	SmartDashboard.putNumber("Compressor Current Value", compressor.getCompressorCurrent());
     	SmartDashboard.putBoolean("Compressor Pressure Switch On/Off", compressor.getPressureSwitchValue());
     }	
 
-    public boolean isEnabled(){
+    public boolean isEnabled(){	// Returns Enabled Compressor Value for future reuse
     	return compressor.enabled();
     }
 }
