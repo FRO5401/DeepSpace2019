@@ -5,7 +5,7 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+This command is meant to control the compressor
  */
 public class CompressorToggle extends Command {
 
@@ -29,11 +29,14 @@ public class CompressorToggle extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
+        //Button used for turning the compressor on and off based off of a when-pressed system
         compressorToggle = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
-
+        
+        //When the button is pressed and the compressor is already enabled, the compressor will be disabled
         if(compressorToggle && Robot.compressorsubsystem.isEnabled()){
             Robot.compressorsubsystem.stopCompressor();
         }
+        //When the button is pressed and the compressor is not enabled, the compressor will be disabled
         else if(compressorToggle && !(Robot.compressorsubsystem.isEnabled())){
             Robot.compressorsubsystem.startCompressor();
         }
@@ -55,6 +58,7 @@ public class CompressorToggle extends Command {
     // subsystems is scheduled to run
     @Override
 	protected void interrupted() {
+        //When the code is interrupted, the compressor will automatically stop
     	Robot.compressorsubsystem.stopCompressor();
     	//System.out.println("CompressorToggle Interrupted");
     }

@@ -13,10 +13,12 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class FeedCarriage extends Command {
+  //booleans for controlling the carriage and the rollers
   boolean overrideButton;
   double feedIn;
   double feedOut;
 
+  //doubles that are used as conditions to set the carriage to a specific angle when the elevator is at a certain height
   double carriageUpDown;
   double carriageReset;
   double carriageMiddle;
@@ -33,37 +35,45 @@ public class FeedCarriage extends Command {
 
   @Override
   protected void execute() {
+    //Buttons for controlling the carriage
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_R3);
     feedIn = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_TRIGGER);
     feedOut = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_TRIGGER);
 
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
 
-    if(overrideButton){
-      if(Robot.carriageinfeed.getCarriageAngle() >= 88 && Robot.carriageinfeed.getCarriageAngle() <= -43){
+    if(overrideButton){//when the elevator is moving
+      //allows the normal movement of the carriage as long as the input is within the range
+      if(Robot.carriageinfeed.getCarriageAngle() <= 88 && Robot.carriageinfeed.getCarriageAngle() >= -43){
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }
+
+      //If the elevator is above or equal to the max safe angle, it will only be allowed to move down
       else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
         if (carriageUpDown < 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
+      //If the elevator is above or equal to the max safe angle, it will only be allowed to move down
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
         if (carriageUpDown > 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
-      else{
-        Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
-      }  
+      //else{
+        //Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+      //}  
     }
-      
+    
+    //Allows the movement of the rollers inward while pressing down the right trigger if it is greater than the threshold
     if(feedIn > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedIn();
     }
+    //Allows the movement of the rollers inward while pressing down the left trigger if it is greater than the threshold
     else if(feedOut > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedOut();
     }
+    //If neither are being pressed, or if the axis value is not reached, the feeders will stop
     else{
       Robot.carriageinfeed.feedStop();
     }
