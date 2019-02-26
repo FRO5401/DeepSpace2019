@@ -39,30 +39,41 @@ public class FeedCarriage extends Command {
     feedIn = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_TRIGGER);
     feedOut = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_TRIGGER);
 
+    //Used to measure how far up the carriage infeed is moving
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
 
+    //If the override button is pressed and...
     if(overrideButton){
+      //the robot carriage angle is between the reset angle and the ground angle
       if(Robot.carriageinfeed.getCarriageAngle() >= 88 && Robot.carriageinfeed.getCarriageAngle() <= -43){
+        //Override the movement of the carriage
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }
+      //the robot carriage angle is no less than the reset angle,
       else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
+        //and the angle is decreasing,
         if (carriageUpDown < 0){
+          //Override the movement of the carriage
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
+      //the robot carriage angle is no more than the ground angle,
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
+        //and the angle is increasing
         if (carriageUpDown > 0){
+          //Override the movement of the carriage
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
-      else{
+      else{ //Can be deleted, this cannot be met
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }  
     }
-      
+    //Code for feeding in the carriages
     if(feedIn > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedIn();
     }
+    //Code for ejecting carriages
     else if(feedOut > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedOut();
     }
@@ -76,6 +87,7 @@ public class FeedCarriage extends Command {
     return false;
   }
 
+  //Stops the carriage infeed once end() or interrupted() is called
   @Override
   protected void end() {
     Robot.carriageinfeed.feedStop();

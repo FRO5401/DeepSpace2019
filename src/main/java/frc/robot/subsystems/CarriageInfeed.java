@@ -42,6 +42,7 @@ public class CarriageInfeed extends Subsystem {
   private double groundAngle = -43;
   private double midAngle = 0;
 
+  //Motors for the carriages
   VictorSP feederMotors;
   TalonSRX carriageTalon;
 

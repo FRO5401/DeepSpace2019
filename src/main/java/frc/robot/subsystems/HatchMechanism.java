@@ -22,14 +22,17 @@ public class HatchMechanism extends Subsystem {
     setDefaultCommand(new PopHatch());
   }
 
+  //Opens the hatch release
   public void openHatch(){
     hatchRelease.set(true);
   }
 
+  //Closes the hatch release
   public void closeHatch(){
     hatchRelease.set(false);
   }
 
+  //Reports the state of hatch release
   public void reportHatchMechanismSensors(){
     SmartDashboard.putBoolean("Hatch Release LEFT", hatchRelease.get());
   }

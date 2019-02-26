@@ -131,32 +131,39 @@ public class Elevator extends Subsystem {
 		//getClosedLoopT gets the SetPoint already set (or moving to)
   }
   
+  //Rises the elevator for use
   public void riseElevator(){
     elevatorCollapseTop.set(true);
     elevatorCollapseBottom.set(true);
   }
 
+  //Collapses the elevator to make the robot easier to carry
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
     elevatorCollapseBottom.set(false);
   }
 
+  //Returns whether or not the bottom switch is on
   public boolean getLimitB(){
     return !stopLow.get();
   }
 
+  //Returns whether or not the top switch is on
   public boolean getLimitT(){
     return !stopHigh.get();
   }
 
+  //Gets the elevator gear status
   public boolean getElevatorGear(){
     return elevatorGearShifter.get();
   }
 
+  //Returns whether or not the elevator is indicated by the top solenoid to be usable
   public boolean getElevatorCollapsedTop(){
     return elevatorCollapseTop.get();
   }
   
+  //Returns whether or not the elevator is indicated by the bottom solenoid to be usable
   public boolean getElevatorCollapsedBottom(){
     return elevatorCollapseBottom.get();
   }
@@ -166,7 +173,7 @@ public class Elevator extends Subsystem {
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
   }
 
-
+  //Reports the data of the elevator
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());

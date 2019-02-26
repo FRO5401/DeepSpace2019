@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class ElevatorControl extends Command {
   
+  //Control that is selected
   int controlSelected;
 
   public ElevatorControl(int buttonSelected) {
@@ -23,18 +24,22 @@ public class ElevatorControl extends Command {
   @Override
   protected void initialize() {
     if(controlSelected == 1){
+      //Add gear shift to the elevator
       Robot.elevator.elevatorGearShift(true);
     }
     else if(controlSelected == 2){
+      //Remove gear shift from the elevator
       Robot.elevator.elevatorGearShift(false);
     }
 
     if(controlSelected == 3){
+      //Reset robot and collapse the elevator
       Robot.elevator.setPoint(0);
       Robot.elevator.collapseElevator();
     }
 
     if(controlSelected == 4){
+      //Reset robot and raise the elevator
       Robot.elevator.setPoint(0);
       Robot.elevator.riseElevator();
     }

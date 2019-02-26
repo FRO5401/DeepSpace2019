@@ -58,37 +58,37 @@ public class ElevatorPID extends Command {
     right = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER);
     theAButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_A);
 
-    topLimit = Robot.elevator.getLimitT();
-    bottomLimit = Robot.elevator.getLimitB();
+    topLimit = Robot.elevator.getLimitT(); //Limit switch top
+    bottomLimit = Robot.elevator.getLimitB(); //Limit switch bottom
 
-    if((topLimit != true) && left && dPadInput == 0){ 
+    if((topLimit != true) && left && dPadInput == 0){  //Left button and D-Pad Up (and not on the top)
       Robot.elevator.setPoint(rocketHighBall);
     }
-    else if(right && dPadInput == 0){ 
+    else if(right && dPadInput == 0){ //Right button and D-Pad Up
       Robot.elevator.setPoint(rocketHighHatch);
     }
-    else if(left && dPadInput == 270){ 
+    else if(left && dPadInput == 270){ //Left button and D-Pad Left
       Robot.elevator.setPoint(rocketMidBall);
     }
-    else if(right && dPadInput == 270){
+    else if(right && dPadInput == 270){ //Right button and D-Pad Left
       Robot.elevator.setPoint(rocketMidHatch);
     }
-    else if(left && dPadInput == 90){ 
+    else if(left && dPadInput == 90){  //Left button and D-Pad Right
       Robot.elevator.setPoint(rocketLowBall);
     }
-    else if(right && dPadInput == 90){ 
+    else if(right && dPadInput == 90){ //Right button and D-Pad Right
       Robot.elevator.setPoint(rocketLowHatch);
     }
-    else if(left && right && dPadInput == 135){ 
-      Robot.elevator.setPoint(0);
+    else if(left && right && dPadInput == 135){ //Left and Right button, and D-Pad Down-Right
+      Robot.elevator.setPoint(0); //Reset
     }
-    else if(right && dPadInput == 180){ 
+    else if(right && dPadInput == 180){ //Right button and D-Pad Down
       Robot.elevator.setPoint(cargoShipBall);
     }
-    else if(left && dPadInput == 180){
+    else if(left && dPadInput == 180){ //Left button and D-Pad Down
       Robot.elevator.setPoint(cargoBallInfeed);
     }
-    else if((bottomLimit != true) && theAButton){
+    else if((bottomLimit != true) && theAButton){ //A Button (and not on the bottom)
       Robot.elevator.setPoint(ballInfeedFloor);
     }
   }

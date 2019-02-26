@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CompressorToggle extends Command {
 
+    //Whether or not the compressor is on
     private boolean compressorToggle;
 	
     public CompressorToggle() {
@@ -19,9 +20,12 @@ public class CompressorToggle extends Command {
     // Called just before this Command runs the first time
     @Override
 	protected void initialize() {
+        //If the compressor is not already enabled,
         if(Robot.compressorsubsystem.isEnabled() == false){
+            //Start the compressor
             Robot.compressorsubsystem.startCompressor();
         } else {
+            //Stop the compressor
             Robot.compressorsubsystem.stopCompressor();
         }
     }
@@ -29,6 +33,7 @@ public class CompressorToggle extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
+        //Compressor is toggled using the XBox BACK Button
         compressorToggle = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_BACK);
 
         //Compressor is set to stop if it is already enabled
@@ -56,6 +61,7 @@ public class CompressorToggle extends Command {
     // subsystems is scheduled to run
     @Override
 	protected void interrupted() {
+        //Stops the compressor
     	Robot.compressorsubsystem.stopCompressor();
     	//System.out.println("CompressorToggle Interrupted");
     }

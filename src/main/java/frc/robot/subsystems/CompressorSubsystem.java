@@ -11,6 +11,7 @@ import frc.robot.commands.CompressorToggle;
  */
 public class CompressorSubsystem extends Subsystem {
 	
+	//A compressor in the subsystem
 	private Compressor compressor;
 
 	public CompressorSubsystem() {

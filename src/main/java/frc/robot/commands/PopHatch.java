@@ -21,10 +21,13 @@ public class PopHatch extends Command {
     //Y-button is attached to the hatch mechanism
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
 
+    //If the button is pressed,
     if(hatchInOut){
+      //close the hatch release
       Robot.hatchmechanism.closeHatch();
     }
     else{
+      //open the hatch release
       Robot.hatchmechanism.openHatch();
     }
   }
