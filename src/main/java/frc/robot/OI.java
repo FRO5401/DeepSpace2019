@@ -79,16 +79,16 @@ public class OI {
     xboxL3_Operator.whenPressed(new ElevatorOverride());
       
       //Elevator HIGH gear
-    xboxStart_Operator.whenPressed(new ElevatorControl(1));
+    xboxStart_Operator.whenPressed(new ElevatorControl(RobotMap.ELEVATOR_BUTTON_SHIFT_HIGH));
       
       //Elevator LOW gear
-    xboxBack_Operator.whenPressed(new ElevatorControl(2));
+    xboxBack_Operator.whenPressed(new ElevatorControl(RobotMap.ELEVATOR_BUTTON_SHIFT_LOW));
       
       //COLLAPSE elevator
-    xboxB_Operator.whenPressed(new ElevatorControl(3));
+    xboxB_Operator.whenPressed(new ElevatorControl(RobotMap.ELEVATOR_BUTTON_COLLAPSE));
     
       //RISE elevator
-    xboxX_Operator.whenPressed(new ElevatorControl(4));
+    xboxX_Operator.whenPressed(new ElevatorControl(RobotMap.ELEVATOR_BUTTON_RISE));
   }
 
   public double xboxAxis(Joystick xboxController, int xboxAxis){

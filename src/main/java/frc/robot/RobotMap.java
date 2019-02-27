@@ -27,6 +27,10 @@ public class RobotMap {
   /*** Constants ***/
     //OI
   public static final double AXIS_THRESHOLD = 0.25;
+  public static final int ELEVATOR_BUTTON_SHIFT_HIGH = 1;
+  public static final int ELEVATOR_BUTTON_SHIFT_LOW  = 2;
+  public static final int ELEVATOR_BUTTON_COLLAPSE   = 3;
+  public static final int ELEVATOR_BUTTON_RISE       = 4;
 
     //DriveBase
   public static final double LOW_GEAR_LEFT_DPP  = 0.1466004558282468; //These are for practice bot, skewed a lot

@@ -26,24 +26,23 @@ public class ElevatorControl extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //TODO: Make RobotMap constants for the different values. 
       //If user shifts HIGH
-    if(controlSelected == 1){
+    if(controlSelected == RobotMap.ELEVATOR_BUTTON_SHIFT_HIGH){
       Robot.elevator.elevatorGearShift(true);
     }
       //If user shifts LOW
-    else if(controlSelected == 2){
+    else if(controlSelected == RobotMap.ELEVATOR_BUTTON_SHIFT_LOW){
       Robot.elevator.elevatorGearShift(false);
     }
 
       //Button to drop the elevator FLAT.
-    if(controlSelected == 3){
+    if(controlSelected == RobotMap.ELEVATOR_BUTTON_COLLAPSE){
       Robot.elevator.setPoint(0);
       Robot.elevator.collapseElevator();
     }
 
       //Button to stand the elevator UP
-    if(controlSelected == 4){
+    if(controlSelected == RobotMap.ELEVATOR_BUTTON_RISE){
       Robot.elevator.setPoint(0);
       Robot.elevator.riseElevator();
     }

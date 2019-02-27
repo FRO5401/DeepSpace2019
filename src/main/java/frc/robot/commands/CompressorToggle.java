@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -17,16 +16,17 @@ public class CompressorToggle extends Command {
     // Called just before this Command runs the first time
     @Override
 	protected void initialize() {
-        if(Robot.compressorsubsystem.isEnabled() == false){
-            Robot.compressorsubsystem.startCompressor();
-        } else {
-            Robot.compressorsubsystem.stopCompressor();
-        }
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
 	protected void execute() {
+        if(Robot.compressorsubsystem.isEnabled()){
+            Robot.compressorsubsystem.stopCompressor();
+        } 
+        else {
+            Robot.compressorsubsystem.startCompressor();
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
