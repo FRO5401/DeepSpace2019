@@ -100,12 +100,12 @@ public class RobotMap {
   public static final int PCM_ID = 0;
 
     //DriveBase
-  public static final int GEAR_SHIFTER = 6;
+  public static final int GEAR_SHIFTER = 0;
   
     //Elevator
   public static final int ELEVATOR_GEAR_SHIFTER   = 4;
   public static final int ELEVATOR_COLLAPSE_TOP  = 5;
-  public static final int ELEVATOR_COLLAPSE_BOTTOM = 0;//TODO Set RobotMap value for this
+  public static final int ELEVATOR_COLLAPSE_BOTTOM = 1;//TODO Set RobotMap value for this
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER = 2;
