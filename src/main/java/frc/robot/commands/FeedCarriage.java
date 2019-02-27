@@ -43,25 +43,25 @@ public class FeedCarriage extends Command {
       //Read axis
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
 
-      //Carriage Move logic.
+    //Carriage move logic
     if(overrideButton){
-        //Normal Control
-      if(Robot.carriageinfeed.getCarriageAngle() >= 88 && Robot.carriageinfeed.getCarriageAngle() <= -43){
+      //Normal movement between the ranges.
+      if(Robot.carriageinfeed.getCarriageAngle() <= 88 && Robot.carriageinfeed.getCarriageAngle() >= -43){
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }
-        //If the carriage goes to far UP, only let it go DOWN.
+
+      //Only allows it to go DOWN when it has reached the max.
       else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
         if (carriageUpDown < 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
-        //If the carriage goes to far DOWN, only let it go UP.
+      //Only allows it to go UP when int has reached the minimum.
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
         if (carriageUpDown > 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
       }
-        //Moving the carriage (within the threshold).
       else{
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }  
