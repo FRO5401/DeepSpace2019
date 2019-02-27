@@ -25,6 +25,10 @@ import frc.robot.commands.VisionDrive;
  */
 public class Robot extends TimedRobot {
   public static DriveBase drivebase;
+  public static CarriageInfeed carriageinfeed;
+  public static Elevator elevator;
+  public static HatchMechanism hatchmechanism;
+  public static CompressorSubsystem compressorsubsystem;
   public static VisionAuto visionAuto;
   
   //OI is always last.
@@ -41,6 +45,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     drivebase = new DriveBase();
+
+    carriageinfeed = new CarriageInfeed();
+    elevator = new Elevator();
+    hatchmechanism = new HatchMechanism();
+    compressorsubsystem = new CompressorSubsystem();
     visionAuto = new VisionAuto();
     
     //OI is always last.
@@ -50,10 +59,18 @@ public class Robot extends TimedRobot {
     chooser.addOption("Drive Straight", new DriveStraight());
     chooser.addOption("Turn Turn Turn", new TurnTurnTurn());
     chooser.addOption("Down and Back", new DownAndBack());
+    chooser.addOption("LeftFrontHatch1", new LeftFrontHatch1());
+    chooser.addOption("LeftFrontHatch2", new LeftFrontHatch2());
+    chooser.addOption("RightFrontHatch1", new RightFrontHatch1());
+    chooser.addOption("RightFrontHatch2", new RightFrontHatch2());
+    chooser.addOption("RightRocketHatchLow", new RightRocketHatchLow());
 
     SmartDashboard.putData("Auto mode", chooser);
     
 
+      //TODO: Reset these where deemed necessary.
+      //Set to reset vals when robot turns on, might be more useful in
+      //either auto, disabled, or teleop init. 
     Robot.drivebase.resetEncoders();
     Robot.drivebase.resetGyro();
   }
@@ -69,9 +86,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
       //DriveBase Reporting
-    Robot.drivebase.reportEncoders();
-    Robot.drivebase.reportGyro();
-    Robot.drivebase.getVictorSpeed();
+    Robot.drivebase.reportDriveBaseSensors();
+    Robot.elevator.reportElevatorSensors();
+    Robot.carriageinfeed.reportCarriageInfeedSensors();
+    Robot.hatchmechanism.reportHatchMechanismSensors();
+    Robot.compressorsubsystem.reportCompressorStatus();
   }
 
   /**

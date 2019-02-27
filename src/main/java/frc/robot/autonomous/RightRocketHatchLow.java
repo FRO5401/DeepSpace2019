@@ -8,18 +8,24 @@
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.*;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class DownAndBack extends CommandGroup {
+public class RightRocketHatchLow extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public DownAndBack() {
-    addSequential(new AutoDrive(30, 0.3));
-    addSequential(new AutoTurnAngle(180));
+  public RightRocketHatchLow() {
+    addSequential(new AutoDrive(50, 0.5));
+    addSequential(new AutoTurnAngle(45));
     addSequential(new WaitCommand(0.5));
-    addSequential(new AutoDrive(30, 0.3));
-    addSequential(new AutoTurnAngle(-180));
+    Robot.drivebase.resetEncoders();
+    addSequential(new AutoDrive(121, 0.5));
+    addSequential(new WaitCommand(0.5));
+    Robot.drivebase.resetGyro();
+    Robot.drivebase.resetEncoders();
+    addSequential(new AutoDrive (0, 0.5));
+    addSequential(new AutoTurnAngle(-10));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

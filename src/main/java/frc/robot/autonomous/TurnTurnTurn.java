@@ -8,16 +8,24 @@
 package frc.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.*;
 
 public class TurnTurnTurn extends CommandGroup {
   /**
    * Add your docs here.
    */
   public TurnTurnTurn() {
-    addSequential(new AutoTurnAngle(45));
-    addSequential(new AutoTurnAngle(-45));
-    addSequential(new AutoTurnAngle(-45));
-    addSequential(new AutoDrive(5, 0.3));
+    addSequential(new AutoTurnAngle(90));
+    addSequential(new WaitCommand(0.4));
+    addSequential(new AutoTurnAngle(-90));
+    addSequential(new WaitCommand(0.4));
+    addSequential(new AutoTurnAngle(90));
+    addSequential(new WaitCommand(0.4));
+    Robot.drivebase.resetGyro();
+    addSequential(new AutoDrive(25, 0.3));
+    addSequential(new AutoDrive(0, 0.5));
+    
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
