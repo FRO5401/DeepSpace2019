@@ -8,10 +8,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.Robot;
+import frc.robot.commands.VisionDrive;
 
 /**
  * Add your docs here.
@@ -25,6 +27,7 @@ public class VisionAuto extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new VisionDrive());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
@@ -34,6 +37,7 @@ public class VisionAuto extends Subsystem {
     distanceEntry = VisionData.getEntry("distance");
 
     double distance = distanceEntry.getDouble(0);
+    SmartDashboard.putNumber("Distance", distance);
     if(distance > 2) {
       // TODO: Update Values
       Robot.drivebase.drive(.3,-.3);

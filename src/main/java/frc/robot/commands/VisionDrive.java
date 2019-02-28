@@ -9,12 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class VisionDrive extends Command {
-  
+
+  boolean buttonTest;
+
   public VisionDrive() {
+    buttonTest = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_R3);
     requires(Robot.visionAuto);
   }
+
 
   // Called just before this Command runs the first time
   @Override
@@ -25,7 +30,9 @@ public class VisionDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.visionAuto.visionAlign();
+    if(buttonTest){
+      Robot.visionAuto.visionAlign();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
