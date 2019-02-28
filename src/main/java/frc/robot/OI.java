@@ -73,7 +73,7 @@ public class OI {
 
   public OI(){
       //Toggle Compressor
-    xboxBack_Operator.whenPressed(new CompressorToggle());
+    xboxY_Driver.whenPressed(new CompressorToggle());
     
       //Start Override Move
     xboxL3_Operator.whenPressed(new ElevatorOverride());
