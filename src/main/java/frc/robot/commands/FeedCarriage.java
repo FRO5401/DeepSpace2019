@@ -52,7 +52,7 @@ public class FeedCarriage extends Command {
     //Carriage move logic
     if(overrideButton){
       //Normal movement between the ranges.
-      if(Robot.carriageinfeed.getCarriageAngle() <= 88 && Robot.carriageinfeed.getCarriageAngle() >= -43){
+      if((Robot.carriageinfeed.getCarriageAngle() <= 88) && (Robot.carriageinfeed.getCarriageAngle() >= -43)){
         Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
       }
 
@@ -61,15 +61,22 @@ public class FeedCarriage extends Command {
         if (carriageUpDown < 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
+        else{
+          Robot.carriageinfeed.carriageOverrideMove(0);
+        }
       }
       //Only allows it to go UP when int has reached the minimum.
       else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
         if (carriageUpDown > 0){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
+        else{
+          Robot.carriageinfeed.carriageOverrideMove(0);
+        }
       }
+        //Any unexpected combination
       else{
-        Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+        Robot.carriageinfeed.carriageOverrideMove(0);
       }  
     }
       

@@ -18,10 +18,10 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class ElevatorOverride extends Command {
 
     //DPad & Joysticks
-  double dPadInput, leftJoystickOperator;
+  double leftJoystickOperator;
     
     //Buttons
-  boolean left, right, theAButton, theXButton, theBButton, overrideButton, elevatorShiftLow, elevatorShiftHigh;
+  boolean overrideButton;
 
     //Limit switches
   boolean topLimit;
@@ -110,7 +110,7 @@ public class ElevatorOverride extends Command {
   @Override
   protected void end() {
     Robot.elevator.overrideStopped();
-    //new ElevatorPID();
+    new ElevatorPID();
   }
 
   // Called when another command which requires one or more of the same
