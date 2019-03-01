@@ -111,12 +111,12 @@ public class RobotMap {
 
   */
     //DriveBase
-  public static final int GEAR_SHIFTER = 6;
+  public static final int GEAR_SHIFTER = 0;
   
     //Elevator
   public static final int ELEVATOR_GEAR_SHIFTER    = 4;
   public static final int ELEVATOR_COLLAPSE_TOP    = 5;
-  public static final int ELEVATOR_COLLAPSE_BOTTOM = 0;
+  public static final int ELEVATOR_COLLAPSE_BOTTOM = 1;
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER = 2;
