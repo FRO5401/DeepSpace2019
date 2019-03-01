@@ -90,10 +90,12 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-        //If there is an unexpected Limit Switch combo.
+      /*
+      //If there is an unexpected Limit Switch combo.
       else{
         Robot.elevator.overrideElevator(0);
       }
+      */
     }
     else if(!overrideButton) {
       overrideFinished = true;
@@ -103,7 +105,7 @@ public class ElevatorOverride extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return overrideFinished;
+    return false;
   }
 
   // Called once after isFinished returns true

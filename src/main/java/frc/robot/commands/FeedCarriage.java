@@ -79,6 +79,9 @@ public class FeedCarriage extends Command {
         Robot.carriageinfeed.carriageOverrideMove(0);
       }  
     }
+    else{
+      Robot.carriageinfeed.carriageOverrideMove(0);
+    }
       
       //Feeder Logic
     if(feedIn > RobotMap.AXIS_THRESHOLD){
