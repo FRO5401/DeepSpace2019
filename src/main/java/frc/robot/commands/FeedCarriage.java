@@ -12,6 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/*
+ * Command controls the following:
+ * - CARGO INFEEDER
+ * - CARRIAGE MOVEMENT
+ */
+
 public class FeedCarriage extends Command {
   boolean overrideButton;
   double feedIn;

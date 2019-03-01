@@ -12,6 +12,9 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+/*
+ * Command controls the Override moving, it is called from OI
+ */
 public class ElevatorOverride extends Command {
 
     //DPad & Joysticks

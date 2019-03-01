@@ -79,6 +79,11 @@ public class RobotMap {
   public static final int XBOX_AXIS_RIGHT_Y       = 5;
     
   /*** Motors ***/
+
+  /*
+    TODO: Missing RobotMap Motor Values:
+      - CARRIAGE_FEED_ROLLERS
+  */
     //DriveBase
   public static final int DRIVE_MOTOR_RIGHT_1 = 0;
   public static final int DRIVE_MOTOR_LEFT_1  = 2;
@@ -99,13 +104,19 @@ public class RobotMap {
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
 
+  /*
+    TODO: Missing RobotMap Solenoid Values:
+      - GEAR_SHIFTER
+      - HATCH_EXTENDER
+
+  */
     //DriveBase
   public static final int GEAR_SHIFTER = 6;
   
     //Elevator
-  public static final int ELEVATOR_GEAR_SHIFTER   = 4;
-  public static final int ELEVATOR_COLLAPSE_TOP  = 5;
-  public static final int ELEVATOR_COLLAPSE_BOTTOM = 0;//TODO Set RobotMap value for this
+  public static final int ELEVATOR_GEAR_SHIFTER    = 4;
+  public static final int ELEVATOR_COLLAPSE_TOP    = 5;
+  public static final int ELEVATOR_COLLAPSE_BOTTOM = 0;
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER = 2;

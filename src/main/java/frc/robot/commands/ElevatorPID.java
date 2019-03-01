@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/*
+ * Command controls PID setpoints.
+ * "Supposed" to run once Override is done running. 
+ */ 
+
 public class ElevatorPID extends Command {
 
     //DPad & Joysticks

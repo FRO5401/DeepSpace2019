@@ -11,6 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/*
+ *  Command controls Elevator functions such as:
+ *  - Elevator RISE/COLLAPSE
+ *  - Elevator GEAR SHIFT (HIGH/LOW)
+ */
+
 public class ElevatorControl extends Command {
   
   int controlSelected;

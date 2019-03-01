@@ -11,6 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+/*
+ * Command controls the following drive functions:
+ * - TURNING
+ * - FORWARDS/BACKWARDS
+ * - TURN IN PLACE
+ * - GEAR SHIFT HIGH/LOW
+ */
+
 public class XboxMove extends Command {
   /*** Variables ***/
     //Input Axes
@@ -24,6 +32,8 @@ public class XboxMove extends Command {
   boolean precision;
   boolean gearShiftHigh;
   boolean gearShiftLow;
+
+    //Testing Buttons (TODO: Remove for Comp)
   boolean resetSensors;
   boolean speedConstant1;
   boolean speedConstant2;
