@@ -121,7 +121,7 @@ public class CarriageInfeed extends Subsystem {
 
   public void reportCarriageInfeedSensors(){
     SmartDashboard.putNumber("Infeed Direction", feederMotors.getSpeed());
-    SmartDashboard.putNumber("Carriage Angle (Native)", carriageAngle);
-    SmartDashboard.putNumber("Carriage Angle (Degrees)", (carriageAngle * RobotMap.CARRIAGE_ANGLE_PER_PULSE));
+    SmartDashboard.putNumber("Carriage Angle (Native)", getCarriageAngle());
+    SmartDashboard.putNumber("Carriage Angle (Degrees)", (getCarriageAngle() * RobotMap.CARRIAGE_ANGLE_PER_PULSE));
   }
 }

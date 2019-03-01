@@ -79,11 +79,6 @@ public class RobotMap {
   public static final int XBOX_AXIS_RIGHT_Y       = 5;
     
   /*** Motors ***/
-
-  /*
-    TODO: Missing RobotMap Motor Values:
-      - CARRIAGE_FEED_ROLLERS
-  */
     //DriveBase
   public static final int DRIVE_MOTOR_RIGHT_1 = 0;
   public static final int DRIVE_MOTOR_LEFT_1  = 2;
@@ -104,12 +99,6 @@ public class RobotMap {
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
 
-  /*
-    TODO: Missing RobotMap Solenoid Values:
-      - GEAR_SHIFTER
-      - HATCH_EXTENDER
-
-  */
     //DriveBase
   public static final int GEAR_SHIFTER = 0;
   
