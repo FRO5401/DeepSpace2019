@@ -62,7 +62,7 @@ public class CarriageInfeed extends Subsystem {
   
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new FeedCarriage());
+    setDefaultCommand(new FeedCarriage());//"Attaches this subsystem to FeedCarriage command"
   }
 
   public void setMidCarriageAngle(){

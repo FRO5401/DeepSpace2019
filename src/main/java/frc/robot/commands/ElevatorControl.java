@@ -15,28 +15,28 @@ public class ElevatorControl extends Command {
   int controlSelected;
 
   public ElevatorControl(int buttonSelected) {
-    requires(Robot.elevator);
+    requires(Robot.elevator);//retrieves the subsystem that this command calls from
 
-    controlSelected = buttonSelected;
+    controlSelected = buttonSelected;//sets the controlSelected equal to the value that is retrieved from OI
   }
 
   @Override
   protected void initialize() {
     if(controlSelected == 1){
-      Robot.elevator.elevatorGearShift(true);
+      Robot.elevator.elevatorGearShift(true);//if the value of controlSelected is 1, shift gear 
     }
     else if(controlSelected == 2){
-      Robot.elevator.elevatorGearShift(false);
+      Robot.elevator.elevatorGearShift(false);//if the value of controlSelected is 2, don't shift the gear
     }
 
     if(controlSelected == 3){
       Robot.elevator.setPoint(0);
-      Robot.elevator.collapseElevator();
+      Robot.elevator.collapseElevator();//if the value is 3, collapses the elevator
     }
 
     if(controlSelected == 4){
       Robot.elevator.setPoint(0);
-      Robot.elevator.riseElevator();
+      Robot.elevator.riseElevator();// if the value is 4, make the elevator rise
     }
   }
 

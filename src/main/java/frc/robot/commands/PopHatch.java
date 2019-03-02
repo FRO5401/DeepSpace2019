@@ -7,23 +7,25 @@ import frc.robot.RobotMap;
 public class PopHatch extends Command {
   
   public PopHatch() {
-    requires(Robot.hatchmechanism);
+    requires(Robot.hatchmechanism);//Links the subsystem to the command
   }
 
   @Override
   protected void initialize() {
-    Robot.hatchmechanism.openHatch();
+    Robot.hatchmechanism.openHatch();//pushes out the actuator on initialization of the robot
   }
 
   @Override
   protected void execute() {
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
+    //allows the hatchInOut variable to receive values from OI
 
     if(hatchInOut){
       Robot.hatchmechanism.closeHatch();
+      //if hatchInOut is true, retract the acuator
     }
     else{
-      Robot.hatchmechanism.openHatch();
+      Robot.hatchmechanism.openHatch();//if hatchInOut is false, push the actuator out
     }
   }
 

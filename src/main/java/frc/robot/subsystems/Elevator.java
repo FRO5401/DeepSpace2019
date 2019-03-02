@@ -55,10 +55,12 @@ public class Elevator extends Subsystem {
     elevatorGearShifter = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER);
     elevatorCollapseTop    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_TOP);
     elevatorCollapseBottom    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_BOTTOM);
+    //creates new instances for all of the TalonSRX objects and Solenoid objects and has the location of the ports from RobotMap
 
     //Limits
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
     stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
+    //limit switches for preventing the elevator from going too high or too low
 
     elevatorSRXMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
     elevatorSRXMaster.setSensorPhase(true);
@@ -83,9 +85,9 @@ public class Elevator extends Subsystem {
   }
 
   public void overrideElevator(double joystickSpeed){
-    elevatorPidEnabled = false;
-    joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
-    elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
+    elevatorPidEnabled = false; //stops PID and allows for manual control
+    joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY); //gets the value from how far the joystick is being pushed
+    elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed); //sets the output of the srx equal to the value of the joystick
   }
 
   public void overrideStopped(){
@@ -121,12 +123,12 @@ public class Elevator extends Subsystem {
   
   public void riseElevator(){
     elevatorCollapseTop.set(true);
-    elevatorCollapseBottom.set(true);
+    elevatorCollapseBottom.set(true);//raises the elevator
   }
 
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
-    elevatorCollapseBottom.set(false);
+    elevatorCollapseBottom.set(false);//collapses elevator
   }
 
   public boolean getLimitB(){
@@ -134,23 +136,23 @@ public class Elevator extends Subsystem {
   }
 
   public boolean getLimitT(){
-    return !stopHigh.get();
+    return !stopHigh.get(); 
   }
 
   public boolean getElevatorGear(){
-    return elevatorGearShifter.get();
+    return elevatorGearShifter.get(); //tells what gear the elevator is in
   }
 
   public boolean getElevatorCollapsedTop(){
-    return elevatorCollapseTop.get();
+    return elevatorCollapseTop.get(); //tells if the elevator is up
   }
   
   public boolean getElevatorCollapsedBottom(){
-    return elevatorCollapseBottom.get();
+    return elevatorCollapseBottom.get(); //tells if the elevator is down
   }
 
   public double getElevatorHeight(){
-    return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
+    return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE); //gets height in native units
   }
 
   public void reportElevatorSensors(){
@@ -161,5 +163,6 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Elevator Collapsed Bottom", getElevatorCollapsedBottom());
     SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
     SmartDashboard.putNumber("Elevator Height (Raw)", elevatorSRXMaster.getSensorCollection().getQuadraturePosition());
+    //reports different aspects of the elevator i.e if either of the limit swithces are triggered, what gear the elevator is in, if the elevator is up or down, and the height of the elevator in inches and native units
   }
 }
