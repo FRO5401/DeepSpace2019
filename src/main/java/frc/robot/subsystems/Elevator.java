@@ -43,6 +43,7 @@ public class Elevator extends Subsystem {
   private double ELEVATOR_kP = 0;
   private double ELEVATOR_kI = 0;
   private double ELEVATOR_kD = 0;
+  public boolean standUp = false;
 
     //Previous try was .0003800114;
   public double ELEVATOR_DISTANCE_PER_PULSE = -0.00037948;
@@ -131,13 +132,17 @@ public class Elevator extends Subsystem {
     //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseTop.set(true);
+    standUp = true;
     //REVERSED DUE TO COMP CHANGES
-    elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
+  elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
+
+
   }
 
     //Drop the elevator FLAT.
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
+    standUp = false;
     //REVERSED DUE TO COMP CHANGES
     elevatorCollapseBottom.set(DoubleSolenoid.Value.kForward);
   }
@@ -187,5 +192,7 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Elevator Collapsed Bottom", getElevatorCollapsedBottom());
     SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
     SmartDashboard.putNumber("Elevator Height (Raw)", elevatorSRXMaster.getSensorCollection().getQuadraturePosition());
+    SmartDashboard.putBoolean("Elevator Deployed", standUp);
+
   }
 }

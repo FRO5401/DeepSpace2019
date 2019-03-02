@@ -41,7 +41,7 @@ public class RobotMap {
     //XboxMove
   public static final double DRIVE_SENSITIVITY_PRECISION = 0.5;
   public static final double DRIVE_SENSITIVITY_DEFAULT   = 1;
-  public static final double SPIN_SENSITIVITY            = 0.2;
+  public static final double SPIN_SENSITIVITY            = 0.8;
 
     //CarriageInfeed
   public static final double CARRIAGE_FEEDER_SPEED    = .4;

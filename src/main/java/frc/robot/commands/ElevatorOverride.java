@@ -27,6 +27,9 @@ public class ElevatorOverride extends Command {
   boolean topLimit;
   boolean bottomLimit;
 
+  // Speed Adjustment
+  double speedAdj;
+
     //Override Finished
   boolean overrideFinished;
 
@@ -55,44 +58,56 @@ public class ElevatorOverride extends Command {
     topLimit = Robot.elevator.getLimitB();
     bottomLimit = Robot.elevator.getLimitT();
 
+    if(bottomLimit){
+      speedAdj = 0;
+    }
+
     /*** INPUT LOGIC ***/
 
       //override control
     if(overrideButton){
+      if(Robot.elevator.standUp){
+        speedAdj = -.30;
+      }
+      else{
+        speedAdj = 0;
+      }
         //If BOTTOM and TOP are NOT tripped. 
       if((bottomLimit == false) && (topLimit == false)){
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
-          Robot.elevator.overrideElevator(leftJoystickOperator); //Normal override Control
+          Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj); //Normal override Control
         }
           //If input is out of threshold.
         else{
-          Robot.elevator.overrideElevator(0);
+          Robot.elevator.overrideElevator(speedAdj);
         }
       }
       //TODO: Elevator Logic is backwards, fixed in a wacky way... correct POST Hatboro. 
         //if BOTTOM is tripped but TOP is not.
       else if((bottomLimit == true) && (topLimit == false)){
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
-          Robot.elevator.overrideElevator(leftJoystickOperator);
+//          Robot.elevator.overrideElevator(0);//Makes it go down, 0'd to eliminate power down
+          Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj);
         }
           //If input is out of threshold.
         else{
-          Robot.elevator.overrideElevator(0);
+          Robot.elevator.overrideElevator(speedAdj);
         }
       }
         //if TOP is tripped and BOTTOM is false.
       else if((topLimit == true) && (bottomLimit == false)){
         if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
-          Robot.elevator.overrideElevator(leftJoystickOperator);
+//          Robot.elevator.overrideElevator(0);
+          Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj);//This makes it go UP
         }
           //If input is out of threshold.
         else{
-          Robot.elevator.overrideElevator(0);
+          Robot.elevator.overrideElevator(speedAdj);
         }
       }
     }
     else if(!overrideButton) {
-      Robot.elevator.overrideElevator(0);
+      Robot.elevator.overrideElevator(speedAdj);
       overrideFinished = true;
     }
   }
