@@ -121,6 +121,10 @@ public class RobotMap {
   public static final int E_STOP_HIGH = 5;
   public static final int E_STOP_LOW  = 6;
 
+    //Carriage Infeed
+  public static final int C_STOP_T = 0;
+  public static final int C_STOP_B = 0;
+
   /*** Autonomous ***/
     public static final int ANGLE_THRESHOLD        = 2;
     public static final double AUTO_TURN_SPEED     = 0.8;
