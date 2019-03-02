@@ -27,10 +27,12 @@ public class PopHatch extends Command {
     boolean hatchInOut = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_Y);
 
     if(hatchInOut){
-      Robot.hatchmechanism.closeHatch();
+        //Was originally close
+      Robot.hatchmechanism.openHatch();
     }
     else{
-      Robot.hatchmechanism.openHatch();
+        //was originally open, test old way first before saving this/deploying. 
+      Robot.hatchmechanism.closeHatch();
     }
   }
 

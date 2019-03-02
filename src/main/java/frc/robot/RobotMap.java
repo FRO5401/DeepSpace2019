@@ -121,6 +121,11 @@ public class RobotMap {
   public static final int E_STOP_HIGH = 5;
   public static final int E_STOP_LOW  = 6;
 
+
+  //DOUBLE SOLENOIDS ELEVATOR
+  public static final int BOTTOM_ELEVATOR_OUT = 6;
+  public static final int BOTTOM_EVEVATOR_IN  = 7;
+
   /*** Autonomous ***/
     public static final int ANGLE_THRESHOLD        = 2;
     public static final double AUTO_TURN_SPEED     = 0.8;

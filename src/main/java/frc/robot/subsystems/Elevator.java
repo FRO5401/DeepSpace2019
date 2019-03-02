@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.RobotMap;
 
 /**
@@ -30,7 +31,8 @@ public class Elevator extends Subsystem {
   // here. Call these from Commands.
   TalonSRX elevatorSRXMaster, elevatorSRXSlave;
   Solenoid elevatorGearShifter;
-  Solenoid elevatorCollapseTop, elevatorCollapseBottom;
+  Solenoid elevatorCollapseTop;
+  DoubleSolenoid elevatorCollapseBottom;
 
   DigitalInput stopHigh, stopLow;
 
@@ -54,7 +56,7 @@ public class Elevator extends Subsystem {
     elevatorSRXSlave    = new TalonSRX(RobotMap.ELEVATOR_TALON_SLAVE_CHANNEL);
     elevatorGearShifter = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER);
     elevatorCollapseTop    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_TOP);
-    elevatorCollapseBottom    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_BOTTOM);
+    elevatorCollapseBottom    = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.BOTTOM_ELEVATOR_OUT, RobotMap.BOTTOM_EVEVATOR_IN);
 
     //Limits
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
@@ -129,13 +131,13 @@ public class Elevator extends Subsystem {
     //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseTop.set(true);
-    elevatorCollapseBottom.set(true);
+    elevatorCollapseBottom.set(DoubleSolenoid.Value.kForward);
   }
 
     //Drop the elevator FLAT.
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
-    elevatorCollapseBottom.set(false);
+    elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
   }
 
   //Get if the BOTTOM limit is tripped. 
@@ -159,7 +161,15 @@ public class Elevator extends Subsystem {
   }
   
   public boolean getElevatorCollapsedBottom(){
-    return elevatorCollapseBottom.get();
+    boolean solVal = false;
+    if(elevatorCollapseBottom.get().equals(DoubleSolenoid.Value.kForward)){
+      solVal = true;
+    }
+    else if(elevatorCollapseBottom.get().equals(DoubleSolenoid.Value.kReverse)){
+      solVal = false;
+    }
+
+    return solVal;
   }
 
   //Get the HEIGHT of the elevator. 
