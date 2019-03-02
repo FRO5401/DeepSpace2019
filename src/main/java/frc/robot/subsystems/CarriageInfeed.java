@@ -93,7 +93,7 @@ public class CarriageInfeed extends Subsystem {
 
     //Moves the carriage manually, given velocity
   public void carriageOverrideMove(double carriagePercentSpeed){
-    carriageTalon.set(ControlMode.PercentOutput, carriagePercentSpeed);
+    carriageTalon.set(ControlMode.PercentOutput, carriagePercentSpeed * -1);
   }
 
     //Sets the neutral mode of the Talons (Coast or Brake), post to Dashboard
@@ -128,6 +128,7 @@ public class CarriageInfeed extends Subsystem {
   }
 
   public void reportCarriageInfeedSensors(){
+    SmartDashboard.putBoolean("Top Limit Infeed", getLimitTop());
     SmartDashboard.putNumber("Infeed Direction", feederMotors.getSpeed());
     SmartDashboard.putNumber("Carriage Angle (Native)", getCarriageAngle());
     SmartDashboard.putNumber("Carriage Angle (Degrees)", (getCarriageAngle() * RobotMap.CARRIAGE_ANGLE_PER_PULSE));

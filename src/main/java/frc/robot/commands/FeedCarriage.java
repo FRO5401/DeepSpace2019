@@ -33,7 +33,7 @@ public class FeedCarriage extends Command {
     requires(Robot.carriageinfeed);
   }
 
-  // Called just before this Command runs the first time
+  // Called just before this Command runs first time
   @Override
   protected void initialize() {
     Robot.carriageinfeed.carriageSetTalonNeutralMode(NeutralMode.Brake);
@@ -63,6 +63,17 @@ public class FeedCarriage extends Command {
           Robot.carriageinfeed.carriageOverrideMove(0);
         }
       }
+      else if(limitTop){
+        if(carriageUpDown < (-1 * RobotMap.AXIS_THRESHOLD)){
+          Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
+        }
+        else{
+          Robot.carriageinfeed.carriageOverrideMove(0);
+        }
+      }
+    }
+    else{
+      Robot.carriageinfeed.carriageOverrideMove(0);
     }
       
       //Feeder Logic
