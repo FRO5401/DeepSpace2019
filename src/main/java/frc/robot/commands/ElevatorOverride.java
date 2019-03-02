@@ -58,6 +58,8 @@ public class ElevatorOverride extends Command {
     topLimit = Robot.elevator.getLimitB();
     bottomLimit = Robot.elevator.getLimitT();
 
+
+    //Avoids running into the bot. limit switch while at the bottom
     if(bottomLimit){
       speedAdj = 0;
     }
