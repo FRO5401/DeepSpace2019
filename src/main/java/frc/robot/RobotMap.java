@@ -86,7 +86,7 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
     //CarriageInfeed
-  public static final int CARRIAGE_FEED_ROLLERS  = 6;
+  public static final int CARRIAGE_FEED_ROLLERS  = 4;
   public static final int CARRIAGE_TALON_CHANNEL = 2;
   public static final int C_STOP_T = 7;
 

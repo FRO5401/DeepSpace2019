@@ -64,7 +64,7 @@ public class FeedCarriage extends Command {
         }
       }
       else if(limitTop){
-        if(carriageUpDown < (-1 * RobotMap.AXIS_THRESHOLD)){
+        if(carriageUpDown > (-1 * RobotMap.AXIS_THRESHOLD)){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
         else{

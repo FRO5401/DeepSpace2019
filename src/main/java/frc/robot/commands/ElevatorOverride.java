@@ -90,14 +90,9 @@ public class ElevatorOverride extends Command {
           Robot.elevator.overrideElevator(0);
         }
       }
-      /*
-      //If there is an unexpected Limit Switch combo.
-      else{
-        Robot.elevator.overrideElevator(0);
-      }
-      */
     }
     else if(!overrideButton) {
+      Robot.elevator.overrideElevator(0);
       overrideFinished = true;
     }
   }
