@@ -32,13 +32,13 @@ public class XboxMove extends Command {
   boolean precision;
   boolean gearShiftHigh;
   boolean gearShiftLow;
-
+/* 
     //Testing Buttons (TODO: Remove for Comp)
   boolean resetSensors;
   boolean speedConstant1;
   boolean speedConstant2;
   boolean speedConstant3;
-
+ */
     //Instance Vars
   double left;
   double right; 
@@ -69,7 +69,7 @@ public class XboxMove extends Command {
     precision = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_RIGHT_BUMPER);
     gearShiftHigh = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_START);
     gearShiftLow = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_BACK);
-
+    /* 
       //TODO: Remove these testing buttons for competition.
     resetSensors = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_Y);
     speedConstant1 = Robot.oi.xboxButton(Robot.oi.xboxDriver, RobotMap.XBOX_BUTTON_X);
@@ -81,7 +81,7 @@ public class XboxMove extends Command {
       Robot.drivebase.resetEncoders();
       Robot.drivebase.resetGyro();
     }    
-    
+ */    
     /*** Gear Shifting ***/
       //Press for High Gear
     if(gearShiftHigh){
@@ -109,7 +109,7 @@ public class XboxMove extends Command {
       left = 0;
       right = 0;
     }
-      //TODO: Remove these testing conditionals for competition. 
+/*       //TODO: Remove these testing conditionals for competition. 
     else if(speedConstant1){
       left = (1.0 / 3);
       right = (1.0 / 3);
@@ -122,7 +122,7 @@ public class XboxMove extends Command {
       left = (1.0);
       right = (1.0);
     }
-      //Not Braking
+*/    //Not Braking
     else{
         //Pirouetting (Turn in place). 
       if(rotate){

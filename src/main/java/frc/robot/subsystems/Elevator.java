@@ -167,6 +167,10 @@ public class Elevator extends Subsystem {
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
   }
 
+  public void resetElevatorEncoder(){
+    elevatorSRXMaster.setSelectedSensorPosition(0);
+  }
+
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());

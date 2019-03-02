@@ -119,6 +119,10 @@ public class CarriageInfeed extends Subsystem {
     return carriageAngle;
   }
 
+  public boolean getLimit(){
+    return true;
+  }
+
   public void reportCarriageInfeedSensors(){
     SmartDashboard.putNumber("Infeed Direction", feederMotors.getSpeed());
     SmartDashboard.putNumber("Carriage Angle (Native)", getCarriageAngle());

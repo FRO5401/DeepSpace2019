@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
       //either auto, disabled, or teleop init. 
     Robot.drivebase.resetEncoders();
     Robot.drivebase.resetGyro();
+    Robot.elevator.resetElevatorEncoder();
   }
 
   /**
