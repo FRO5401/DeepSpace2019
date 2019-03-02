@@ -68,7 +68,7 @@ public class ElevatorOverride extends Command {
 
       //override control
     if(overrideButton){
-      if(Robot.elevator.standUp){
+      if(Robot.elevator.elevatorDeployed){
         speedAdj = -.30;
       }
       else{
