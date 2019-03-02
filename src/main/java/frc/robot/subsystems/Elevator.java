@@ -131,13 +131,15 @@ public class Elevator extends Subsystem {
     //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseTop.set(true);
-    elevatorCollapseBottom.set(DoubleSolenoid.Value.kForward);
+    //REVERSED DUE TO COMP CHANGES
+    elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
   }
 
     //Drop the elevator FLAT.
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
-    elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
+    //REVERSED DUE TO COMP CHANGES
+    elevatorCollapseBottom.set(DoubleSolenoid.Value.kForward);
   }
 
   //Get if the BOTTOM limit is tripped. 
