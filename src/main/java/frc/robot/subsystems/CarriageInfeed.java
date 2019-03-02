@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,10 +39,13 @@ public class CarriageInfeed extends Subsystem {
 
   VictorSP feederMotors;
   TalonSRX carriageTalon;
+  DigitalInput carriageLimitTop;
+
 
   public CarriageInfeed(){
     feederMotors = new VictorSP(RobotMap.CARRIAGE_FEED_ROLLERS);
     carriageTalon = new TalonSRX(RobotMap.CARRIAGE_TALON_CHANNEL);
+    carriageLimitTop = new DigitalInput(RobotMap.C_STOP_T);
 
     loopIndex = 0;
     slotIndex = 0;
@@ -117,6 +121,10 @@ public class CarriageInfeed extends Subsystem {
   public double getCarriageAngle(){
     carriageAngle = carriageTalon.getSensorCollection().getQuadraturePosition();
     return carriageAngle;
+  }
+
+  public boolean getLimitTop(){
+    return !carriageLimitTop.get();
   }
 
   public void reportCarriageInfeedSensors(){

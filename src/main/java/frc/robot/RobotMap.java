@@ -88,6 +88,8 @@ public class RobotMap {
     //CarriageInfeed
   public static final int CARRIAGE_FEED_ROLLERS  = 6;
   public static final int CARRIAGE_TALON_CHANNEL = 2;
+  public static final int C_STOP_T = 5;
+
 
     //Elevator
   public static final int ELEVATOR_TALON_MASTER_CHANNEL = 0;
@@ -116,6 +118,7 @@ public class RobotMap {
   public static final int DRIVE_ENC_RIGHT_A = 1;
   public static final int DRIVE_ENC_LEFT_B  = 4;
   public static final int DRIVE_ENC_RIGHT_B = 2;
+
 
     //Elevator
   public static final int E_STOP_HIGH = 5;

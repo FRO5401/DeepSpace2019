@@ -20,6 +20,7 @@ import frc.robot.RobotMap;
 
 public class FeedCarriage extends Command {
   boolean overrideButton;
+  boolean limitTop;
   double feedIn;
   double feedOut;
 
@@ -49,38 +50,19 @@ public class FeedCarriage extends Command {
       //Read axis
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
 
+      //Read sensors
+    limitTop = Robot.carriageinfeed.getLimitTop();
+
     //Carriage move logic
     if(overrideButton){
-      //Normal movement between the ranges.
-      if((Robot.carriageinfeed.getCarriageAngle() <= 88) && (Robot.carriageinfeed.getCarriageAngle() >= -43)){
-        Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
-      }
-
-      //Only allows it to go DOWN when it has reached the max.
-      else if(Robot.carriageinfeed.getCarriageAngle() >= 88){
-        if (carriageUpDown < 0){
+      if(!limitTop){
+        if((carriageUpDown > RobotMap.AXIS_THRESHOLD) || (carriageUpDown < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
         else{
           Robot.carriageinfeed.carriageOverrideMove(0);
         }
       }
-      //Only allows it to go UP when int has reached the minimum.
-      else if(Robot.carriageinfeed.getCarriageAngle() <= -43){
-        if (carriageUpDown > 0){
-          Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
-        }
-        else{
-          Robot.carriageinfeed.carriageOverrideMove(0);
-        }
-      }
-        //Any unexpected combination
-      else{
-        Robot.carriageinfeed.carriageOverrideMove(0);
-      }  
-    }
-    else{
-      Robot.carriageinfeed.carriageOverrideMove(0);
     }
       
       //Feeder Logic
