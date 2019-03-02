@@ -100,6 +100,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    Robot.hatchmechanism.openHatch();
   }
 
   @Override
@@ -139,7 +140,7 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */
   @Override
-  public void autonomousPeriodic() {
+  public void autonomousPeriodic() {;
     Scheduler.getInstance().run();
   }
 
