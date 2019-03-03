@@ -8,7 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 /**
  * Add your docs here.
  */
@@ -16,8 +20,8 @@ public class RobotFeet extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  Solenoid leftFoot = new Solenoid();
-  Solenoid rightFoot = new Solenoid();
+  DoubleSolenoid leftFoot = new DoubleSolenoid(RobotMap.PCM_ID, );
+  DoubleSolenoid rightFoot = new DoubleSolenoid(RobotMap.PCM_ID, );
 
   @Override
   public void initDefaultCommand() {
@@ -26,12 +30,25 @@ public class RobotFeet extends Subsystem {
   }
 
   void collapseFeet(){
-    leftFoot.set(false);
-    rightFoot.set(false);
+    leftFoot.set(DoubleSolenoid.Value.kReverse);
+    rightFoot.set(DoubleSolenoid.Value.kReverse);
   }
 
   void expandFeet(){
-    leftFoot.set(true);
-    rightFoot.set(true);
+    leftFoot.set(DoubleSolenoid.Value.kForward);
+    rightFoot.set(DoubleSolenoid.Value.kForward);
+  }
+
+  boolean returnFeetCollapsed(){
+    if((leftFoot.get() == Value.kForward) || (rightFoot.get() == Value.kForward)){
+       return true; 
+    }
+    else if((leftFoot.get() == Value.kReverse) || (rightFoot.get() == Value.kReverse)){
+       return false; 
+    } 
+  }
+
+  void putSmartDashBoardFeet(){
+    SmartDashboard.putBoolean("Feet are Expanded", returnFeetCollapsed());
   }
 }
