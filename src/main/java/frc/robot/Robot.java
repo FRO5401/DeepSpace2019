@@ -93,6 +93,7 @@ public class Robot extends TimedRobot {
     Robot.carriageinfeed.reportCarriageInfeedSensors();
     Robot.hatchmechanism.reportHatchMechanismSensors();
     Robot.compressorsubsystem.reportCompressorStatus();
+    Robot.robotFeet.reportFootStatus();
   }
 
   /**

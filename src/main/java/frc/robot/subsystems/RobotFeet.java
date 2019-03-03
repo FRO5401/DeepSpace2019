@@ -20,8 +20,8 @@ public class RobotFeet extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  DoubleSolenoid leftFoot = new DoubleSolenoid(RobotMap.PCM_ID, );
-  DoubleSolenoid rightFoot = new DoubleSolenoid(RobotMap.PCM_ID, );
+  DoubleSolenoid leftFoot = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.ROBOT_LEFT_FOOT_DOWN, RobotMap.ROBOT_LEFT_FOOT_UP);
+  DoubleSolenoid rightFoot = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.ROBOT_RIGHT_FOOT_DOWN, RobotMap.ROBOT_RIGHT_FOOT_UP);
 
   @Override
   public void initDefaultCommand() {
@@ -29,26 +29,28 @@ public class RobotFeet extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  void collapseFeet(){
+  public void collapseFeet(){
     leftFoot.set(DoubleSolenoid.Value.kReverse);
     rightFoot.set(DoubleSolenoid.Value.kReverse);
   }
 
-  void expandFeet(){
+  public void expandFeet(){
     leftFoot.set(DoubleSolenoid.Value.kForward);
     rightFoot.set(DoubleSolenoid.Value.kForward);
   }
 
-  boolean returnFeetCollapsed(){
-    if((leftFoot.get() == Value.kForward) || (rightFoot.get() == Value.kForward)){
-       return true; 
+  public boolean returnFeetCollapsed(){
+    boolean footDown = false;
+    if((leftFoot.get() == Value.kForward) && (rightFoot.get() == Value.kForward)){
+       footDown = true; 
     }
-    else if((leftFoot.get() == Value.kReverse) || (rightFoot.get() == Value.kReverse)){
-       return false; 
+    else if((leftFoot.get() == Value.kReverse) && (rightFoot.get() == Value.kReverse)){
+       footDown = false; 
     } 
+    return footDown;
   }
 
-  void reportFootStatus(){
+  public void reportFootStatus(){
     SmartDashboard.putBoolean("Feet are Expanded", returnFeetCollapsed());
   }
 }
