@@ -20,8 +20,8 @@ public class RobotFeet extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  DoubleSolenoid leftFoot = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.ROBOT_LEFT_FOOT_DOWN, RobotMap.ROBOT_LEFT_FOOT_UP);
-  DoubleSolenoid rightFoot = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.ROBOT_RIGHT_FOOT_DOWN, RobotMap.ROBOT_RIGHT_FOOT_UP);
+  Solenoid leftFoot = new Solenoid(RobotMap.ROBOT_LEFT_FOOT);
+  Solenoid rightFoot = new Solenoid(RobotMap.ROBOT_RIGHT_FOOT);
 
   @Override
   public void initDefaultCommand() {
@@ -30,24 +30,17 @@ public class RobotFeet extends Subsystem {
   }
 
   public void collapseFeet(){
-    leftFoot.set(DoubleSolenoid.Value.kReverse);
-    rightFoot.set(DoubleSolenoid.Value.kReverse);
+    leftFoot.set(false);
+    rightFoot.set(false);
   }
 
   public void expandFeet(){
-    leftFoot.set(DoubleSolenoid.Value.kForward);
-    rightFoot.set(DoubleSolenoid.Value.kForward);
+    leftFoot.set(true);
+    rightFoot.set(true);
   }
 
   public boolean returnFeetCollapsed(){
-    boolean footDown = false;
-    if((leftFoot.get() == Value.kForward) && (rightFoot.get() == Value.kForward)){
-       footDown = true; 
-    }
-    else if((leftFoot.get() == Value.kReverse) && (rightFoot.get() == Value.kReverse)){
-       footDown = false; 
-    } 
-    return footDown;
+    return leftFoot.get();
   }
 
   public void reportFootStatus(){

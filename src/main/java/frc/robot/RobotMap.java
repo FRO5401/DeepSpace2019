@@ -110,10 +110,8 @@ public class RobotMap {
   public static final int ELEVATOR_COLLAPSE_BOTTOM = 1;
 
     //RobotFeet
-  public static final int ROBOT_LEFT_FOOT_DOWN = 8;
-  public static final int ROBOT_LEFT_FOOT_UP   = 9;
-  public static final int ROBOT_RIGHT_FOOT_DOWN = 10;
-  public static final int ROBOT_RIGHT_FOOT_UP   = 11;
+  public static final int ROBOT_LEFT_FOOT   = 9;
+  public static final int ROBOT_RIGHT_FOOT   = 11;
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER = 2;
