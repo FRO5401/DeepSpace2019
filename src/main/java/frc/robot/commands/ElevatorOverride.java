@@ -79,7 +79,7 @@ public class ElevatorOverride extends Command {
         }
           //If input is out of threshold.
         else{
-          Robot.elevator.overrideElevator(speedAdj);
+          Robot.elevator.holdPoint();
         }
       }
       //TODO: Elevator Logic is backwards, fixed in a wacky way... correct POST Hatboro. 
@@ -91,7 +91,7 @@ public class ElevatorOverride extends Command {
         }
           //If input is out of threshold.
         else{
-          Robot.elevator.overrideElevator(speedAdj);
+          Robot.elevator.holdPoint();
         }
       }
         //if TOP is tripped and BOTTOM is false.
@@ -102,7 +102,7 @@ public class ElevatorOverride extends Command {
         }
           //If input is out of threshold.
         else{
-          Robot.elevator.overrideElevator(speedAdj);
+          Robot.elevator.holdPoint();
         }
       }
     }
