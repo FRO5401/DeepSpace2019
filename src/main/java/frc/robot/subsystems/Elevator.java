@@ -39,11 +39,12 @@ public class Elevator extends Subsystem {
   private boolean elevatorPidEnabled;
   private int loopIndex, slotIndex;
   
+  
+  private double targetPosition = 0;
   private double ELEVATOR_kF = 0;
   private double ELEVATOR_kP = 0;
   private double ELEVATOR_kI = 0;
   private double ELEVATOR_kD = 0;
-  public boolean standUp = false;
 
     //Previous try was .0003800114;
   public double ELEVATOR_DISTANCE_PER_PULSE = -0.00037948;
@@ -110,6 +111,11 @@ public class Elevator extends Subsystem {
 		elevatorSRXMaster.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
   }
+
+  public void holdPoint(){
+    targetPosition = getElevatorHeight();
+    elevatorSRXMaster.set(ControlMode.MotionMagic, targetPosition);
+  }
   
   //Sets the NeutralMode of the elevator (BRAKE or COAST)
   public void setElevatorNeutralMode(NeutralMode neutralMode){
@@ -132,67 +138,62 @@ public class Elevator extends Subsystem {
     //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseTop.set(true);
-    standUp = true;
     //REVERSED DUE TO COMP CHANGES
-  elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
-
-
+    elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
   }
 
     //Drop the elevator FLAT.
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
-    standUp = false;
     //REVERSED DUE TO COMP CHANGES
     elevatorCollapseBottom.set(DoubleSolenoid.Value.kForward);
   }
 
-  //Get if the BOTTOM limit is tripped. 
+    //Get if the BOTTOM limit is tripped. 
   public boolean getLimitB(){
     return !stopLow.get();
   }
 
-  //Get if the TOP limit is tripped. 
+    //Get if the TOP limit is tripped. 
   public boolean getLimitT(){
     return !stopHigh.get();
   }
 
-  //Get the elevator's currently shifted GEAR.
+    //Get the elevator's currently shifted GEAR.
   public boolean getElevatorGear(){
     return elevatorGearShifter.get();
   }
 
-  //Get if the elevator is collapsed or not.
-  public boolean getElevatorCollapsedTop(){
+    //Get if the TOP actuator is collapsed or not.
+  public boolean getElevatorDeployedTop(){
     return elevatorCollapseTop.get();
   }
   
-  public boolean getElevatorCollapsedBottom(){
-    boolean solVal = false;
+    //Get if the BOTTOM actuator is collapsed or not.
+  public boolean getElevatorDeployedBottom(){
+    boolean elevatorBottomDeployed = false;
     if(elevatorCollapseBottom.get().equals(DoubleSolenoid.Value.kForward)){
-      solVal = true;
+      elevatorBottomDeployed = true;
     }
     else if(elevatorCollapseBottom.get().equals(DoubleSolenoid.Value.kReverse)){
-      solVal = false;
+      elevatorBottomDeployed = false;
     }
-
-    return solVal;
+    return elevatorBottomDeployed;
   }
 
   //Get the HEIGHT of the elevator. 
   public double getElevatorHeight(){
-    return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
+    return elevatorSRXMaster.getSensorCollection().getQuadraturePosition();
   }
 
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());
     SmartDashboard.putBoolean("Elevator In High Gear", getElevatorGear());
-    SmartDashboard.putBoolean("Elevator Collapsed Top", getElevatorCollapsedTop());
-    SmartDashboard.putBoolean("Elevator Collapsed Bottom", getElevatorCollapsedBottom());
-    SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
-    SmartDashboard.putNumber("Elevator Height (Raw)", elevatorSRXMaster.getSensorCollection().getQuadraturePosition());
-    SmartDashboard.putBoolean("Elevator Deployed", standUp);
-
+    SmartDashboard.putNumber("Elevator Height", (getElevatorHeight() * ELEVATOR_DISTANCE_PER_PULSE));
+    SmartDashboard.putNumber("Elevator Height (Raw)", getElevatorHeight());
+    SmartDashboard.putNumber("Elevator Hold Position", targetPosition);
+    SmartDashboard.putBoolean("Elevator Top Deployed", getElevatorDeployedTop());
+    SmartDashboard.putBoolean("Elevator Bottom Deployed", getElevatorDeployedBottom());
   }
 }

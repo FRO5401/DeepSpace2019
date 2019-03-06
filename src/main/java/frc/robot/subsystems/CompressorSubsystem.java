@@ -34,7 +34,7 @@ public class CompressorSubsystem extends Subsystem {
     public void reportCompressorStatus(){
     	SmartDashboard.putBoolean("Compressor Enabled", compressor.enabled());
     	SmartDashboard.putBoolean("Compressor in Closed Looop", compressor.getClosedLoopControl());
-    	SmartDashboard.putNumber("Compressor Current Value", compressor.getCompressorCurrent());
+    	SmartDashboard.putNumber("Compressor Current Consumed", compressor.getCompressorCurrent());
     	SmartDashboard.putBoolean("Compressor Pressure Switch On/Off", compressor.getPressureSwitchValue());
     }
     
