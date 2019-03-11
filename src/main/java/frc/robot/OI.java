@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CompressorToggle;
 import frc.robot.commands.ElevatorControl;
 import frc.robot.commands.ElevatorOverride;
-import frc.robot.commands.FeetToggle;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -76,8 +74,6 @@ public class OI {
       //Toggle Compressor
     xboxY_Driver.whenPressed(new CompressorToggle());
     
-    xboxX_Driver.whenPressed(new FeetToggle());
-
       //Start Override Move
     xboxL3_Operator.whenPressed(new ElevatorOverride());
       

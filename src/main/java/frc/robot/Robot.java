@@ -30,7 +30,6 @@ public class Robot extends TimedRobot {
   public static HatchMechanism hatchmechanism;
   public static CompressorSubsystem compressorsubsystem;
   public static VisionAuto visionAuto;
-  public static RobotFeet robotFeet;
   
   //OI is always last.
   public static OI oi;
@@ -52,7 +51,6 @@ public class Robot extends TimedRobot {
     hatchmechanism = new HatchMechanism();
     compressorsubsystem = new CompressorSubsystem();
     visionAuto = new VisionAuto();
-    robotFeet = new RobotFeet();
     
     //OI is always last.
     oi = new OI();
@@ -93,7 +91,6 @@ public class Robot extends TimedRobot {
     Robot.carriageinfeed.reportCarriageInfeedSensors();
     Robot.hatchmechanism.reportHatchMechanismSensors();
     Robot.compressorsubsystem.reportCompressorStatus();
-    Robot.robotFeet.reportFootStatus();
   }
 
   /**
