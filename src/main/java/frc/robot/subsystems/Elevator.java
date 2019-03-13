@@ -12,15 +12,11 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import frc.robot.commands.ElevatorControl;
-import frc.robot.commands.ElevatorOverride;
-import frc.robot.commands.ElevatorPID;
-
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.RobotMap;
 
 /**
@@ -39,6 +35,7 @@ public class Elevator extends Subsystem {
   private boolean elevatorPidEnabled;
   private int loopIndex, slotIndex;
   
+  private static double iaccum = 0;
   private double ELEVATOR_kF = 0;
   private double ELEVATOR_kP = 0;
   private double ELEVATOR_kI = 0;
@@ -63,23 +60,30 @@ public class Elevator extends Subsystem {
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
     stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
 
-    elevatorSRXMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
+    elevatorSRXMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
     elevatorSRXMaster.setSensorPhase(true);
 
     elevatorSRXMaster.configAllowableClosedloopError(slotIndex, RobotMap.ELEVATOR_THRESHOLD_FOR_PID, RobotMap.TIMEOUT_LIMIT_IN_Ms);
-  
-      //Configuring the max & min percentage output. 
+    
+    elevatorSRXMaster.setIntegralAccumulator(iaccum, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);
+
+
+    //Configuring the max & min percentage output. 
     elevatorSRXMaster.configNominalOutputForward(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.configNominalOutputReverse(0, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.configPeakOutputForward(1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.configPeakOutputReverse(-1, 	RobotMap.TIMEOUT_LIMIT_IN_Ms);
-
-      //Configuring PID values. 
+    
+      //Configuring PID values.
+    elevatorSRXMaster.selectProfileSlot(slotIndex, loopIndex);
     elevatorSRXMaster.config_kF(slotIndex, ELEVATOR_kF, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kP(slotIndex, ELEVATOR_kP, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
     elevatorSRXSlave.set(ControlMode.Follower, elevatorSRXMaster.getDeviceID());
+    /* 
+    elevatorSRXMaster.configMotionCruiseVelocity(sensorUnitsPer100ms);
+    elevatorSRXMaster.configMotionAcceleration(sensorUnitsPer100msPerSec); */
   } 
 
   @Override
@@ -90,7 +94,10 @@ public class Elevator extends Subsystem {
   public void overrideElevator(double joystickSpeed){
     elevatorPidEnabled = false;
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
-    elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
+    double revolutions = joystickSpeed * 4096;
+    double currentPoint = revolutions + getElevatorHeight();
+    elevatorSRXMaster.set(ControlMode.MotionMagic, currentPoint);
+    elevatorSRXMaster.set(ControlMode.Position, currentPoint);
   }
 
   public void overrideStopped(){
