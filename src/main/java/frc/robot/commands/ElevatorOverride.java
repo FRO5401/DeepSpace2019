@@ -107,7 +107,7 @@ public class ElevatorOverride extends Command {
       }
     }
     else if(!overrideButton) {
-      Robot.elevator.overrideElevator(speedAdj);
+      Robot.elevator.overrideElevator(0);
       overrideFinished = true;
     }
   }
@@ -122,7 +122,7 @@ public class ElevatorOverride extends Command {
   @Override
   protected void end() {
     Robot.elevator.overrideStopped();
-    new ElevatorPID();
+    //new ElevatorPID();
   }
 
   // Called when another command which requires one or more of the same

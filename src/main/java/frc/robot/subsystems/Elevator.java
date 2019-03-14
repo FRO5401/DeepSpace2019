@@ -34,10 +34,12 @@ public class Elevator extends Subsystem {
 
   private boolean elevatorPidEnabled;
   private int loopIndex, slotIndex;
-  
+  public int holdPointIteration = 0;
+  private double currentPosition;
+
   private static double iaccum = 0;
-  private double ELEVATOR_kF = 0;
-  private double ELEVATOR_kP = 0;
+  private double ELEVATOR_kF = .2481;
+  private double ELEVATOR_kP = .1;
   private double ELEVATOR_kI = 0;
   private double ELEVATOR_kD = 0;
   public boolean standUp = false;
@@ -81,9 +83,9 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.config_kI(slotIndex, ELEVATOR_kI, RobotMap.TIMEOUT_LIMIT_IN_Ms);
     elevatorSRXMaster.config_kD(slotIndex, ELEVATOR_kD, RobotMap.TIMEOUT_LIMIT_IN_Ms); 
     elevatorSRXSlave.set(ControlMode.Follower, elevatorSRXMaster.getDeviceID());
-    /* 
-    elevatorSRXMaster.configMotionCruiseVelocity(sensorUnitsPer100ms);
-    elevatorSRXMaster.configMotionAcceleration(sensorUnitsPer100msPerSec); */
+    
+    elevatorSRXMaster.configMotionCruiseVelocity(1443/* sensorUnitsPer100ms */);
+    elevatorSRXMaster.configMotionAcceleration(1443/* sensorUnitsPer100msPerSec */);
   } 
 
   @Override
@@ -92,12 +94,16 @@ public class Elevator extends Subsystem {
 
   //Override Methods
   public void overrideElevator(double joystickSpeed){
-    elevatorPidEnabled = false;
+    elevatorPidEnabled = false; 
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
-    double revolutions = joystickSpeed * 4096;
-    double currentPoint = revolutions + getElevatorHeight();
-    elevatorSRXMaster.set(ControlMode.MotionMagic, currentPoint);
-    elevatorSRXMaster.set(ControlMode.Position, currentPoint);
+
+    /*elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed); */
+    double revolutions = joystickSpeed * 16384; //Was 4096
+    double currentPoint = (revolutions) + (getElevatorHeight() * ELEVATOR_DISTANCE_PER_PULSE);
+    if(currentPoint > 10 || true){
+      elevatorSRXMaster.set(ControlMode.MotionMagic, currentPoint); 
+      elevatorSRXMaster.set(ControlMode.Position, currentPoint);
+    }
   }
 
   public void overrideStopped(){
@@ -116,6 +122,15 @@ public class Elevator extends Subsystem {
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
 		elevatorSRXMaster.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
+  }
+
+  public void holdPoint(){/* 
+    if(getElevatorHeight() > 10 || true){
+      currentPosition = getElevatorHeight();
+      elevatorSRXMaster.set(ControlMode.MotionMagic, currentPosition);
+      elevatorSRXMaster.set(ControlMode.Position, currentPosition);
+    } */
+    elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
   }
   
   //Sets the NeutralMode of the elevator (BRAKE or COAST)
@@ -188,7 +203,7 @@ public class Elevator extends Subsystem {
 
   //Get the HEIGHT of the elevator. 
   public double getElevatorHeight(){
-    return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
+    return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition());
   }
 
   public void reportElevatorSensors(){
@@ -197,8 +212,8 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Elevator In High Gear", getElevatorGear());
     SmartDashboard.putBoolean("Elevator Collapsed Top", getElevatorCollapsedTop());
     SmartDashboard.putBoolean("Elevator Collapsed Bottom", getElevatorCollapsedBottom());
-    SmartDashboard.putNumber("Elevator Height", getElevatorHeight());
-    SmartDashboard.putNumber("Elevator Height (Raw)", elevatorSRXMaster.getSensorCollection().getQuadraturePosition());
+    SmartDashboard.putNumber("Elevator Height", getElevatorHeight() * ELEVATOR_DISTANCE_PER_PULSE);
+    SmartDashboard.putNumber("Elevator Height (Raw)", getElevatorHeight());
     SmartDashboard.putBoolean("Elevator Deployed", standUp);
 
   }
