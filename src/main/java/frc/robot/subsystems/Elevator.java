@@ -98,7 +98,7 @@ public class Elevator extends Subsystem {
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
 
     /*elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed); */
-    double revolutions = joystickSpeed * 16384; //Was 4096
+    double revolutions = joystickSpeed * 16384; //Was 4096 (is now 4 * 4096)
     double currentPoint = (revolutions) + (getElevatorHeight() * ELEVATOR_DISTANCE_PER_PULSE);
     if(currentPoint > 10 || true){
       elevatorSRXMaster.set(ControlMode.MotionMagic, currentPoint); 
