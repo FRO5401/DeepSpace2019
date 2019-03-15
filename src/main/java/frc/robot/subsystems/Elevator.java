@@ -97,13 +97,13 @@ public class Elevator extends Subsystem {
     elevatorPidEnabled = false; 
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
 
-    /*elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed); */
-    double revolutions = joystickSpeed * 16384; //Was 4096 (is now 4 * 4096)
-    double currentPoint = (revolutions) + (getElevatorHeight() * ELEVATOR_DISTANCE_PER_PULSE);
-    if(currentPoint > 10 || true){
-      elevatorSRXMaster.set(ControlMode.MotionMagic, currentPoint); 
-      elevatorSRXMaster.set(ControlMode.Position, currentPoint);
-    }
+    elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
+//    double revolutions = joystickSpeed * 16384; //Was 4096 (is now 4 * 4096)
+//    double currentPoint = (revolutions) + (getElevatorHeight() * ELEVATOR_DISTANCE_PER_PULSE);
+//    if(currentPoint > 10 || true){
+//      elevatorSRXMaster.set(ControlMode.MotionMagic, currentPoint); 
+//      elevatorSRXMaster.set(ControlMode.Position, currentPoint);
+//    }
   }
 
   public void overrideStopped(){
@@ -124,13 +124,8 @@ public class Elevator extends Subsystem {
 		elevatorPidEnabled = true;
   }
 
-  public void holdPoint(){/* 
-    if(getElevatorHeight() > 10 || true){
-      currentPosition = getElevatorHeight();
-      elevatorSRXMaster.set(ControlMode.MotionMagic, currentPosition);
-      elevatorSRXMaster.set(ControlMode.Position, currentPosition);
-    } */
-    elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
+  public void holdPoint(){
+    elevatorSRXMaster.set(ControlMode.MotionProfile, 2);
   }
   
   //Sets the NeutralMode of the elevator (BRAKE or COAST)

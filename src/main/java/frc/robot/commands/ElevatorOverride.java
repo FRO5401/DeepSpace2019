@@ -30,8 +30,12 @@ public class ElevatorOverride extends Command {
   // Speed Adjustment
   double speedAdj;
 
-    //Override Finished
+  //Override Finished
   boolean overrideFinished;
+
+  //Elevator Height
+  double lastHeight;
+  double currentHeight;
 
   public ElevatorOverride() {
     requires(Robot.elevator);
@@ -107,7 +111,17 @@ public class ElevatorOverride extends Command {
       }
     }
     else if(!overrideButton) {
-      Robot.elevator.overrideElevator(0);
+      Robot.elevator.holdPoint();
+
+/*      currentHeight = Robot.elevator.getElevatorHeight();
+      if(currentHeight != lastHeight){
+        Robot.elevator.holdPoint(currentHeight);
+        lastHeight = currentHeight;
+      }
+      else{
+        Robot.elevator.holdPoint(lastHeight);
+      }*/
+
       overrideFinished = true;
     }
   }
