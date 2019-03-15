@@ -1,0 +1,52 @@
+package frc.robot.commands;
+
+import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.Command;
+
+/*
+ * Command allows for toggling of Compressor
+ * ON or OFF, it is called from OI.
+ */
+public class CompressorToggle extends Command {
+
+    public CompressorToggle() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.compressorsubsystem);
+    }
+
+    // Called just before this Command runs the first time
+    @Override
+	protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+	protected void execute() {
+        if(Robot.compressorsubsystem.isEnabled()){
+            Robot.compressorsubsystem.stopCompressor();
+        } 
+        else {
+            Robot.compressorsubsystem.startCompressor();
+        }
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+	protected boolean isFinished() {
+        return true;
+    }
+
+    // Called once after isFinished returns true
+    @Override
+	protected void end() {
+    	//end() does nothing because this command toggles the state
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    @Override
+	protected void interrupted() {
+    	Robot.compressorsubsystem.stopCompressor();
+    	//System.out.println("CompressorToggle Interrupted");
+    }
+}

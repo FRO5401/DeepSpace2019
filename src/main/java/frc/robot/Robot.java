@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.*;
+import frc.robot.autonomous.*;
+import frc.robot.commands.VisionDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,11 +24,18 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
+  public static DriveBase drivebase;
+  public static CarriageInfeed carriageinfeed;
+  public static Elevator elevator;
+  public static HatchMechanism hatchmechanism;
+  public static CompressorSubsystem compressorsubsystem;
+  public static VisionAuto visionAuto;
+  
+  //OI is always last.
+  public static OI oi;
 
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -35,10 +43,36 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+
+    drivebase = new DriveBase();
+
+    carriageinfeed = new CarriageInfeed();
+    elevator = new Elevator();
+    hatchmechanism = new HatchMechanism();
+    compressorsubsystem = new CompressorSubsystem();
+    visionAuto = new VisionAuto();
+    
+    //OI is always last.
+    oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    chooser.setDefaultOption("DoNothing", new DoNothing());
+    chooser.addOption("Drive Straight", new DriveStraight());
+    chooser.addOption("Turn Turn Turn", new TurnTurnTurn());
+    chooser.addOption("Down and Back", new DownAndBack());
+    chooser.addOption("LeftFrontHatch1", new LeftFrontHatch1());
+    chooser.addOption("LeftFrontHatch2", new LeftFrontHatch2());
+    chooser.addOption("RightFrontHatch1", new RightFrontHatch1());
+    chooser.addOption("RightFrontHatch2", new RightFrontHatch2());
+    chooser.addOption("RightRocketHatchLow", new RightRocketHatchLow());
+
+    SmartDashboard.putData("Auto mode", chooser);
+    
+
+      //TODO: Reset these where deemed necessary.
+      //Set to reset vals when robot turns on, might be more useful in
+      //either auto, disabled, or teleop init. 
+    Robot.drivebase.resetEncoders();
+    Robot.drivebase.resetGyro();
   }
 
   /**
@@ -51,6 +85,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+      //DriveBase Reporting
+    Robot.drivebase.reportDriveBaseSensors();
+    Robot.elevator.reportElevatorSensors();
+    Robot.carriageinfeed.reportCarriageInfeedSensors();
+    Robot.hatchmechanism.reportHatchMechanismSensors();
+    Robot.compressorsubsystem.reportCompressorStatus();
   }
 
   /**
@@ -80,7 +120,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -99,7 +139,7 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */
   @Override
-  public void autonomousPeriodic() {
+  public void autonomousPeriodic() {;
     Scheduler.getInstance().run();
   }
 
@@ -111,7 +151,10 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      //Add AutoDrive command and set it to 0
+      
     }
+    
   }
 
   /**
