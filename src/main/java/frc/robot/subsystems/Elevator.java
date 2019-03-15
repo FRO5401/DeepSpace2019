@@ -39,7 +39,7 @@ public class Elevator extends Subsystem {
 
   private static double iaccum = 0;
   private double ELEVATOR_kF = .2481;
-  private double ELEVATOR_kP = .1;
+  private double ELEVATOR_kP = 0;
   private double ELEVATOR_kI = 0;
   private double ELEVATOR_kD = 0;
   public boolean standUp = false;
@@ -124,8 +124,8 @@ public class Elevator extends Subsystem {
 		elevatorPidEnabled = true;
   }
 
-  public void holdPoint(){
-    elevatorSRXMaster.set(ControlMode.MotionProfile, 2);
+  public void holdPoint(double position){
+    elevatorSRXMaster.set(ControlMode.MotionMagic, position);
   }
   
   //Sets the NeutralMode of the elevator (BRAKE or COAST)

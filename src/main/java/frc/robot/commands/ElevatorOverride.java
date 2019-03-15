@@ -111,16 +111,14 @@ public class ElevatorOverride extends Command {
       }
     }
     else if(!overrideButton) {
-      Robot.elevator.holdPoint();
-
-/*      currentHeight = Robot.elevator.getElevatorHeight();
+      currentHeight = Robot.elevator.getElevatorHeight();
       if(currentHeight != lastHeight){
         Robot.elevator.holdPoint(currentHeight);
         lastHeight = currentHeight;
       }
       else{
         Robot.elevator.holdPoint(lastHeight);
-      }*/
+      }
 
       overrideFinished = true;
     }
