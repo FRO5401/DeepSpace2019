@@ -38,7 +38,7 @@ public class Elevator extends Subsystem {
   private double currentPosition;
 
   private static double iaccum = 0;
-  private double ELEVATOR_kF = .2481;
+  private double ELEVATOR_kF = 0;
   private double ELEVATOR_kP = 0;
   private double ELEVATOR_kI = 0;
   private double ELEVATOR_kD = 0;
@@ -127,7 +127,12 @@ public class Elevator extends Subsystem {
   public void holdPoint(double position){
     elevatorSRXMaster.set(ControlMode.MotionMagic, position);
   }
-  
+
+  public void setStop(){
+    double height = getElevatorHeight();
+    elevatorSRXMaster.set(ControlMode.MotionMagic, height);
+  }
+
   //Sets the NeutralMode of the elevator (BRAKE or COAST)
   public void setElevatorNeutralMode(NeutralMode neutralMode){
     elevatorSRXMaster.setNeutralMode(neutralMode);
