@@ -36,6 +36,8 @@ public class Elevator extends Subsystem {
   private int loopIndex, slotIndex;
   public int holdPointIteration = 0;
   private double currentPosition;
+  private double height;
+  public boolean heightIsSet;
 
   private static double iaccum = 0;
   private double ELEVATOR_kF = 0;
@@ -124,13 +126,26 @@ public class Elevator extends Subsystem {
 		elevatorPidEnabled = true;
   }
 
-  public void holdPoint(double position){
+/*public void holdPoint(double position){
     elevatorSRXMaster.set(ControlMode.MotionMagic, position);
-  }
+  }*/
 
   public void setStop(){
-    double height = getElevatorHeight();
-    elevatorSRXMaster.set(ControlMode.MotionMagic, height);
+    if (heightIsSet == false){
+      height = getElevatorHeight();
+      heightIsSet = true;
+    }
+    else if (heightIsSet == true){
+      elevatorSRXMaster.set(ControlMode.MotionMagic, height);
+    }
+  }
+
+  public void makeHeightIsSetTrue(){
+    heightIsSet = true;
+  }
+
+  public void makeHeightIsSetFalse(){
+    heightIsSet = false;
   }
 
   //Sets the NeutralMode of the elevator (BRAKE or COAST)
