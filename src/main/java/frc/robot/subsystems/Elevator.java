@@ -130,7 +130,7 @@ public class Elevator extends Subsystem {
     elevatorSRXMaster.set(ControlMode.MotionMagic, position);
   }*/
 
-  public void setStop(){
+  public void holdPoint(){
     if (heightIsSet == false){
       height = getElevatorHeight();
       heightIsSet = true;

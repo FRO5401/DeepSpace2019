@@ -70,7 +70,7 @@ public class ElevatorOverride extends Command {
 
       //override control
     if(overrideButton){
-      Robot.elevator.makeHeightIsSetTrue();
+      Robot.elevator.makeHeightIsSetFalse();
       if(Robot.elevator.standUp){
         speedAdj = 0;
       }
@@ -112,7 +112,7 @@ public class ElevatorOverride extends Command {
       }
     }
     else if(!overrideButton) {
-      Robot.elevator.setStop();      
+      Robot.elevator.holdPoint();      
 /*      currentHeight = Robot.elevator.getElevatorHeight();
       if(currentHeight != lastHeight){
         Robot.elevator.holdPoint(currentHeight);
