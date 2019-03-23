@@ -19,7 +19,7 @@ import frc.robot.RobotMap;
  */
 
 public class FeedCarriage extends Command {
-  boolean overrideButton;
+  boolean overrideButton, lockerButton;
   boolean limitTop;
   double feedIn;
   double feedOut;
@@ -46,6 +46,7 @@ public class FeedCarriage extends Command {
     overrideButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_R3);
     feedIn = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_TRIGGER);
     feedOut = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_LEFT_TRIGGER);
+    lockerButton = Robot.oi.xboxButton(Robot.oi.xboxOperator, RobotMap.XBOX_BUTTON_RIGHT_BUMPER);
 
       //Read axis
     carriageUpDown = Robot.oi.xboxAxis(Robot.oi.xboxOperator, RobotMap.XBOX_AXIS_RIGHT_Y);
@@ -86,6 +87,14 @@ public class FeedCarriage extends Command {
     else{
       Robot.carriageinfeed.feedStop();
     }
+
+
+      //Feeder Lock
+    if((lockerButton == true) && (feedIn > RobotMap.AXIS_THRESHOLD)){
+      Robot.carriageinfeed.feedLock(); 
+    }
+
+  
   }
 
   // Make this return true when this Command no longer needs to run execute()

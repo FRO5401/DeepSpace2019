@@ -41,7 +41,6 @@ public class CarriageInfeed extends Subsystem {
   TalonSRX carriageTalon;
   DigitalInput carriageLimitTop;
 
-
   public CarriageInfeed(){
     feederMotors = new VictorSP(RobotMap.CARRIAGE_FEED_ROLLERS);
     carriageTalon = new TalonSRX(RobotMap.CARRIAGE_TALON_CHANNEL);
@@ -115,6 +114,11 @@ public class CarriageInfeed extends Subsystem {
     //Set motors to stop feeding
   public void feedStop(){
     feederMotors.set(0);
+  }
+
+   //Set motors to lock
+  public void feedLock(){
+    feederMotors.set(RobotMap.CARRIAGE_FEEDER_LOCK_SPEED);
   }
 
     //Get talon encoder value, post vals to Dashboard.

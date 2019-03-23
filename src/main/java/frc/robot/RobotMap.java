@@ -45,6 +45,7 @@ public class RobotMap {
 
     //CarriageInfeed
   public static final double CARRIAGE_FEEDER_SPEED    = .6;
+  public static final double CARRIAGE_FEEDER_LOCK_SPEED    = .15;
   public static final double CARRIAGE_ANGLE_PER_PULSE = 0;
 
     //Elevator
