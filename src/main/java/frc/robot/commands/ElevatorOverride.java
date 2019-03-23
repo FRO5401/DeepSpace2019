@@ -122,7 +122,7 @@ public class ElevatorOverride extends Command {
   @Override
   protected void end() {
     Robot.elevator.overrideStopped();
-    new ElevatorPID();
+    //new ElevatorPID();
   }
 
   // Called when another command which requires one or more of the same

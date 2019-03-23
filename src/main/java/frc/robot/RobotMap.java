@@ -44,13 +44,13 @@ public class RobotMap {
   public static final double SPIN_SENSITIVITY            = 0.8;
 
     //CarriageInfeed
-  public static final double CARRIAGE_FEEDER_SPEED    = .4;
+  public static final double CARRIAGE_FEEDER_SPEED    = .6;
   public static final double CARRIAGE_ANGLE_PER_PULSE = 0;
 
     //Elevator
   public static final int TIMEOUT_LIMIT_IN_Ms        = 10;
   public static final int ELEVATOR_THRESHOLD_FOR_PID = 0;
-  public static final double ELEVATOR_SPEED_SENSITIVITY = .4;
+  public static final double ELEVATOR_SPEED_SENSITIVITY = .75;
 
 
   /*** Operator Interfaces ***/
