@@ -44,7 +44,7 @@ public class RobotMap {
   public static final double SPIN_SENSITIVITY            = 0.8;
 
     //CarriageInfeed
-  public static final double CARRIAGE_FEEDER_SPEED    = .4;
+  public static final double CARRIAGE_FEEDER_SPEED    = .8;
   public static final double CARRIAGE_ANGLE_PER_PULSE = 0;
 
     //Elevator
@@ -86,7 +86,8 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_LEFT_2  = 3;
 
     //CarriageInfeed
-  public static final int CARRIAGE_FEED_ROLLERS  = 4;
+  public static final int CARRIAGE_FEED_MOTOR_1  = 4;
+  public static final int CARRIAGE_FEED_MOTOR_2  = 5;
   public static final int CARRIAGE_TALON_CHANNEL = 2;
   public static final int C_STOP_T = 7;
 
