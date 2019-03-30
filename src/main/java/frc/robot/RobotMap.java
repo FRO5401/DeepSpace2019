@@ -50,7 +50,7 @@ public class RobotMap {
     //Elevator
   public static final int TIMEOUT_LIMIT_IN_Ms        = 10;
   public static final int ELEVATOR_THRESHOLD_FOR_PID = 0;
-  public static final double ELEVATOR_SPEED_SENSITIVITY = .4;
+  public static final double ELEVATOR_SPEED_SENSITIVITY = .7;
 
 
   /*** Operator Interfaces ***/
