@@ -37,14 +37,14 @@ public class CarriageInfeed extends Subsystem {
   private double groundAngle = -43;
   private double midAngle = 0;
 
-  VictorSP feederMotor1, feederMotor2;
+  VictorSP feederMotor1; //feederMotor2;
   TalonSRX carriageTalon;
   DigitalInput carriageLimitTop;
 
 
   public CarriageInfeed(){
     feederMotor1 = new VictorSP(RobotMap.CARRIAGE_FEED_MOTOR_1);
-    feederMotor2 = new VictorSP(RobotMap.CARRIAGE_FEED_MOTOR_2);
+    //feederMotor2 = new VictorSP(RobotMap.CARRIAGE_FEED_MOTOR_2);
     carriageTalon = new TalonSRX(RobotMap.CARRIAGE_TALON_CHANNEL);
     carriageLimitTop = new DigitalInput(RobotMap.C_STOP_T);
 
@@ -106,19 +106,19 @@ public class CarriageInfeed extends Subsystem {
     //Set motors to feed in
   public void feedIn(){
     feederMotor1.set(RobotMap.CARRIAGE_FEEDER_SPEED);
-    feederMotor2.set(RobotMap.CARRIAGE_FEEDER_SPEED);
+    //feederMotor2.set(RobotMap.CARRIAGE_FEEDER_SPEED);
   }
   
     //Set motors to feed out
   public void feedOut(){
     feederMotor1.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
-    feederMotor2.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
+    //feederMotor2.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
   }
 
     //Set motors to stop feeding
   public void feedStop(){
     feederMotor1.set(0);
-    feederMotor2.set(0);
+    //feederMotor2.set(0);
   }
 
     //Get talon encoder value, post vals to Dashboard.
@@ -134,7 +134,7 @@ public class CarriageInfeed extends Subsystem {
   public void reportCarriageInfeedSensors(){
     SmartDashboard.putBoolean("Top Limit Infeed", getLimitTop());
     SmartDashboard.putNumber("Infeed Direction", feederMotor1.getSpeed());
-    SmartDashboard.putNumber("Infeed Direction", feederMotor2.getSpeed());
+    //SmartDashboard.putNumber("Infeed Direction", feederMotor2.getSpeed());
     SmartDashboard.putNumber("Carriage Angle (Native)", getCarriageAngle());
     SmartDashboard.putNumber("Carriage Angle (Degrees)", (getCarriageAngle() * RobotMap.CARRIAGE_ANGLE_PER_PULSE));
   }

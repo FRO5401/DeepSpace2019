@@ -84,10 +84,12 @@ public class RobotMap {
   public static final int DRIVE_MOTOR_LEFT_1  = 2;
   public static final int DRIVE_MOTOR_RIGHT_2 = 1;
   public static final int DRIVE_MOTOR_LEFT_2  = 3;
+  public static final int DRIVE_MOTOR_RIGHT_3 = 5;
+  public static final int DRIVE_MOTOR_LEFT_3  = 6;
 
     //CarriageInfeed
   public static final int CARRIAGE_FEED_MOTOR_1  = 4;
-  public static final int CARRIAGE_FEED_MOTOR_2  = 5;
+  //public static final int CARRIAGE_FEED_MOTOR_2  = 5;
   public static final int CARRIAGE_TALON_CHANNEL = 2;
   public static final int C_STOP_T = 7;
 

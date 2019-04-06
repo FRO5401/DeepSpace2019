@@ -59,7 +59,8 @@ public class ElevatorOverride extends Command {
     bottomLimit = Robot.elevator.getLimitT();
 
     if(bottomLimit){
-      speedAdj = 0;
+      // Not sure if this is needed...
+      //speedAdj = 0;
     }
 
     /*** INPUT LOGIC ***/
@@ -72,11 +73,13 @@ public class ElevatorOverride extends Command {
       else{
         speedAdj = 0;
       }
-        //If BOTTOM and TOP are NOT tripped. 
+
+      //If BOTTOM and TOP are NOT tripped. 
       if((bottomLimit == false) && (topLimit == false)){
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj); //Normal override Control
         }
+
           //If input is out of threshold.
         else{
           Robot.elevator.overrideElevator(speedAdj);
