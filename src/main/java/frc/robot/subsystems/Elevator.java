@@ -27,15 +27,18 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+    //Motors
   TalonSRX elevatorSRXMaster, elevatorSRXSlave;
+    
+    //Solenoids
   Solenoid elevatorGearShifter;
   Solenoid elevatorCollapseTop;
   DoubleSolenoid elevatorCollapseBottom;
 
+    //Sensors
   DigitalInput stopHigh, stopLow;
 
+    //PID Constants.
   private boolean elevatorPidEnabled;
   private int loopIndex, slotIndex;
   
@@ -53,16 +56,20 @@ public class Elevator extends Subsystem {
     loopIndex = 0;
     slotIndex = 0;
   
+      //Motor Instantiation
     elevatorSRXMaster   = new TalonSRX(RobotMap.ELEVATOR_TALON_MASTER_CHANNEL);
     elevatorSRXSlave    = new TalonSRX(RobotMap.ELEVATOR_TALON_SLAVE_CHANNEL);
+
+      //Solenoid Instantiation
     elevatorGearShifter = new Solenoid(RobotMap.ELEVATOR_GEAR_SHIFTER);
     elevatorCollapseTop    = new Solenoid(RobotMap.ELEVATOR_COLLAPSE_TOP);
     elevatorCollapseBottom    = new DoubleSolenoid(RobotMap.PCM_ID, RobotMap.BOTTOM_ELEVATOR_OUT, RobotMap.BOTTOM_EVEVATOR_IN);
 
-    //Limits
+      //Limit Switch Instantiation
     stopHigh = new DigitalInput(RobotMap.E_STOP_HIGH);
     stopLow = new DigitalInput(RobotMap.E_STOP_LOW);
 
+      //Configuring Elevator Sensor
     elevatorSRXMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, loopIndex, RobotMap.TIMEOUT_LIMIT_IN_Ms);//10 is a timeout that waits for successful conection to sensor
     elevatorSRXMaster.setSensorPhase(true);
 
@@ -86,38 +93,39 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
   }
 
-  //Override Methods
+    //Override Movement
   public void overrideElevator(double joystickSpeed){
     elevatorPidEnabled = false;
     joystickSpeed *= (-1 * RobotMap.ELEVATOR_SPEED_SENSITIVITY);
     elevatorSRXMaster.set(ControlMode.PercentOutput, joystickSpeed);
   }
 
+    //Stop Override Movement
   public void overrideStopped(){
     elevatorSRXMaster.setNeutralMode(NeutralMode.Brake);
     elevatorSRXMaster.set(ControlMode.PercentOutput, 0);
     elevatorPidEnabled = false;
 	}
 
-  //Elevator Stopped with PID/Interrupted
+    //Elevator Stopped with PID/Interrupted
   public void elevatorStop(){
 		elevatorPidEnabled = false;
   }
 
-  //Sets the point to which the elevator will move
+    //Sets the point to which the elevator will move
   public void setPoint(double setPoint){
 		double setPointNativeUnits = setPoint / ELEVATOR_DISTANCE_PER_PULSE;
 		elevatorSRXMaster.set(ControlMode.Position, setPointNativeUnits);
 		elevatorPidEnabled = true;
   }
   
-  //Sets the NeutralMode of the elevator (BRAKE or COAST)
+    //Sets the NeutralMode of the elevator (BRAKE or COAST)
   public void setElevatorNeutralMode(NeutralMode neutralMode){
     elevatorSRXMaster.setNeutralMode(neutralMode);
   }
 
-  //Allows the elevator to move faster/slower
-  //false = lowgear, true = highgear
+    //Allows the elevator to move faster/slower
+    //false = lowgear, true = highgear
   public void elevatorGearShift(boolean shifterValue){
     elevatorGearShifter.set(shifterValue);
   }
@@ -126,15 +134,16 @@ public class Elevator extends Subsystem {
 		//Method returns true if on target
 		boolean onTarget = Math.abs(elevatorSRXMaster.getSensorCollection().getQuadraturePosition() - elevatorSRXMaster.getClosedLoopTarget(loopIndex)) < RobotMap.ELEVATOR_THRESHOLD_FOR_PID;
 		return onTarget;
-		//getClosedLoopT gets the SetPoint already set (or moving to)
+		//getClosedLoopTarget gets the SetPoint already set (or moving to)
   }
   
     //Stand the elevator UP
   public void riseElevator(){
     elevatorCollapseTop.set(true);
     standUp = true;
-    //REVERSED DUE TO COMP CHANGES
-  elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
+     
+      //REVERSED DUE TO COMP CHANGES
+    elevatorCollapseBottom.set(DoubleSolenoid.Value.kReverse);
 
 
   }
@@ -143,30 +152,32 @@ public class Elevator extends Subsystem {
   public void collapseElevator(){
     elevatorCollapseTop.set(false);
     standUp = false;
-    //REVERSED DUE TO COMP CHANGES
+    
+      //REVERSED DUE TO COMP CHANGES
     elevatorCollapseBottom.set(DoubleSolenoid.Value.kForward);
   }
 
-  //Get if the BOTTOM limit is tripped. 
+    //Get if the BOTTOM limit is tripped. 
   public boolean getLimitB(){
     return !stopLow.get();
   }
 
-  //Get if the TOP limit is tripped. 
+    //Get if the TOP limit is tripped. 
   public boolean getLimitT(){
     return !stopHigh.get();
   }
 
-  //Get the elevator's currently shifted GEAR.
+    //Get the elevator's currently shifted GEAR.
   public boolean getElevatorGear(){
     return elevatorGearShifter.get();
   }
 
-  //Get if the elevator is collapsed or not.
+    //Returns the state of the top elevator solenoids
   public boolean getElevatorCollapsedTop(){
     return elevatorCollapseTop.get();
   }
   
+    //Returns the state of the bottom elevator solenoids
   public boolean getElevatorCollapsedBottom(){
     boolean solVal = false;
     if(elevatorCollapseBottom.get().equals(DoubleSolenoid.Value.kForward)){
@@ -179,11 +190,12 @@ public class Elevator extends Subsystem {
     return solVal;
   }
 
-  //Get the HEIGHT of the elevator. 
+    //Get the HEIGHT of the elevator. 
   public double getElevatorHeight(){
     return (elevatorSRXMaster.getSensorCollection().getQuadraturePosition() * ELEVATOR_DISTANCE_PER_PULSE);
   }
 
+    //Gathers all available sensor values for smart dashboard
   public void reportElevatorSensors(){
     SmartDashboard.putBoolean("Top Limit Switch", getLimitT());
     SmartDashboard.putBoolean("Bottom Limit Switch", getLimitB());

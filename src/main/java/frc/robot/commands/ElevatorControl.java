@@ -25,8 +25,6 @@ public class ElevatorControl extends Command {
     requires(Robot.elevator);
 
     controlSelected = buttonSelected;
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time

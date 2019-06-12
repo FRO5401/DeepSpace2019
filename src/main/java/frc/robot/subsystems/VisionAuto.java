@@ -17,8 +17,6 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class VisionAuto extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
   NetworkTableEntry distanceEntry;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable VisionData;
@@ -29,6 +27,7 @@ public class VisionAuto extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
+    //Moves the drivebase based on camera input, then stops moving.
   public void visionAlign(){
     VisionData = inst.getTable("VisionData");
     distanceEntry = VisionData.getEntry("distance");
@@ -47,6 +46,7 @@ public class VisionAuto extends Subsystem {
     } 
   }
 
+    //Aligns the drivebase based on camera input, then places a hatch panel.
   public void visionPlaceHatch(){
     VisionData = inst.getTable("VisionData");
     distanceEntry = VisionData.getEntry("distance");

@@ -89,7 +89,6 @@ public class RobotMap {
 
     //CarriageInfeed
   public static final int CARRIAGE_FEED_MOTOR_1  = 4;
-  //public static final int CARRIAGE_FEED_MOTOR_2  = 5;
   public static final int CARRIAGE_TALON_CHANNEL = 2;
   public static final int C_STOP_T = 7;
 
@@ -99,18 +98,21 @@ public class RobotMap {
   public static final int ELEVATOR_TALON_SLAVE_CHANNEL  = 1;
 
   /*** Solenoids (Single and Double) ***/
-    //DoubleSolenoids have an IN and an OUT constant. 
-    //Solenoids have just one constant. 
+    //NOTE: DoubleSolenoids have an IN and an OUT constant. 
+    //NOTE: Solenoids have just one constant. 
     //PCM (Pneumatic Control Module)
   public static final int PCM_ID = 0;
 
     //DriveBase
   public static final int GEAR_SHIFTER = 0;
   
-    //Elevator
+    //Elevator 
+    //NOTE (Elevator Collapse): TOP solenoid is single, BOTTOM is double. 
   public static final int ELEVATOR_GEAR_SHIFTER    = 4;
   public static final int ELEVATOR_COLLAPSE_TOP    = 5;
-  public static final int ELEVATOR_COLLAPSE_BOTTOM = 1;
+  public static final int BOTTOM_ELEVATOR_OUT = 6;
+  public static final int BOTTOM_EVEVATOR_IN  = 7;
+
 
     //Hatch Mechanism
   public static final int HATCH_EXTENDER = 2;
@@ -127,11 +129,7 @@ public class RobotMap {
   public static final int E_STOP_HIGH = 5;
   public static final int E_STOP_LOW  = 6;
 
-
-  //DOUBLE SOLENOIDS ELEVATOR
-  public static final int BOTTOM_ELEVATOR_OUT = 6;
-  public static final int BOTTOM_EVEVATOR_IN  = 7;
-
+  
   /*** Autonomous ***/
     public static final int ANGLE_THRESHOLD        = 2;
     public static final double AUTO_TURN_SPEED     = 0.8;

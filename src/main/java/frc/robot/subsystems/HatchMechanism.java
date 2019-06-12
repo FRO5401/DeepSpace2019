@@ -31,6 +31,7 @@ public class HatchMechanism extends Subsystem {
     hatchRelease.set(false);
   }
 
+    //Gathers all available sensor values for smart dashboard. 
   public void reportHatchMechanismSensors(){
     SmartDashboard.putBoolean("Hatch Release LEFT", hatchRelease.get());
   }

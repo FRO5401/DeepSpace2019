@@ -13,7 +13,8 @@ import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /*
- * Command controls the Override moving, it is called from OI
+ * Command controls Elevator functions such as:
+ * - Elevator OVERRIDE
  */
 public class ElevatorOverride extends Command {
 
@@ -67,14 +68,16 @@ public class ElevatorOverride extends Command {
 
       //override control
     if(overrideButton){
+        //If the elevator is NOT collapsed. 
       if(Robot.elevator.standUp){
         speedAdj = -.30;
       }
+        //If the elevator is collapsed. 
       else{
         speedAdj = 0;
       }
 
-      //If BOTTOM and TOP are NOT tripped. 
+        //If BOTTOM and TOP are NOT tripped. 
       if((bottomLimit == false) && (topLimit == false)){
         if((leftJoystickOperator > RobotMap.AXIS_THRESHOLD) || (leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj); //Normal override Control
@@ -89,7 +92,6 @@ public class ElevatorOverride extends Command {
         //if BOTTOM is tripped but TOP is not.
       else if((bottomLimit == true) && (topLimit == false)){
         if(leftJoystickOperator > RobotMap.AXIS_THRESHOLD){
-//          Robot.elevator.overrideElevator(0);//Makes it go down, 0'd to eliminate power down
           Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj);
         }
           //If input is out of threshold.
@@ -100,7 +102,6 @@ public class ElevatorOverride extends Command {
         //if TOP is tripped and BOTTOM is false.
       else if((topLimit == true) && (bottomLimit == false)){
         if(leftJoystickOperator < (-1 * RobotMap.AXIS_THRESHOLD)){
-//          Robot.elevator.overrideElevator(0);
           Robot.elevator.overrideElevator(leftJoystickOperator+speedAdj);//This makes it go UP
         }
           //If input is out of threshold.
@@ -125,7 +126,6 @@ public class ElevatorOverride extends Command {
   @Override
   protected void end() {
     Robot.elevator.overrideStopped();
-    new ElevatorPID();
   }
 
   // Called when another command which requires one or more of the same

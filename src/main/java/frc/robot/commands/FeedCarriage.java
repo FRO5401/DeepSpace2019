@@ -53,36 +53,49 @@ public class FeedCarriage extends Command {
       //Read sensors
     limitTop = Robot.carriageinfeed.getLimitTop();
 
-    //Carriage move logic
+    /*** Carriage Override Logic ***/
+
+      //If the override button is pressed. 
     if(overrideButton){
+        //If the top limit NOT tripped. 
       if(!limitTop){
+          //Allow FREE movement only within the threshold.
         if((carriageUpDown > RobotMap.AXIS_THRESHOLD) || (carriageUpDown < (-1 * RobotMap.AXIS_THRESHOLD))){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
+          //Disallow movement outside of threshold. 
         else{
           Robot.carriageinfeed.carriageOverrideMove(0);
         }
       }
+        //If the top limit IS tripped. 
       else if(limitTop){
+          //Allow DOWN movement only within the threshold.
         if(carriageUpDown > (-1 * RobotMap.AXIS_THRESHOLD)){
           Robot.carriageinfeed.carriageOverrideMove(carriageUpDown);
         }
+          //Disallow movement outside of threshold. 
         else{
           Robot.carriageinfeed.carriageOverrideMove(0);
         }
       }
     }
+      //If the override button is not pressed.
     else{
       Robot.carriageinfeed.carriageOverrideMove(0);
     }
-      
-      //Feeder Logic
+    
+    /*** FEEDER LOGIC ***/
+
+      //Don't feed in within the deadzone. 
     if(feedIn > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedIn();
     }
+      //Don't feed out within the deadzone.
     else if(feedOut > RobotMap.AXIS_THRESHOLD){
       Robot.carriageinfeed.feedOut();
     }
+      //Don't rotate the feeder motors at all. 
     else{
       Robot.carriageinfeed.feedStop();
     }

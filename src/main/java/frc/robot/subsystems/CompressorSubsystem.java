@@ -21,23 +21,27 @@ public class CompressorSubsystem extends Subsystem {
 	public void initDefaultCommand() {
 		//Default command not needed, called from OI.
 	}
-    
+	
+		//Turn the compressor on.
     public void startCompressor() {
     	compressor.setClosedLoopControl(true);
     	compressor.start();
     }
-    
+	
+		//Turn the compressor off. 
     public void stopCompressor() {
 		compressor.stop();
     }
 
+		//Report all available sensors for smart dashboard.
     public void reportCompressorStatus(){
     	SmartDashboard.putBoolean("Compressor Enabled", compressor.enabled());
     	SmartDashboard.putBoolean("Compressor in Closed Looop", compressor.getClosedLoopControl());
     	SmartDashboard.putNumber("Compressor Current Value", compressor.getCompressorCurrent());
     	SmartDashboard.putBoolean("Compressor Pressure Switch On/Off", compressor.getPressureSwitchValue());
     }
-    
+	
+		//Returns if the compressor is enabled or not. (Used for compressor toggle.)
     public boolean isEnabled(){
     	return compressor.enabled();
     }

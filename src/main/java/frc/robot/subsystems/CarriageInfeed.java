@@ -26,6 +26,7 @@ public class CarriageInfeed extends Subsystem {
   private double carriageAngle;
   private int loopIndex, slotIndex;
 
+    //Constants
   private double CARRIAGE_kF = 0;
   private double CARRIAGE_kP = 0;
   private double CARRIAGE_kI = 0;
@@ -37,17 +38,23 @@ public class CarriageInfeed extends Subsystem {
   private double groundAngle = -43;
   private double midAngle = 0;
 
-  VictorSP feederMotor1; //feederMotor2;
+    //Motors
+  VictorSP feederMotor1;
   TalonSRX carriageTalon;
+
+    //Sensor
   DigitalInput carriageLimitTop;
 
 
   public CarriageInfeed(){
+      //Motor Instantiation
     feederMotor1 = new VictorSP(RobotMap.CARRIAGE_FEED_MOTOR_1);
-    //feederMotor2 = new VictorSP(RobotMap.CARRIAGE_FEED_MOTOR_2);
     carriageTalon = new TalonSRX(RobotMap.CARRIAGE_TALON_CHANNEL);
+
+      //Sensor Instantiation.
     carriageLimitTop = new DigitalInput(RobotMap.C_STOP_T);
 
+      //Indexes (for PID).
     loopIndex = 0;
     slotIndex = 0;
 
@@ -73,7 +80,7 @@ public class CarriageInfeed extends Subsystem {
     setDefaultCommand(new FeedCarriage());
   }
 
-  //PID methods for carriage to run when elevator is moving
+    //PID methods for carriage to run when elevator is moving
   public void setMidCarriageAngle(){
     carriageTalon.set(ControlMode.Position, midAngle);
   }
@@ -82,8 +89,8 @@ public class CarriageInfeed extends Subsystem {
     carriageTalon.set(ControlMode.Position, groundAngle);
   }
 
+    //Reset to 90 degrees (default)
   public void resetCarriageAngle(){
-  //Reset to 90 degrees (default)
     carriageTalon.set(ControlMode.Position, resetAngle);
   }
     //Moves the carriage to the desired angle (native units)
@@ -92,7 +99,7 @@ public class CarriageInfeed extends Subsystem {
     carriageTalon.set(ControlMode.Position, desiredAngleNativeUnits);
   }
 
-    //Moves the carriage manually, given velocity
+    //Moves the carriage manually, given an output percentage.
   public void carriageOverrideMove(double carriagePercentSpeed){
     carriageTalon.set(ControlMode.PercentOutput, carriagePercentSpeed * -1);
   }
@@ -106,19 +113,16 @@ public class CarriageInfeed extends Subsystem {
     //Set motors to feed in
   public void feedIn(){
     feederMotor1.set(RobotMap.CARRIAGE_FEEDER_SPEED);
-    //feederMotor2.set(RobotMap.CARRIAGE_FEEDER_SPEED);
   }
   
     //Set motors to feed out
   public void feedOut(){
     feederMotor1.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
-    //feederMotor2.set(-1 * RobotMap.CARRIAGE_FEEDER_SPEED);
   }
 
     //Set motors to stop feeding
   public void feedStop(){
     feederMotor1.set(0);
-    //feederMotor2.set(0);
   }
 
     //Get talon encoder value, post vals to Dashboard.
@@ -127,14 +131,15 @@ public class CarriageInfeed extends Subsystem {
     return carriageAngle;
   }
 
+    //Read the top limit switch. 
   public boolean getLimitTop(){
     return !carriageLimitTop.get();
   }
 
+    //Gathers all available sensor data for the dashboard. 
   public void reportCarriageInfeedSensors(){
     SmartDashboard.putBoolean("Top Limit Infeed", getLimitTop());
     SmartDashboard.putNumber("Infeed Direction", feederMotor1.getSpeed());
-    //SmartDashboard.putNumber("Infeed Direction", feederMotor2.getSpeed());
     SmartDashboard.putNumber("Carriage Angle (Native)", getCarriageAngle());
     SmartDashboard.putNumber("Carriage Angle (Degrees)", (getCarriageAngle() * RobotMap.CARRIAGE_ANGLE_PER_PULSE));
   }
