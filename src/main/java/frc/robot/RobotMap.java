@@ -121,4 +121,8 @@ public class RobotMap {
     public static final int ANGLE_THRESHOLD        = 2;
     public static final double AUTO_TURN_SPEED     = 0.8;
     public static final double AUTO_TURN_PRECISION = 0.5;
+
+    //Pneumatics - Added for Unjammer Class
+    public static final int UNJAMMER_IN = 4;
+    public static final int UNJAMMER_OUT = 5;
 }
