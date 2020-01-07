@@ -63,7 +63,8 @@ public FlywheelShooter(){
   SmartDashboard.putNumber("kI", kI);
   SmartDashboard.putNumber("kD", kD);
 
-  _talonMaster.configureSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+ // _talonMaster.configureSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+ _talonMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   THRESH = 200;
 }
 
@@ -126,7 +127,7 @@ public FlywheelShooter(){
       }
 
       public void printReadyToShoot(){
-        if (_talonMaster.getSensorCollection().getQuadraturePosition() < MOTOR_SPEED + THRESH || _talonMaster.getSensorCollection().getQuadraturePostion() > MOTOR_SPEED -THRESH) {
+        if (_talonMaster.getSensorCollection().getQuadraturePosition() < MOTOR_SPEED + THRESH || _talonMaster.getSensorCollection().getQuadraturePosition() > MOTOR_SPEED - THRESH){//.getQuadraturePostion() > MOTOR_SPEED -THRESH) {
           SmartDashboard.putBoolean("Ready to shoot", true);
         } else {
           SmartDashboard.putBoolean("Ready to shoot", false);
